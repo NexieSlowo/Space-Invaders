@@ -18,10 +18,10 @@
         android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_bias="0.103"
         app:srcCompat="@drawable/ic_pause" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,4 +40,12 @@
         app:layout_constraintStart_toStartOf="@+id/floatingActionButton1"
         app:srcCompat="@drawable/ic_restart" />
 
+    <com.example.spaceinvaders.SpaceView
+        android:id="@+id/vMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,8 +3,6 @@ package com.example.spaceinvaders
 
 import android.content.Intent
 import android.media.MediaPlayer
-import android.net.Uri
-
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Switch
@@ -14,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private var mediaPlayer : MediaPlayer? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         musicSWITCH.isChecked=true
         playAudio()
         changeActivityBTN.setOnClickListener{
+            Toast.makeText(this,"Lancement du jeu", Toast.LENGTH_SHORT).show()
             stopAudio()
             val intent = Intent(this,SecondActivity::class.java)
             startActivity(intent)
@@ -32,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         musicSWITCH.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
                 playAudio()
-                Toast.makeText(this,"Music started", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Musique lancée", Toast.LENGTH_SHORT).show()
             } else {
                 pauseAudio()
-                Toast.makeText(this,"Music paused", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Musique pausée", Toast.LENGTH_SHORT).show()
             }
         }
 

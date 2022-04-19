@@ -27,6 +27,7 @@ class SecondActivity : AppCompatActivity() {
         playAudio()
 
         changeActivityBTN.setOnClickListener{
+            Toast.makeText(this,"Redémarrage du jeu", Toast.LENGTH_SHORT).show()
             stopAudio()
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
@@ -45,10 +46,10 @@ class SecondActivity : AppCompatActivity() {
         musicSWITCH.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
                 playAudio()
-                Toast.makeText(this,"Music started", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Musique lancée", Toast.LENGTH_SHORT).show()
             } else {
                 pauseAudio()
-                Toast.makeText(this,"Music paused", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Musique pausée", Toast.LENGTH_SHORT).show()
             }
         }
     }

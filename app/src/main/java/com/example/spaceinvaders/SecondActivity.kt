@@ -21,6 +21,10 @@ class SecondActivity : AppCompatActivity() {
         val musicSWITCH = findViewById<Switch>(R.id.switch1)
         val changeActivityBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton2)
         val pauseBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton1)
+        val playBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton3)
+
+        musicSWITCH.isChecked=true
+        playAudio()
 
         changeActivityBTN.setOnClickListener{
             stopAudio()
@@ -28,15 +32,23 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent)
         }
         pauseBTN.setOnClickListener {
-            pauseAudio()
-            musicSWITCH.isChecked=false
+            onPause()
+            pauseBTN.hide()
+            playBTN.show()
+        }
+        playBTN.setOnClickListener {
+            onResume()
+            playBTN.hide()
+            pauseBTN.show()
         }
 
         musicSWITCH.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
                 playAudio()
+                Toast.makeText(this,"Music started", Toast.LENGTH_SHORT).show()
             } else {
                 pauseAudio()
+                Toast.makeText(this,"Music paused", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -54,13 +66,13 @@ class SecondActivity : AppCompatActivity() {
             mediaPlayer = MediaPlayer.create(this, R.raw.battle_of_the_heroes)
         }
         mediaPlayer?.start()
-        Toast.makeText(this,"Music started", Toast.LENGTH_SHORT).show()
+
     }
     private fun pauseAudio() {
         if (mediaPlayer?.isPlaying() == true){
             mediaPlayer?.pause()
 
-            Toast.makeText(this,"Music paused", Toast.LENGTH_SHORT).show()
+
         }
 
     }
@@ -68,7 +80,6 @@ class SecondActivity : AppCompatActivity() {
         if (mediaPlayer?.isPlaying() == true){
             mediaPlayer?.stop()
             mediaPlayer = null
-            Toast.makeText(this,"Music stopped", Toast.LENGTH_SHORT).show()
         }
     }
 }

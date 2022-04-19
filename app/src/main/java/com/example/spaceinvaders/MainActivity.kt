@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         val musicSWITCH = findViewById<Switch>(R.id.switch2)
         val changeActivityBTN = findViewById<Button>(R.id.button1)
 
+        musicSWITCH.isChecked=true
+        playAudio()
         changeActivityBTN.setOnClickListener{
             stopAudio()
             val intent = Intent(this,SecondActivity::class.java)
@@ -30,8 +32,10 @@ class MainActivity : AppCompatActivity() {
         musicSWITCH.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
                 playAudio()
+                Toast.makeText(this,"Music started", Toast.LENGTH_SHORT).show()
             } else {
                 pauseAudio()
+                Toast.makeText(this,"Music paused", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -41,13 +45,13 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer = MediaPlayer.create(this, R.raw.cantina_band)
         }
         mediaPlayer?.start()
-        Toast.makeText(this,"Music started", Toast.LENGTH_SHORT).show()
+
     }
     private fun pauseAudio() {
         if (mediaPlayer?.isPlaying() == true){
             mediaPlayer?.pause()
 
-            Toast.makeText(this,"Music paused", Toast.LENGTH_SHORT).show()
+
         }
 
     }
@@ -55,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         if (mediaPlayer?.isPlaying() == true){
             mediaPlayer?.stop()
             mediaPlayer = null
-            Toast.makeText(this,"Music stopped", Toast.LENGTH_SHORT).show()
         }
     }
 }

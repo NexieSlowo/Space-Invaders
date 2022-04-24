@@ -1,21 +1,28 @@
 package com.example.spaceinvaders
 
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class SecondActivity : AppCompatActivity() {
+class SecondActivity : AppCompatActivity(){
     private var mediaPlayer : MediaPlayer? = null
     lateinit var spaceview: SpaceView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+
+
         spaceview = findViewById(R.id.vMain)
 
         val musicSWITCH = findViewById<Switch>(R.id.switch1)
@@ -55,6 +62,8 @@ class SecondActivity : AppCompatActivity() {
             }
         }
     }
+
+
     override fun onPause() {
         super.onPause()
         spaceview.pause()
@@ -85,4 +94,5 @@ class SecondActivity : AppCompatActivity() {
             mediaPlayer = null
         }
     }
+
 }

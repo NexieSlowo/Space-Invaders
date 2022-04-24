@@ -15,7 +15,7 @@ class EnemySpaceship (var enemySpaceshipDistance: Float, var enemySpaceshipDebut
     )
     val enemySpaceshipPaint = Paint()
     var enemySpaceshipVitesse= initialenemySpaceshipVitesse
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar)
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
 
 
     fun setRect() { //Méthode qui crée le rectangle qui caracterise le vaisseau

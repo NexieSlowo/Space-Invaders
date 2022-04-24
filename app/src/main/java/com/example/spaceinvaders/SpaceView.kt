@@ -4,12 +4,12 @@ package com.example.spaceinvaders
 
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+
 
 class SpaceView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
     lateinit var canvas : Canvas
@@ -18,8 +18,13 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     var screenHeight = 0f
     var drawing = false
     lateinit var thread: Thread
-    val enemySpaceship = EnemySpaceship(0f, 0f, 0f, 0f, 0f, this)
-    val spaceship = SpaceShip(0f,0f,0f,0f,0f,this)
+    val enemySpaceship = EnemySpaceship(0f, 0f, 0f, 0f, 0f, this,this)
+
+    val missile = Missile(0f,0f,0f,0f,0f,this)
+
+    val spaceship = SpaceShip(0f, 0f, 0f, 0f, 0f, this,this)
+    val lesMissiles = arrayListOf<Missile>()
+
     init { //Cette méthode donne la couleur blanche au background
         backgroundPaint.color = Color.WHITE
     }
@@ -50,28 +55,28 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
         enemySpaceship.enemySpaceshipDistance = (w/4f)
+        enemySpaceship.enemySpaceshipDebut = (h / 14f)
+        enemySpaceship.enemySpaceshipFin = (h  / 16f)
+        enemySpaceship.width= (w / 4f)
+        enemySpaceship.initialenemySpaceshipVitesse= (h /2f)
+        enemySpaceship.setRect()
 
+        spaceship.SpaceshipDistance = (w/6f)
         spaceship.SpaceshipDebut = (h / 1.045f)
-
         spaceship.SpaceshipFin = (h  / 1.055f)
-
         spaceship.width= (w / 6f)
-
-        spaceship.initialSpaceshipVitesse= (h / 1f)
-
+        spaceship.initialSpaceshipVitesse= (h / 1.5f)
         spaceship.setRect()
 
-        enemySpaceship.enemySpaceshipDistance = (w/6f)
 
-        enemySpaceship.enemySpaceshipDebut = (h / 14f)
+        missile.missileDistance = (w/6f)
+        missile.initialMissileVitesse = (h / 1.5f)
+        missile.missileDebut = (h / 1.2f)
+        missile.missileFin = (h  / 1.055f)
+        missile.width= (w / 15f)
+        missile.setRect()
 
-        enemySpaceship.enemySpaceshipFin = (h  / 16f)
 
-        enemySpaceship.width= (w / 4f)
-
-        enemySpaceship.initialenemySpaceshipVitesse= (h /2f)
-
-        enemySpaceship.setRect()
 
 
     }
@@ -82,15 +87,55 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 canvas.height.toFloat(), backgroundPaint)
             enemySpaceship.draw(canvas)
             spaceship.draw(canvas)
+            for (m in lesMissiles){
+              m.draw(canvas)
+            }
+
             holder.unlockCanvasAndPost(canvas)
+
         }
     }
     fun updatePositions(elapsedTimeMS: Double) { //Ceci est la méthode qui change la position des objets, elle se sert de la méthode update() définie differament dans chaque
         val interval = elapsedTimeMS / 1000.0
         enemySpaceship.update(interval)
         spaceship.update(interval)
+        for(m in lesMissiles){
+            m.update(interval)
+        }}
 
+    override fun onTouchEvent(e: MotionEvent): Boolean {
+
+        when (e.action) {
+            MotionEvent.ACTION_DOWN -> {
+                //val x = e.rawX.toInt() - 100
+                //val y = e.rawY.toInt() - 300
+                lesMissiles.add(Missile(spaceship.SpaceshipDistance+width/2, spaceship.SpaceshipDebut, spaceship.SpaceshipFin,this.height/2f,10f,this))
+
+            }
+
+        }
+        return true
     }
+    /*override fun onTouchEvent(e: MotionEvent): Boolean {
+        val action = e.action
+        if (action == MotionEvent.ACTION_DOWN
+            || action == MotionEvent.ACTION_MOVE) {
+            tirerMissile(e)
+        }
+        return true
+    }
+
+    fun tirerMissile(event: MotionEvent) {
+        var shotsFired =0
+        if (! missile.missileOnScreen) {
+             val PI: Double = kotlin.math.PI
+            val angle = PI
+
+
+            missile.launch(angle)
+            ++shotsFired
+        }
+    }*/
 
 
 

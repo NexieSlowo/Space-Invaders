@@ -55,25 +55,26 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         super.onSizeChanged(w, h, oldw, oldh)
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
-        enemySpaceship.enemySpaceshipDistance = (w/5f)
+
+        enemySpaceship.enemySpaceshipDistance = (w/2f)
         enemySpaceship.enemySpaceshipDebut = (h / 3f)
-        enemySpaceship.enemySpaceshipFin = (h  / 5f)
+        enemySpaceship.enemySpaceshipFin = (h  / 4f)
         enemySpaceship.width= (w / 4f)
-        enemySpaceship.initialenemySpaceshipVitesse= (h /2f)
+        enemySpaceship.initialenemySpaceshipVitesse= (500f)
         enemySpaceship.setRect()
 
-        spaceship.SpaceshipDistance = (w/6f)
+        spaceship.SpaceshipDistance = (w/2f)
         spaceship.SpaceshipDebut = (h / 1.045f)
         spaceship.SpaceshipFin = (h  / 1.055f)
-        spaceship.width= (w / 6f)
-        spaceship.initialSpaceshipVitesse= (h / 1.5f)
+        spaceship.width= (w / 3f)
+        spaceship.initialSpaceshipVitesse= (700f)
         spaceship.setRect()
 
 
         missile.missileDistance = (w/6f)
-        missile.initialMissileVitesse = (h / 1.5f)
-        missile.missileDebut = (h / 1.2f)
-        missile.missileFin = (h  / 1.055f)
+        missile.initialMissileVitesse = (1000f)
+        missile.missileDebut = (h / 2f)
+        missile.missileFin = (h  / 1.8f)
         missile.width= (w / 15f)
         missile.setRect()
 
@@ -109,7 +110,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissiles.add(Missile(spaceship.SpaceshipDistance, spaceship.SpaceshipDebut+width/7, spaceship.SpaceshipFin+height/8,this.height/0.5f,10f,this))
+                lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-height/30, spaceship.SpaceshipDebut,this.height/0.5f,10f,this))
 
             }
 

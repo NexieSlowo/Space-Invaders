@@ -24,7 +24,7 @@ class SpaceShip(
     )
     //val spaceshipPaint = Paint()
     var spaceshipVitesse= initialSpaceshipVitesse
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.vaisseau)
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.player2)
 
 
 

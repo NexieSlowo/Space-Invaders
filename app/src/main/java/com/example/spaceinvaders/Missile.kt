@@ -44,7 +44,7 @@ class Missile (x:Float, y:Float, diametre:Float,var view : SpaceView) {
 
 import android.graphics.*
 
-class Missile(var missileDistance: Float, var missileDebut: Float, var missileFin: Float, var initialMissileVitesse: Float, var width: Float, var view: SpaceView) {
+class Missile(var missileDistance: Float, var missileDebut: Float, var missileFin: Float, var initialMissileVitesse: Float, var width: Float, var view: SpaceView, ) {
 
     val missile= RectF(missileDistance, missileDebut,
         missileDistance + width, missileFin)
@@ -67,11 +67,14 @@ class Missile(var missileDistance: Float, var missileDebut: Float, var missileFi
         lateinit var spaceShip: SpaceShip
         var up = (interval * missileVitesse).toFloat()
         missile.offset(0f, -up)
+        /*if (missile.top>enemySpaceship.enemySpaceshipFin
+            && missile.left > enemySpaceship.enemySpaceshipDistance && missileDistance+ ) {
+            cible.detectChoc(this)
         //if (missile.top < 0 || missile.bottom > view.screenHeight) {
             //missileVitesse *= -1
            // up = (interval * 3 * missileVitesse).toFloat()
             //missile.offset(0f,up)
-        //}
+        //}*/
     }
 }
 

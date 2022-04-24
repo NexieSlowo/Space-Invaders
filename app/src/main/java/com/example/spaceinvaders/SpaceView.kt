@@ -20,10 +20,11 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     lateinit var thread: Thread
     val enemySpaceship = EnemySpaceship(0f, 0f, 0f, 0f, 0f, this,this)
 
-    val missile = Missile(0f,0f,0f,0f,0f,this)
+    val missile = Missile(0f,0f,0f,0f,0f,this,)
 
     val spaceship = SpaceShip(0f, 0f, 0f, 0f, 0f, this,this)
     val lesMissiles = arrayListOf<Missile>()
+    val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
     init { //Cette méthode donne la couleur blanche au background
         backgroundPaint.color = Color.WHITE
@@ -83,8 +84,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     fun draw() { //Ceci fait le déssin final, il se sers de draw() définis dans  enemySpaceship et Spacheship
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
-            canvas.drawRect(0f, 0f, canvas.width.toFloat(),
-                canvas.height.toFloat(), backgroundPaint)
+            canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             spaceship.draw(canvas)
             for (m in lesMissiles){
@@ -116,26 +116,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         }
         return true
     }
-    /*override fun onTouchEvent(e: MotionEvent): Boolean {
-        val action = e.action
-        if (action == MotionEvent.ACTION_DOWN
-            || action == MotionEvent.ACTION_MOVE) {
-            tirerMissile(e)
-        }
-        return true
-    }
 
-    fun tirerMissile(event: MotionEvent) {
-        var shotsFired =0
-        if (! missile.missileOnScreen) {
-             val PI: Double = kotlin.math.PI
-            val angle = PI
-
-
-            missile.launch(angle)
-            ++shotsFired
-        }
-    }*/
 
 
 

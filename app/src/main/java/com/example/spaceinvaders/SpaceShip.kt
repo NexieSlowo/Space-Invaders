@@ -22,7 +22,7 @@ class SpaceShip(
         SpaceshipDistance.toInt(), SpaceshipDebut.toInt(),
         (SpaceshipDistance + width).toInt(), SpaceshipFin.toInt()
     )
-    val spaceshipPaint = Paint()
+    //val spaceshipPaint = Paint()
     var spaceshipVitesse= initialSpaceshipVitesse
     var image = BitmapFactory.decodeResource(context.resources,R.drawable.vaisseau)
 

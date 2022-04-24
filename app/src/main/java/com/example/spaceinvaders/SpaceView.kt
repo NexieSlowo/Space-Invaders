@@ -18,11 +18,55 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     var screenHeight = 0f
     var drawing = false
     lateinit var thread: Thread
-    val enemySpaceship = EnemySpaceship(0f, 0f, 0f, 0f, 0f, this,this)
+    val enemySpaceship = EnemySpaceship(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
 
-    val missile = Missile(0f,0f,0f,0f,0f,this,)
+    val missile = Missile(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this)
 
-    val spaceship = SpaceShip(0f, 0f, 0f, 0f, 0f, this,this)
+    val spaceship = SpaceShip(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+
+    val etoile1 = etoile(
+        0f,
+        0f,
+        0f,
+        0f,
+        this, this)
+
+    val etoile2 = etoile(
+        0f,
+        0f,
+        0f,
+        0f,
+        this, this)
+    val etoile3 = etoile(
+        0f,
+        0f,
+        0f,
+        0f,
+        this, this)
+    val etoile4 = etoile(
+        0f,
+        0f,
+        0f,
+        0f,
+        this, this)
     val lesMissiles = arrayListOf<Missile>()
     val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
@@ -56,16 +100,16 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
 
-        enemySpaceship.enemySpaceshipDistance = (w/2f)
-        enemySpaceship.enemySpaceshipDebut = (h / 3f)
-        enemySpaceship.enemySpaceshipFin = (h  / 4f)
-        enemySpaceship.width= (w / 4f)
+        enemySpaceship.enemySpaceshipDistance = (0f)
+        enemySpaceship.enemySpaceshipDebut = (0.3f*h)
+        enemySpaceship.enemySpaceshipFin = (0.3f*h)
+        enemySpaceship.width= (150f)
         enemySpaceship.initialenemySpaceshipVitesse= (500f)
         enemySpaceship.setRect()
 
-        spaceship.SpaceshipDistance = (w/2f)
-        spaceship.SpaceshipDebut = (h / 1.045f)
-        spaceship.SpaceshipFin = (h  / 1.055f)
+        spaceship.SpaceshipDistance = (0f)
+        spaceship.SpaceshipDebut = (9999*h/10000f-200)
+        spaceship.SpaceshipFin = (9999*h/10000f-200)
         spaceship.width= (w / 3f)
         spaceship.initialSpaceshipVitesse= (700f)
         spaceship.setRect()
@@ -74,11 +118,35 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         missile.missileDistance = (w/6f)
         missile.initialMissileVitesse = (1000f)
         missile.missileDebut = (h / 2f)
-        missile.missileFin = (h  / 1.8f)
+        missile.missileFin = (h  / 0.5f)
         missile.width= (w / 15f)
         missile.setRect()
 
+        /*
+        etoile2.EtoileDistance = (12*w/24f)
+        etoile2.EtoileDebut = (h/5f)
+        etoile2.EtoileFin = (h/5f)
+        etoile2.width= (0f)
+        etoile2.setRect()
 
+        etoile1.EtoileDistance = etoile2.EtoileDistance-150
+        etoile1.EtoileDebut = (h/5f)
+        etoile1.EtoileFin = (h/5f)
+        etoile1.width= (0f)
+        etoile1.setRect()
+
+        etoile3.EtoileDistance = etoile2.EtoileDistance+150
+        etoile3.EtoileDebut = (h/5f)
+        etoile3.EtoileFin = (h/5f)
+        etoile3.width= (0f)
+        etoile3.setRect()
+
+        etoile4.EtoileDistance = (14*w/24f)
+        etoile4.EtoileDebut = (9999*h/10000f)
+        etoile4.EtoileFin = (9999*h/10000f)
+        etoile4.width= (0f)
+        etoile4.setRect()
+        */
 
 
     }
@@ -88,6 +156,10 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             spaceship.draw(canvas)
+            etoile1.draw(canvas)
+            etoile2.draw(canvas)
+            etoile3.draw(canvas)
+            etoile4.draw(canvas)
             for (m in lesMissiles){
               m.draw(canvas)
             }
@@ -110,7 +182,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-height/30, spaceship.SpaceshipDebut,this.height/0.5f,10f,this))
+                lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-14*height/60, spaceship.SpaceshipFin-10*height/60,this.height/0.5f,10f,this))
 
             }
 

@@ -109,7 +109,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissiles.add(Missile(spaceship.SpaceshipDistance+width/2, spaceship.SpaceshipDebut, spaceship.SpaceshipFin,this.height/2f,10f,this))
+                lesMissiles.add(Missile(spaceship.SpaceshipDistance, spaceship.SpaceshipDebut+width/7, spaceship.SpaceshipFin+height/8,this.height/0.5f,10f,this))
 
             }
 

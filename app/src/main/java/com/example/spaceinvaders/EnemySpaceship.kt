@@ -15,7 +15,7 @@ class EnemySpaceship (var enemySpaceshipDistance: Float, var enemySpaceshipDebut
     )
     val enemySpaceshipPaint = Paint()
     var enemySpaceshipVitesse= initialenemySpaceshipVitesse
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.darthstar2)
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar)
 
 
     fun setRect() { //Méthode qui crée le rectangle qui caracterise le vaisseau
@@ -27,7 +27,7 @@ class EnemySpaceship (var enemySpaceshipDistance: Float, var enemySpaceshipDebut
     }
 
 
-    fun draw(canvas: Canvas) { //Ceci déssine le rectangle, mais pour vraiment déssiner il faut s'aider de la classe spaceview qui s'occupe de l'apparence de la page
+    fun draw(canvas: Canvas) { //Ceci dessine le rectangle, mais pour vraiment dessiner il faut s'aider de la classe spaceview qui s'occupe de l'apparence de la page
         //enemySpaceshipPaint.color = Color.RED //On défini la couleur du rectangle
         //canvas.drawRect(enemySpaceship, enemySpaceshipPaint) //drawRect est une méthode qui existe déjà et qui dessine des rectangles, les coord sont données en argument
         canvas.drawBitmap(image,enemySpaceshipDistance,enemySpaceshipFin-view.height/8,null)

@@ -23,8 +23,8 @@ class SecondActivity : AppCompatActivity() {
         val pauseBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton1)
         val playBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton3)
 
-        musicSWITCH.isChecked=true
-        playAudio()
+        musicSWITCH.isChecked=false
+
 
         changeActivityBTN.setOnClickListener{
             Toast.makeText(this,"Redémarrage du jeu", Toast.LENGTH_SHORT).show()
@@ -36,11 +36,13 @@ class SecondActivity : AppCompatActivity() {
             onPause()
             pauseBTN.hide()
             playBTN.show()
+
         }
         playBTN.setOnClickListener {
             onResume()
             playBTN.hide()
             pauseBTN.show()
+
         }
 
         musicSWITCH.setOnCheckedChangeListener{ _, isChecked ->

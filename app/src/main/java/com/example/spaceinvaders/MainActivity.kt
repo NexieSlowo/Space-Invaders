@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity() {
         val musicSWITCH = findViewById<Switch>(R.id.switch2)
         val changeActivityBTN = findViewById<Button>(R.id.button1)
 
-        musicSWITCH.isChecked=true
-        playAudio()
+        musicSWITCH.isChecked=false
         changeActivityBTN.setOnClickListener{
             Toast.makeText(this,"Lancement du jeu", Toast.LENGTH_SHORT).show()
             stopAudio()

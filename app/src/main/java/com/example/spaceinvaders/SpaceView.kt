@@ -76,12 +76,14 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
     var m=0
     val random = arrayListOf<Random>()
+    var iteration = 0
 
     init { //Cette méthode donne la couleur blanche au background
         backgroundPaint.color = Color.WHITE
         textPaint.textSize= screenWidth/20
         textPaint.color = Color.WHITE
         timeLeft = 120.0
+
 
     }
 
@@ -102,14 +104,14 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
 
-        enemySpaceship.enemySpaceshipDistance = (0f)
+        enemySpaceship.enemySpaceshipDistance = (w/3f)
         enemySpaceship.enemySpaceshipDebut = (0.3f*h)
         enemySpaceship.enemySpaceshipFin = (0.3f*h)
-        enemySpaceship.width= (400f)
-        enemySpaceship.initialenemySpaceshipVitesse= (w/2.5f)
+        enemySpaceship.width= (370f)
+        enemySpaceship.initialenemySpaceshipVitesse= (400f)
         enemySpaceship.setRect()
 
-        spaceship.SpaceshipDistance = (0f)
+        spaceship.SpaceshipDistance = (w/5f)
         spaceship.SpaceshipDebut = (9999*h/10000f-200)
         spaceship.SpaceshipFin = (9999*h/10000f-200)
         spaceship.width= (300f)
@@ -193,8 +195,15 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 j.update2(interval)
         }
 
+
         timeLeft -= interval
-        if (timeLeft <= 0.0) drawing = false}
+        if (timeLeft/60 <= 0.0) drawing = false
+        var k =0
+        if(timeLeft in 115.28..115.3 || timeLeft in 111.18..111.20 || timeLeft in 109.38..109.4 || timeLeft in 107.38..107.4
+            || timeLeft in 102.38..102.4 || timeLeft in 99.38..99.4 || timeLeft in 89.38..89.4) lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/2f,10f,this))
+
+    }
+
 
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
@@ -203,13 +212,16 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-14*height/60, spaceship.SpaceshipFin-10*height/60,this.height/0.5f,10f,this))
-                lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance+enemySpaceship.width/2, enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipFin,this.height/0.5f,10f,this))
+                lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-14*height/60, spaceship.SpaceshipFin-10*height/60,this.height/1.5f,10f,this))
+                //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
             }
 
         }
+
         return true
     }
+
+
 
 
 

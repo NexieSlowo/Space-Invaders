@@ -13,6 +13,7 @@ import java.util.*
 import kotlin.random.Random.Default.nextInt
 
 
+
 class SpaceView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
     lateinit var canvas : Canvas
     val backgroundPaint = Paint()
@@ -171,9 +172,8 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 j.draw(canvas)
             }
 
-            val formatted = String.format("%.2f", timeLeft/60)
-            val formatted2= String.format("%.2f", timeLeft%60)
-            canvas.drawText("Il reste $formatted : $formatted2. ",
+            val timeleft = String.format("%.2f", timeLeft)
+            canvas.drawText("Il reste $timeleft s",
                 30f, 50f, textPaint)
 
 

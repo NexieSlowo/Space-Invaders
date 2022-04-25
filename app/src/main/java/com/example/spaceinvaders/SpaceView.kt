@@ -105,7 +105,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         enemySpaceship.enemySpaceshipDistance = (0f)
         enemySpaceship.enemySpaceshipDebut = (0.3f*h)
         enemySpaceship.enemySpaceshipFin = (0.3f*h)
-        enemySpaceship.width= (370f)
+        enemySpaceship.width= (400f)
         enemySpaceship.initialenemySpaceshipVitesse= (w/2.5f)
         enemySpaceship.setRect()
 

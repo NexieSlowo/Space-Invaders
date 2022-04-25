@@ -18,6 +18,8 @@ class EnemySpaceship (var enemySpaceshipDistance: Float, var enemySpaceshipDebut
     var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
 
 
+
+
     fun setRect() { //Méthode qui crée le rectangle qui caracterise le vaisseau
         enemySpaceship.set(
             enemySpaceshipDistance.toInt(), enemySpaceshipDebut.toInt(),
@@ -44,4 +46,8 @@ class EnemySpaceship (var enemySpaceshipDistance: Float, var enemySpaceshipDebut
         }
         enemySpaceshipDistance = enemySpaceshipDistance+up
     }
+
+
+
+
 }

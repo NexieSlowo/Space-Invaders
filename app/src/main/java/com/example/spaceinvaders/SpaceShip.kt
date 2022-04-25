@@ -47,9 +47,9 @@ class SpaceShip(
     fun update(interval: Double) {
         var up = (interval * spaceshipVitesse).toFloat()
         spaceship.offset(up.toInt(), 0)
-        if (spaceship.left < 0 || spaceship.right > view.screenWidth) {
+        if (spaceship.left+view.width/20 < 0 || spaceship.right+ view.width/15.3f > view.screenWidth) {
             spaceshipVitesse *= -1
-            up = (interval * 3 * spaceshipVitesse).toFloat()
+            up = (interval * 4 * spaceshipVitesse).toFloat()
             spaceship.offset(up.toInt(), 0)
         }
         SpaceshipDistance = SpaceshipDistance + up

@@ -9,6 +9,8 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 
 class SpaceView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
@@ -70,8 +72,11 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this, this)
     val lesMissiles = arrayListOf<Missile>()
+    val lesMissilesEnemy = arrayListOf<Missile>()
     val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
     var m=0
+    val random = arrayListOf<Random>()
+
     init { //Cette méthode donne la couleur blanche au background
         backgroundPaint.color = Color.WHITE
         textPaint.textSize= screenWidth/20
@@ -80,16 +85,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
 
     }
 
-    fun pause() { //Ceci arrete l'appli quand on fait pause ou quand on sort de l'appli
-        drawing = false
-        thread.join()
-    }
 
-    fun resume() { //Ceci relance l'appli là où on a laissé quand on est partis
-        drawing = true
-        thread = Thread(this)
-        thread.start()
-    }
 
     override fun run() { //Cette fonction met en ouvre le thread, qui fait le mouvement des objets. Elle existe déjà donc on le modifie avec override.
         var previousFrameTime = System.currentTimeMillis()
@@ -109,14 +105,14 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         enemySpaceship.enemySpaceshipDistance = (0f)
         enemySpaceship.enemySpaceshipDebut = (0.3f*h)
         enemySpaceship.enemySpaceshipFin = (0.3f*h)
-        enemySpaceship.width= (300f)
-        enemySpaceship.initialenemySpaceshipVitesse= (500f)
+        enemySpaceship.width= (370f)
+        enemySpaceship.initialenemySpaceshipVitesse= (w/2.5f)
         enemySpaceship.setRect()
 
-        spaceship.SpaceshipDistance = (-100f)
+        spaceship.SpaceshipDistance = (0f)
         spaceship.SpaceshipDebut = (9999*h/10000f-200)
         spaceship.SpaceshipFin = (9999*h/10000f-200)
-        spaceship.width= (w / 3f)
+        spaceship.width= (300f)
         spaceship.initialSpaceshipVitesse= (700f)
         spaceship.setRect()
 
@@ -127,17 +123,17 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         missile.missileFin = (h  / 0.5f)
         missile.width= (w / 15f)
         missile.setRect()
-        textPaint.setTextSize(w / 20f)
+        textPaint.setTextSize(50f)
         textPaint.isAntiAlias = true
 
-        /*
-        etoile2.EtoileDistance = (12*w/24f)
-        etoile2.EtoileDebut = (h/5f)
-        etoile2.EtoileFin = (h/5f)
-        etoile2.width= (0f)
-        etoile2.setRect()
 
-        etoile1.EtoileDistance = etoile2.EtoileDistance-150
+        //etoile2.EtoileDistance = (w/8f)
+        //etoile2.EtoileDebut = (h/5f)
+        //etoile2.EtoileFin = (h/5f)
+        //etoile2.width= (0f)
+        //etoile2.setRect()
+
+        /*etoile1.EtoileDistance = etoile2.EtoileDistance-150
         etoile1.EtoileDebut = (h/5f)
         etoile1.EtoileFin = (h/5f)
         etoile1.width= (0f)
@@ -158,7 +154,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
 
 
     }
-    fun draw() { //Ceci fait le déssin final, il se sers de draw() définis dans  enemySpaceship et Spacheship
+    fun draw() { //Ceci fait le déssin final, il se sert de draw() définis dans  enemySpaceship et Spacheship
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
             canvas.drawBitmap(imageBackground,0f,0f, null)
@@ -171,27 +167,35 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             for (m in lesMissiles){
               m.draw(canvas)
             }
+            for(j in lesMissilesEnemy){
+                j.draw(canvas)
+            }
+
             val formatted = String.format("%.2f", timeLeft/60)
             val formatted2= String.format("%.2f", timeLeft%60)
             canvas.drawText("Il reste $formatted : $formatted2. ",
                 30f, 50f, textPaint)
-            spaceship.draw(canvas)
-            enemySpaceship.draw(canvas)
+
 
             holder.unlockCanvasAndPost(canvas)
 
-        }
-    }
+
+    }}
     fun updatePositions(elapsedTimeMS: Double) { //Ceci est la méthode qui change la position des objets, elle se sert de la méthode update() définie differament dans chaque
         val interval = elapsedTimeMS / 1000.0
         enemySpaceship.update(interval)
         spaceship.update(interval)
-        for(m in lesMissiles){
-            m.update(interval)
+        if (missile.missileOnScreen){
+            for(m in lesMissiles){
+                m.update(interval,enemySpaceship) } }
+
+            for( j in lesMissilesEnemy){
+                j.update2(interval)
         }
+
         timeLeft -= interval
-        if (timeLeft <= 0.0) drawing = false
-    }
+        if (timeLeft <= 0.0) drawing = false}
+
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
@@ -200,7 +204,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
                 lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-14*height/60, spaceship.SpaceshipFin-10*height/60,this.height/0.5f,10f,this))
-
+                lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance+enemySpaceship.width/2, enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipFin,this.height/0.5f,10f,this))
             }
 
         }
@@ -217,7 +221,16 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {}
 
+    fun pause() { //Ceci arrete l'appli quand on fait pause ou quand on sort de l'appli
+        drawing = false
+        thread.join()
+    }
 
+    fun resume() { //Ceci relance l'appli là où on a laissé quand on est partis
+        drawing = true
+        thread = Thread(this)
+        thread.start()
+    }
 
 
 

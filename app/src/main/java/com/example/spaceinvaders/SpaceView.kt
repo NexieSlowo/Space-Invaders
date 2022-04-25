@@ -17,6 +17,8 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     var screenWidth = 0f
     var screenHeight = 0f
     var drawing = false
+    var timeLeft = 0.0
+    val textPaint = Paint()
     lateinit var thread: Thread
     val enemySpaceship = EnemySpaceship(
         0f,
@@ -69,9 +71,13 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         this, this)
     val lesMissiles = arrayListOf<Missile>()
     val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
-
+    var m=0
     init { //Cette méthode donne la couleur blanche au background
         backgroundPaint.color = Color.WHITE
+        textPaint.textSize= screenWidth/20
+        textPaint.color = Color.WHITE
+        timeLeft = 120.0
+
     }
 
     fun pause() { //Ceci arrete l'appli quand on fait pause ou quand on sort de l'appli
@@ -103,11 +109,11 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         enemySpaceship.enemySpaceshipDistance = (0f)
         enemySpaceship.enemySpaceshipDebut = (0.3f*h)
         enemySpaceship.enemySpaceshipFin = (0.3f*h)
-        enemySpaceship.width= (150f)
+        enemySpaceship.width= (300f)
         enemySpaceship.initialenemySpaceshipVitesse= (500f)
         enemySpaceship.setRect()
 
-        spaceship.SpaceshipDistance = (0f)
+        spaceship.SpaceshipDistance = (-100f)
         spaceship.SpaceshipDebut = (9999*h/10000f-200)
         spaceship.SpaceshipFin = (9999*h/10000f-200)
         spaceship.width= (w / 3f)
@@ -121,6 +127,8 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         missile.missileFin = (h  / 0.5f)
         missile.width= (w / 15f)
         missile.setRect()
+        textPaint.setTextSize(w / 20f)
+        textPaint.isAntiAlias = true
 
         /*
         etoile2.EtoileDistance = (12*w/24f)
@@ -163,6 +171,12 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             for (m in lesMissiles){
               m.draw(canvas)
             }
+            val formatted = String.format("%.2f", timeLeft/60)
+            val formatted2= String.format("%.2f", timeLeft%60)
+            canvas.drawText("Il reste $formatted : $formatted2. ",
+                30f, 50f, textPaint)
+            spaceship.draw(canvas)
+            enemySpaceship.draw(canvas)
 
             holder.unlockCanvasAndPost(canvas)
 
@@ -174,7 +188,10 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         spaceship.update(interval)
         for(m in lesMissiles){
             m.update(interval)
-        }}
+        }
+        timeLeft -= interval
+        if (timeLeft <= 0.0) drawing = false
+    }
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
 

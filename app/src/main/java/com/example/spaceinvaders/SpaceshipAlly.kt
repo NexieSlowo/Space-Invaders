@@ -1,22 +1,10 @@
 package com.example.spaceinvaders
 
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 
-//Classe du vaisseau de l'enemi
-
-import android.graphics.*
-import android.widget.Space
-import java.util.*
-
-
-class EnemySpaceship( SpaceshipDistance: Float, SpaceshipDebut: Float, SpaceshipFin: Float,  initialSpaceshipVitesse: Float, width: Float,  view: SpaceView, context:SpaceView):SpaceShip(SpaceshipDistance, SpaceshipDebut, SpaceshipFin, initialSpaceshipVitesse, width , view, context)
-{
-
-
-
-
-     var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
-
-
+class SpaceshipAlly(SpaceshipDistance : Float,SpaceshipDebut:Float,SpaceshipFin : Float,initialSpaceshipVitesse : Float,width : Float,view : SpaceView,context:SpaceView):SpaceShip(SpaceshipDistance,SpaceshipDebut,SpaceshipFin,initialSpaceshipVitesse,width,view,context) {
+     var image = BitmapFactory.decodeResource(context.resources,R.drawable.player2)
 
 
     override fun setRect() {
@@ -28,7 +16,6 @@ class EnemySpaceship( SpaceshipDistance: Float, SpaceshipDebut: Float, Spaceship
         spaceshipVitesse= initialSpaceshipVitesse
 
     }
-
 
     override fun draw(canvas: Canvas) {
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipFin-view.height/8,null)
@@ -47,10 +34,7 @@ class EnemySpaceship( SpaceshipDistance: Float, SpaceshipDebut: Float, Spaceship
 
     }
 
-    override fun interact() {
-
+    override fun interact(missile: Missile) {
+        TODO("Not yet implemented")
     }
-
-
-
 }

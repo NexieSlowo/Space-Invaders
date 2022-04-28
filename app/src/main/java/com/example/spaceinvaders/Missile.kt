@@ -1,7 +1,8 @@
 package com.example.spaceinvaders
 import android.graphics.*
+import android.icu.util.DateInterval
 
-open class Missile(var missileDistance: Float, var missileDebut: Float, var missileFin: Float, var initialMissileVitesse: Float, var width: Float, var view: SpaceView, ) {
+open abstract class Missile(var missileDistance: Float, var missileDebut: Float, var missileFin: Float, var initialMissileVitesse: Float, var width: Float, var view: SpaceView ) {
 
     val missile= RectF(missileDistance, missileDebut,
         missileDistance + width, missileFin)
@@ -10,6 +11,7 @@ open class Missile(var missileDistance: Float, var missileDebut: Float, var miss
     val missilePaint = Paint()
     var missileVitesse= initialMissileVitesse
     var missileOnScreen = true
+    init {missilePaint.color = Color.BLUE}
 
     fun setRect() {
         missile.set(missileDistance, missileDebut,
@@ -20,19 +22,14 @@ open class Missile(var missileDistance: Float, var missileDebut: Float, var miss
 
 
     fun draw(canvas: Canvas) {
-        missilePaint.color = Color.BLUE
+
         canvas.drawRect(missile, missilePaint)
 
     }
 
-    fun update(interval: Double, enemySpaceship: EnemySpaceship) {
-            var up = (interval * missileVitesse).toFloat()
-            missile.offset(0f, -up)
-        }
-    fun update2(interval:Double){
-        var up = (interval*missileVitesse).toFloat()
-        missile.offset(0f,up)
-    }
+    abstract fun update(interval : Double)
+
+
 
 
         /*if (missileDebut>enemySpaceship.enemySpaceshipFin /*&& missileDistance > enemySpaceship.enemySpaceshipDistance && missileDistance +width < enemySpaceship.enemySpaceshipDistance+width*/) {

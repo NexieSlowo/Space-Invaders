@@ -10,7 +10,7 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.util.*
-import kotlin.random.Random.Default.nextInt
+import kotlin.random.Random
 
 
 class SpaceView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
@@ -22,6 +22,22 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     var timeLeft = 0.0
     val textPaint = Paint()
     lateinit var thread: Thread
+    var randomTimer : Double = 0.0
+
+
+    /*val missile = MissileEnemy(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this)
+    val missileAlly = MissileAlly(0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this)*/
     val enemySpaceship = EnemySpaceship(
         0f,
         0f,
@@ -29,22 +45,21 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         0f,
         this,this)
-
-    val missile = Missile(
+    val allySpaceship = SpaceshipAlly(0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,
+        this,
+        )
+    /*val spaceship = EnemySpaceship(
         0f,
         0f,
         0f,
         0f,
         0f,
-        this)
-
-    val spaceship = SpaceShip(
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
+        this,this)*/
 
     val etoile1 = etoile(
         0f,
@@ -71,14 +86,14 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         0f,
         this, this)
-    val lesMissiles = arrayListOf<Missile>()
-    val lesMissilesEnemy = arrayListOf<Missile>()
+    val lesMissilesAlly = arrayListOf<MissileAlly>()
+    val lesMissilesEnemy = arrayListOf<MissileEnemy>()
+    val lesMissilesJaunes = arrayListOf<MissileJaune>()
     val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
-    var m=0
-    val random = arrayListOf<Random>()
-    var iteration = 0
 
-    init { //Cette méthode donne la couleur blanche au background
+
+
+    init { //Création du background
         backgroundPaint.color = Color.WHITE
         textPaint.textSize= screenWidth/20
         textPaint.color = Color.WHITE
@@ -104,29 +119,29 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
 
-        enemySpaceship.enemySpaceshipDistance = (w/3f)
-        enemySpaceship.enemySpaceshipDebut = (0.3f*h)
-        enemySpaceship.enemySpaceshipFin = (0.3f*h)
+        enemySpaceship.SpaceshipDistance = (w/3f)
+        enemySpaceship.SpaceshipDebut = (0.3f*h)
+        enemySpaceship.SpaceshipFin = (0.3f*h)
         enemySpaceship.width= (370f)
-        enemySpaceship.initialenemySpaceshipVitesse= (400f)
+        enemySpaceship.initialSpaceshipVitesse= (400f)
         enemySpaceship.setRect()
 
-        spaceship.SpaceshipDistance = (w/5f)
-        spaceship.SpaceshipDebut = (9999*h/10000f-200)
-        spaceship.SpaceshipFin = (9999*h/10000f-200)
-        spaceship.width= (300f)
-        spaceship.initialSpaceshipVitesse= (700f)
-        spaceship.setRect()
+        allySpaceship.SpaceshipDistance = (w/5f)
+        allySpaceship.SpaceshipDebut = (9999*h/10000f-200)
+        allySpaceship.SpaceshipFin = (9999*h/10000f-200)
+        allySpaceship.width= (300f)
+        allySpaceship.initialSpaceshipVitesse= (700f)
+        allySpaceship.setRect()
 
 
-        missile.missileDistance = (w/6f)
+        /*missile.missileDistance = (w/6f)
         missile.initialMissileVitesse = (1000f)
         missile.missileDebut = (h / 2f)
         missile.missileFin = (h  / 0.5f)
         missile.width= (w / 15f)
         missile.setRect()
         textPaint.setTextSize(50f)
-        textPaint.isAntiAlias = true
+        textPaint.isAntiAlias = true*/
 
 
         //etoile2.EtoileDistance = (w/8f)
@@ -161,16 +176,20 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             canvas = holder.lockCanvas()
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
-            spaceship.draw(canvas)
+            allySpaceship.draw(canvas)
             etoile1.draw(canvas)
             etoile2.draw(canvas)
             etoile3.draw(canvas)
             etoile4.draw(canvas)
-            for (m in lesMissiles){
+            for (m in lesMissilesAlly){
               m.draw(canvas)
             }
             for(j in lesMissilesEnemy){
                 j.draw(canvas)
+            }
+
+            for(k in lesMissilesJaunes){
+                k.draw(canvas)
             }
 
             val formatted = String.format("%.2f", timeLeft/60)
@@ -186,21 +205,27 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     fun updatePositions(elapsedTimeMS: Double) { //Ceci est la méthode qui change la position des objets, elle se sert de la méthode update() définie differament dans chaque
         val interval = elapsedTimeMS / 1000.0
         enemySpaceship.update(interval)
-        spaceship.update(interval)
-        if (missile.missileOnScreen){
-            for(m in lesMissiles){
-                m.update(interval,enemySpaceship) } }
+        allySpaceship.update(interval)
+        //Mettre le if missileonScreen pour les missiles de la liste
+            for(m in lesMissilesAlly){
+                m.update(interval) }
 
             for( j in lesMissilesEnemy){
-                j.update2(interval)
+                j.update(interval)
         }
+        for( k in lesMissilesJaunes){
+            k.update(interval)}
 
 
         timeLeft -= interval
+        randomTimer -= interval
         if (timeLeft/60 <= 0.0) drawing = false
-        var k =0
-        if(timeLeft in 115.28..115.3 || timeLeft in 111.18..111.20 || timeLeft in 109.38..109.4 || timeLeft in 107.38..107.4
-            || timeLeft in 102.38..102.4 || timeLeft in 99.38..99.4 || timeLeft in 89.38..89.4) lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/2f,10f,this))
+
+        if(randomTimer<=0.0) {
+            lesMissilesEnemy.add(MissileEnemy(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDebut + width/7f,height/2f,10f,this))
+            lesMissilesJaunes.add(MissileJaune(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDebut + width/8f,height/2f,10f,this))
+            randomTimer = (Random.nextInt(3,5)).toDouble()
+        }
 
     }
 
@@ -212,7 +237,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissiles.add(Missile(spaceship.SpaceshipDistance+spaceship.width/2, spaceship.SpaceshipDebut-14*height/60, spaceship.SpaceshipFin-10*height/60,this.height/1.5f,10f,this))
+                lesMissilesAlly.add(MissileAlly(allySpaceship.SpaceshipDistance+allySpaceship.width/2, allySpaceship.SpaceshipDebut-14*height/60, allySpaceship.SpaceshipFin-10*height/60,this.height/1.5f,10f,this))
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
             }
 

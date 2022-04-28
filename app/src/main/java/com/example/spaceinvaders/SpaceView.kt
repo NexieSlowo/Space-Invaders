@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.widget.Button
 import java.util.*
 import kotlin.random.Random
 
@@ -23,6 +24,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     val textPaint = Paint()
     lateinit var thread: Thread
     var randomTimer : Double = 0.0
+
 
 
     /*val missile = MissileEnemy(
@@ -61,31 +63,6 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)*/
 
-    val etoile1 = etoile(
-        0f,
-        0f,
-        0f,
-        0f,
-        this, this)
-
-    val etoile2 = etoile(
-        0f,
-        0f,
-        0f,
-        0f,
-        this, this)
-    val etoile3 = etoile(
-        0f,
-        0f,
-        0f,
-        0f,
-        this, this)
-    val etoile4 = etoile(
-        0f,
-        0f,
-        0f,
-        0f,
-        this, this)
     val lesMissilesAlly = arrayListOf<MissileAlly>()
     val lesMissilesEnemy = arrayListOf<MissileEnemy>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
@@ -144,31 +121,6 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         textPaint.isAntiAlias = true*/
 
 
-        //etoile2.EtoileDistance = (w/8f)
-        //etoile2.EtoileDebut = (h/5f)
-        //etoile2.EtoileFin = (h/5f)
-        //etoile2.width= (0f)
-        //etoile2.setRect()
-
-        /*etoile1.EtoileDistance = etoile2.EtoileDistance-150
-        etoile1.EtoileDebut = (h/5f)
-        etoile1.EtoileFin = (h/5f)
-        etoile1.width= (0f)
-        etoile1.setRect()
-
-        etoile3.EtoileDistance = etoile2.EtoileDistance+150
-        etoile3.EtoileDebut = (h/5f)
-        etoile3.EtoileFin = (h/5f)
-        etoile3.width= (0f)
-        etoile3.setRect()
-
-        etoile4.EtoileDistance = (14*w/24f)
-        etoile4.EtoileDebut = (9999*h/10000f)
-        etoile4.EtoileFin = (9999*h/10000f)
-        etoile4.width= (0f)
-        etoile4.setRect()
-        */
-
 
     }
     fun draw() { //Ceci fait le déssin final, il se sert de draw() définis dans  enemySpaceship et Spacheship
@@ -177,10 +129,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
-            etoile1.draw(canvas)
-            etoile2.draw(canvas)
-            etoile3.draw(canvas)
-            etoile4.draw(canvas)
+
             for (m in lesMissilesAlly){
               m.draw(canvas)
             }
@@ -206,6 +155,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         val interval = elapsedTimeMS / 1000.0
         enemySpaceship.update(interval)
         allySpaceship.update(interval)
+        //
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
                 m.update(interval,enemySpaceship,allySpaceship) }
@@ -239,12 +189,14 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 //val y = e.rawY.toInt() - 300
                 lesMissilesAlly.add(MissileAlly(allySpaceship.SpaceshipDistance+allySpaceship.width/2, allySpaceship.SpaceshipDebut-14*height/60, allySpaceship.SpaceshipFin-10*height/60,this.height/1.5f,10f,this))
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
+
             }
 
         }
 
         return true
     }
+
 
 
 

@@ -1,22 +1,24 @@
 package com.example.spaceinvaders
 
 import android.content.Intent
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isInvisible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class SecondActivity : AppCompatActivity(){
     private var mediaPlayer : MediaPlayer? = null
     lateinit var spaceview: SpaceView
+    var etoiles: Int = 3
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +31,29 @@ class SecondActivity : AppCompatActivity(){
         val changeActivityBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton2)
         val pauseBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton1)
         val playBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton3)
+        val etoile3 = findViewById<ImageView>(R.id.imageView33)
+        val etoile2 = findViewById<ImageView>(R.id.imageView32)
+        val etoile1 = findViewById<ImageView>(R.id.imageView29)
+        val navBtn = findViewById<Button>(R.id.button33)
+        val t1 = Thread(
+            Runnable {
+                while (true) {
+                    when(etoiles){
+                        2 -> etoile3.setVisibility(View.INVISIBLE)
+                        1 -> etoile2.setVisibility(View.INVISIBLE)
+                    }
+                }
+
+            }
+        )
+
+        t1.start()
+
+
 
         musicSWITCH.isChecked=false
+
+
 
 
         changeActivityBTN.setOnClickListener{
@@ -61,6 +84,7 @@ class SecondActivity : AppCompatActivity(){
                 Toast.makeText(this,"Musique pausée", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
 
@@ -94,5 +118,4 @@ class SecondActivity : AppCompatActivity(){
             mediaPlayer = null
         }
     }
-
 }

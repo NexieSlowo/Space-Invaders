@@ -47,7 +47,8 @@ class EnemySpaceship( SpaceshipDistance: Float, SpaceshipDebut: Float, Spaceship
             up = (interval * 4 * spaceshipVitesse).toFloat()
             spaceship.offset(up.toInt(), 0)
         }
-        SpaceshipDistance = SpaceshipDistance + up}
+        SpaceshipDistance = SpaceshipDistance + up
+        println("interaction spaceship enemy avec missile")}
 
 
 

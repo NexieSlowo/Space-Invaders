@@ -47,7 +47,8 @@ class EnemySpaceship( SpaceshipDistance: Float, SpaceshipDebut: Float, Spaceship
 
     }
 
-    override fun interact() {
+    override fun interact(missile:Missile) {
+
 
     }
 

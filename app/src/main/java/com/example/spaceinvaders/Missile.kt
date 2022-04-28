@@ -21,22 +21,28 @@ open abstract class Missile(var missileDistance: Float, var missileDebut: Float,
     }
 
 
-    fun draw(canvas: Canvas) {
+     fun draw(canvas: Canvas){
+         if(missileOnScreen){
+             canvas.drawRect(missile, missilePaint)}
 
-        canvas.drawRect(missile, missilePaint)
-
-    }
-
-    abstract fun update(interval : Double)
+     }
 
 
 
 
-        /*if (missileDebut>enemySpaceship.enemySpaceshipFin /*&& missileDistance > enemySpaceship.enemySpaceshipDistance && missileDistance +width < enemySpaceship.enemySpaceshipDistance+width*/) {
-            missileOnScreen = false}
+    abstract fun update(interval : Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship)
 
-
+    /*fun interact(){
+        if(missileDebut < view.width)
+           missileOnScreen = false
     }*/
+
+    /*open fun reset(){
+        missileOnScreen = false
+    }*/
+
+
+
 
 }
 

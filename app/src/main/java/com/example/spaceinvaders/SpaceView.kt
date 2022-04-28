@@ -45,7 +45,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         0f,
         this,this)
-    val allySpaceship = SpaceshipAlly(0f,
+    val allySpaceship = AllySpaceship(0f,
         0f,
         0f,
         0f,
@@ -208,13 +208,13 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         allySpaceship.update(interval)
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
-                m.update(interval) }
+                m.update(interval,enemySpaceship,allySpaceship) }
 
             for( j in lesMissilesEnemy){
-                j.update(interval)
+                j.update(interval,enemySpaceship,allySpaceship)
         }
         for( k in lesMissilesJaunes){
-            k.update(interval)}
+            k.update(interval,enemySpaceship,allySpaceship)}
 
 
         timeLeft -= interval

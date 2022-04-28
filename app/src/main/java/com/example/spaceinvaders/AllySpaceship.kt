@@ -3,7 +3,7 @@ package com.example.spaceinvaders
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 
-class SpaceshipAlly(SpaceshipDistance : Float,SpaceshipDebut:Float,SpaceshipFin : Float,initialSpaceshipVitesse : Float,width : Float,view : SpaceView,context:SpaceView):SpaceShip(SpaceshipDistance,SpaceshipDebut,SpaceshipFin,initialSpaceshipVitesse,width,view,context) {
+class AllySpaceship(SpaceshipDistance : Float,SpaceshipDebut:Float,SpaceshipFin : Float,initialSpaceshipVitesse : Float,width : Float,view : SpaceView,context:SpaceView):SpaceShip(SpaceshipDistance,SpaceshipDebut,SpaceshipFin,initialSpaceshipVitesse,width,view,context) {
      var image = BitmapFactory.decodeResource(context.resources,R.drawable.player2)
 
 
@@ -30,11 +30,16 @@ class SpaceshipAlly(SpaceshipDistance : Float,SpaceshipDebut:Float,SpaceshipFin 
             up = (interval * 4 * spaceshipVitesse).toFloat()
             spaceship.offset(up.toInt(), 0)
         }
-        SpaceshipDistance = SpaceshipDistance + up
+        SpaceshipDistance = SpaceshipDistance+up
 
     }
 
-    override fun interact(missile: Missile) {
-        TODO("Not yet implemented")
-    }
+
+
+
+    /*override fun reset() {
+
+        println("je reset")
+    }*/
+
 }

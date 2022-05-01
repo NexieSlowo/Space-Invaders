@@ -24,7 +24,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     val textPaint          = Paint()
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
-    var vie : Int          = 3
+
 
 
 
@@ -42,6 +42,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this)*/
     val enemySpaceship = EnemySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -49,6 +50,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)
     val allySpaceship = AllySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -56,6 +58,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)
     /*val spaceship = EnemySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -63,6 +66,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)*/
     val etoile1 = AllySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -70,19 +74,23 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)
     val etoile2 = AllySpaceship(
+        0,
         0f,
         0f,
         0f,
         0f,
         0f,
         this,this)
-    val etoile3 = AllySpaceship(0f,
+    val etoile3 = AllySpaceship(
+        0,
+        0f,
         0f,
         0f,
         0f,
         0f,
         this,this)
     val etoile4 = AllySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -90,6 +98,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)
     val etoile5 = AllySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -97,6 +106,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         this,this)
     val etoile6 = AllySpaceship(
+        0,
         0f,
         0f,
         0f,
@@ -140,6 +150,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
 
+        enemySpaceship.vie = 0
         enemySpaceship.SpaceshipDistance = (w/3f)
         enemySpaceship.SpaceshipDebut = (0.3f*h)
         enemySpaceship.SpaceshipFin = (0.3f*h)
@@ -147,6 +158,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         enemySpaceship.initialSpaceshipVitesse= (400f)
         enemySpaceship.setRect()
 
+        allySpaceship.vie = 0
         allySpaceship.SpaceshipDistance = (w/5f)
         allySpaceship.SpaceshipDebut = (9999*h/10000f-200)
         allySpaceship.SpaceshipFin = (9999*h/10000f-200)
@@ -207,12 +219,30 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
-            etoile1.draw(canvas)
-            etoile2.draw(canvas)
-            etoile3.draw(canvas)
-            etoile4.draw(canvas)
-            etoile5.draw(canvas)
-            etoile6.draw(canvas)
+
+            when (enemySpaceship.vie){
+                3 -> {
+                    etoile1.draw(canvas)
+                    etoile2.draw(canvas)
+                    etoile3.draw(canvas)}
+                2 -> {
+                    etoile1.draw(canvas)
+                    etoile2.draw(canvas)}
+                1 -> {
+                    etoile1.draw(canvas)}}
+
+            when(allySpaceship.vie){
+                3 -> {
+                    etoile4.draw(canvas)
+                    etoile5.draw(canvas)
+                    etoile6.draw(canvas)}
+                2 -> {
+                    etoile4.draw(canvas)
+                    etoile5.draw(canvas)}
+                1 -> {
+                    etoile4.draw(canvas)}}
+
+
             canvas.drawText("Il reste ${String.format("%.2f", timeLeft)} s", 50f, 40f, textPaint)
 
             for (m in lesMissilesAlly){
@@ -260,6 +290,10 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         }
 
     }
+    fun updateAllySpaceshipPosition(elapsedTimeMS: Double){
+        val interval = elapsedTimeMS / 1000.0
+        allySpaceship.update(interval)
+    }
 
 
 
@@ -271,10 +305,11 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 //val y = e.rawY.toInt() - 300
                 lesMissilesAlly.add(MissileAlly(allySpaceship.SpaceshipDistance+allySpaceship.width/2, allySpaceship.SpaceshipDebut-14*height/60, allySpaceship.SpaceshipFin-10*height/60,this.height/1.5f,10f,this))
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
-
+                allySpaceship.changeVitesse()
             }
 
         }
+
 
         return true
     }

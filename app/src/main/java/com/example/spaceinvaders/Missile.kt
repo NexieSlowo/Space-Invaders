@@ -30,7 +30,10 @@ open abstract class Missile(var missileDistance: Float, var missileDebut: Float,
 
 
 
-    abstract fun update(interval : Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship)
+    abstract fun update(
+        interval       : Double,
+        enemySpaceship : EnemySpaceship,
+        allySpaceship  : AllySpaceship)
 
     /*fun interact(){
         if(missileDebut < view.width)

@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.graphics.*
 
 abstract class SpaceShip(
+    var vie: Int,
     var SpaceshipDistance: Float,
     var SpaceshipDebut: Float,
     var SpaceshipFin: Float,

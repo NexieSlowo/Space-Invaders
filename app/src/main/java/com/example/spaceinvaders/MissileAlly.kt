@@ -20,6 +20,7 @@ class MissileAlly(missileDistance : Float,missileDebut : Float,missileFin : Floa
         if(missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
         {
             missileOnScreen = false
+            enemySpaceship.vie -= 1
         }
     }
 

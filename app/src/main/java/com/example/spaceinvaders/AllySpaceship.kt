@@ -3,7 +3,23 @@ package com.example.spaceinvaders
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 
-class AllySpaceship(SpaceshipDistance : Float,SpaceshipDebut:Float,SpaceshipFin : Float,initialSpaceshipVitesse : Float,width : Float,view : SpaceView,context:SpaceView):SpaceShip(SpaceshipDistance,SpaceshipDebut,SpaceshipFin,initialSpaceshipVitesse,width,view,context) {
+class AllySpaceship(
+    vie: Int,
+    SpaceshipDistance : Float,
+    SpaceshipDebut:Float,
+    SpaceshipFin : Float,
+    initialSpaceshipVitesse : Float,
+    width : Float,
+    view : SpaceView,
+    context:SpaceView):SpaceShip(
+    vie,
+    SpaceshipDistance,
+    SpaceshipDebut,
+    SpaceshipFin,
+    initialSpaceshipVitesse,
+    width,
+    view,
+    context){
      var image = BitmapFactory.decodeResource(context.resources,R.drawable.player2)
 
 
@@ -34,6 +50,9 @@ class AllySpaceship(SpaceshipDistance : Float,SpaceshipDebut:Float,SpaceshipFin 
 
     }
 
+    fun changeVitesse(){
+        spaceshipVitesse *= -1
+    }
 
 
 

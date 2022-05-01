@@ -8,7 +8,21 @@ import android.widget.Space
 import java.util.*
 
 
-class EnemySpaceship( SpaceshipDistance: Float, SpaceshipDebut: Float, SpaceshipFin: Float,  initialSpaceshipVitesse: Float, width: Float,  view: SpaceView, context:SpaceView):SpaceShip(SpaceshipDistance, SpaceshipDebut, SpaceshipFin, initialSpaceshipVitesse, width , view, context)
+class EnemySpaceship(
+    vie: Int,
+    SpaceshipDistance: Float,
+    SpaceshipDebut: Float,
+    SpaceshipFin: Float,
+    initialSpaceshipVitesse: Float,
+    width: Float,
+    view: SpaceView,
+    context:SpaceView):SpaceShip(
+    vie,
+    SpaceshipDistance,
+    SpaceshipDebut,
+    SpaceshipFin,
+    initialSpaceshipVitesse,
+    width,view,context)
 {
 
 

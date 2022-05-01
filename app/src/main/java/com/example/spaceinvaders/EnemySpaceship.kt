@@ -9,26 +9,25 @@ import java.util.*
 
 
 class EnemySpaceship(
-    vie: Int,
-    SpaceshipDistance: Float,
-    SpaceshipDebut: Float,
-    SpaceshipFin: Float,
-    initialSpaceshipVitesse: Float,
-    width: Float,
-    view: SpaceView,
-    context:SpaceView):SpaceShip(
+
+    vie                     : Int       = 3,
+    SpaceshipDistance       : Float     = 0f,
+    SpaceshipDebut          : Float     = 0f,
+    SpaceshipFin            : Float     = 0f,
+    initialSpaceshipVitesse : Float     = 400f,
+    width                   : Float     = 370f,
+    view                    : SpaceView,
+    context                 : SpaceView):
+
+    SpaceShip(
     vie,
     SpaceshipDistance,
     SpaceshipDebut,
     SpaceshipFin,
     initialSpaceshipVitesse,
-    width,view,context)
-{
+    width,view,context){
 
-
-
-
-     var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
 
 
 

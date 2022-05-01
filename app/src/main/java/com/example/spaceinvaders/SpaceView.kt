@@ -14,7 +14,19 @@ import java.util.*
 import kotlin.random.Random
 
 
-class SpaceView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
+class SpaceView @JvmOverloads constructor(
+    context      : Context,
+    attributes   : AttributeSet? = null,
+    defStyleAttr : Int           = 0):
+
+    SurfaceView(
+        context,
+        attributes,
+        defStyleAttr),
+
+    SurfaceHolder.Callback,
+    Runnable {
+
     lateinit var canvas    : Canvas
     val backgroundPaint    = Paint()
     var screenWidth        = 0f
@@ -25,113 +37,25 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
 
-
-
-
-    /*val missile = MissileEnemy(
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this)
-    val missileAlly = MissileAlly(0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this)*/
-    val enemySpaceship = EnemySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    val allySpaceship = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    /*val spaceship = EnemySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)*/
-    val etoile1 = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    val etoile2 = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    val etoile3 = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    val etoile4 = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    val etoile5 = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-    val etoile6 = AllySpaceship(
-        0,
-        0f,
-        0f,
-        0f,
-        0f,
-        0f,
-        this,this)
-
-
+    val enemySpaceship = EnemySpaceship(view=this, context = this)
+    val allySpaceship  = AllySpaceship (view=this, context = this)
+    val etoile1        = AllySpaceship (view=this, context = this)
+    val etoile2        = AllySpaceship (view=this, context = this)
+    val etoile3        = AllySpaceship (view=this, context = this)
+    val etoile4        = AllySpaceship (view=this, context = this)
+    val etoile5        = AllySpaceship (view=this, context = this)
+    val etoile6        = AllySpaceship (view=this, context = this)
 
     val lesMissilesAlly = arrayListOf<MissileAlly>()
     val lesMissilesEnemy = arrayListOf<MissileEnemy>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
     val imageBackground = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
-
-
-    init { //Création du background
-        backgroundPaint.color = Color.WHITE
-
-        textPaint.textSize= screenWidth/20
-        textPaint.color = Color.WHITE
-        timeLeft = 120.0
-
-
-    }
+    init{
+        backgroundPaint.color = Color.WHITE     // Création du background
+        textPaint.textSize    = screenWidth/20  // timer taille
+        textPaint.color       = Color.WHITE     // timer couleur
+        timeLeft              = 120.0}          // timer temps restant
 
 
 
@@ -150,20 +74,14 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         screenWidth = w.toFloat()
         screenHeight = h.toFloat()
 
-        enemySpaceship.vie = 0
         enemySpaceship.SpaceshipDistance = (w/3f)
         enemySpaceship.SpaceshipDebut = (0.3f*h)
         enemySpaceship.SpaceshipFin = (0.3f*h)
-        enemySpaceship.width= (370f)
-        enemySpaceship.initialSpaceshipVitesse= (400f)
         enemySpaceship.setRect()
 
-        allySpaceship.vie = 0
         allySpaceship.SpaceshipDistance = (w/5f)
         allySpaceship.SpaceshipDebut = (9999*h/10000f-200)
         allySpaceship.SpaceshipFin = (9999*h/10000f-200)
-        allySpaceship.width= (300f)
-        allySpaceship.initialSpaceshipVitesse= (700f)
         allySpaceship.setRect()
 
 

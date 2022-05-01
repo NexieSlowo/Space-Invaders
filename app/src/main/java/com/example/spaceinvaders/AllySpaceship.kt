@@ -4,14 +4,16 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 
 class AllySpaceship(
-    vie: Int,
-    SpaceshipDistance : Float,
-    SpaceshipDebut:Float,
-    SpaceshipFin : Float,
-    initialSpaceshipVitesse : Float,
-    width : Float,
-    view : SpaceView,
-    context:SpaceView):SpaceShip(
+    vie                     : Int       = 3,
+    SpaceshipDistance       : Float     = 0f,
+    SpaceshipDebut          : Float     = 0f,
+    SpaceshipFin            : Float     = 0f,
+    initialSpaceshipVitesse : Float     = 700f,
+    width                   : Float     = 300f,
+    view                    : SpaceView,
+    context                 : SpaceView):
+
+    SpaceShip(
     vie,
     SpaceshipDistance,
     SpaceshipDebut,

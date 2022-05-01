@@ -5,10 +5,20 @@ import android.graphics.Color
 import android.widget.ImageView
 import android.widget.Toast
 
-class MissileAlly(missileDistance : Float,missileDebut : Float,missileFin : Float,initialMissileVitesse : Float,width:Float,view: SpaceView) : Missile(missileDistance,missileDebut,missileFin,initialMissileVitesse,width,view) {
+class MissileAlly(
+    missileDistance : Float,
+    missileDebut : Float,
+    missileFin : Float,
+    initialMissileVitesse : Float,
+    width:Float,view: SpaceView): Missile(
+        missileDistance,
+        missileDebut,
+        missileFin,
+        initialMissileVitesse,
+        width,view){
+
     init {
-        missilePaint.color = Color.GREEN
-    }
+        missilePaint.color = Color.GREEN}
     //var allyMissileOnScreen : Boolean = true
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship) {
@@ -21,6 +31,9 @@ class MissileAlly(missileDistance : Float,missileDebut : Float,missileFin : Floa
         {
             missileOnScreen = false
             enemySpaceship.vie -= 1
+
+
+
         }
     }
 

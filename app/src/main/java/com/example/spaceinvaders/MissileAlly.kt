@@ -10,8 +10,6 @@ class MissileAlly(missileDistance : Float,missileDebut : Float,missileFin : Floa
         missilePaint.color = Color.GREEN
     }
     //var allyMissileOnScreen : Boolean = true
-    var classSecondActivity = SecondActivity()
-    var etoiles = classSecondActivity.etoiles
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship) {
 
@@ -22,7 +20,6 @@ class MissileAlly(missileDistance : Float,missileDebut : Float,missileFin : Floa
         if(missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
         {
             missileOnScreen = false
-            etoiles -= 1
         }
     }
 

@@ -15,15 +15,16 @@ import kotlin.random.Random
 
 
 class SpaceView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
-    lateinit var canvas : Canvas
-    val backgroundPaint = Paint()
-    var screenWidth = 0f
-    var screenHeight = 0f
-    var drawing = false
-    var timeLeft = 0.0
-    val textPaint = Paint()
-    lateinit var thread: Thread
-    var randomTimer : Double = 0.0
+    lateinit var canvas    : Canvas
+    val backgroundPaint    = Paint()
+    var screenWidth        = 0f
+    var screenHeight       = 0f
+    var drawing            = false
+    var timeLeft           = 0.0
+    val textPaint          = Paint()
+    lateinit var thread    : Thread
+    var randomTimer:Double = 0.0
+    var vie : Int          = 3
 
 
 
@@ -47,14 +48,13 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         0f,
         this,this)
-    val allySpaceship = AllySpaceship(0f,
+    val allySpaceship = AllySpaceship(
         0f,
         0f,
         0f,
         0f,
-        this,
-        this,
-        )
+        0f,
+        this,this)
     /*val spaceship = EnemySpaceship(
         0f,
         0f,
@@ -62,6 +62,49 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         0f,
         0f,
         this,this)*/
+    val etoile1 = AllySpaceship(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+    val etoile2 = AllySpaceship(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+    val etoile3 = AllySpaceship(0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+    val etoile4 = AllySpaceship(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+    val etoile5 = AllySpaceship(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+    val etoile6 = AllySpaceship(
+        0f,
+        0f,
+        0f,
+        0f,
+        0f,
+        this,this)
+
+
 
     val lesMissilesAlly = arrayListOf<MissileAlly>()
     val lesMissilesEnemy = arrayListOf<MissileEnemy>()
@@ -72,6 +115,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
 
     init { //Création du background
         backgroundPaint.color = Color.WHITE
+
         textPaint.textSize= screenWidth/20
         textPaint.color = Color.WHITE
         timeLeft = 120.0
@@ -116,11 +160,45 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
         missile.missileDebut = (h / 2f)
         missile.missileFin = (h  / 0.5f)
         missile.width= (w / 15f)
-        missile.setRect()
+        missile.setRect()*/
         textPaint.setTextSize(50f)
-        textPaint.isAntiAlias = true*/
+        textPaint.isAntiAlias = true
 
+        etoile1.SpaceshipDistance = (5*w/10000f)
+        etoile1.SpaceshipDebut = (1500*h/10000f)
+        etoile1.SpaceshipFin = etoile1.SpaceshipDebut
+        etoile1.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile1.setRect()
 
+        etoile2.SpaceshipDistance = (1200*w/10000f)
+        etoile2.SpaceshipDebut = etoile1.SpaceshipDebut
+        etoile2.SpaceshipFin = etoile1.SpaceshipDebut
+        etoile2.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile2.setRect()
+
+        etoile3.SpaceshipDistance = (2400*w/10000f)
+        etoile3.SpaceshipDebut = etoile1.SpaceshipDebut
+        etoile3.SpaceshipFin = etoile1.SpaceshipDebut
+        etoile3.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile3.setRect()
+
+        etoile4.SpaceshipDistance = etoile1.SpaceshipDistance
+        etoile4.SpaceshipDebut = (10000*h/10000f)
+        etoile4.SpaceshipFin = etoile4.SpaceshipDebut
+        etoile4.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile4.setRect()
+
+        etoile5.SpaceshipDistance = etoile2.SpaceshipDistance
+        etoile5.SpaceshipDebut = etoile4.SpaceshipDebut
+        etoile5.SpaceshipFin = etoile4.SpaceshipDebut
+        etoile5.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile5.setRect()
+
+        etoile6.SpaceshipDistance = etoile3.SpaceshipDistance
+        etoile6.SpaceshipDebut = etoile4.SpaceshipDebut
+        etoile6.SpaceshipFin = etoile4.SpaceshipDebut
+        etoile6.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile6.setRect()
 
     }
     fun draw() { //Ceci fait le déssin final, il se sert de draw() définis dans  enemySpaceship et Spacheship
@@ -129,6 +207,13 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
+            etoile1.draw(canvas)
+            etoile2.draw(canvas)
+            etoile3.draw(canvas)
+            etoile4.draw(canvas)
+            etoile5.draw(canvas)
+            etoile6.draw(canvas)
+            canvas.drawText("Il reste ${String.format("%.2f", timeLeft)} s", 50f, 40f, textPaint)
 
             for (m in lesMissilesAlly){
               m.draw(canvas)
@@ -141,10 +226,7 @@ class SpaceView @JvmOverloads constructor (context: Context, attributes: Attribu
                 k.draw(canvas)
             }
 
-            val formatted = String.format("%.2f", timeLeft/60)
-            val formatted2= String.format("%.2f", timeLeft%60)
-            canvas.drawText("Il reste $formatted : $formatted2. ",
-                30f, 50f, textPaint)
+
 
 
             holder.unlockCanvasAndPost(canvas)

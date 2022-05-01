@@ -34,7 +34,6 @@ abstract class SpaceShip(
 
      abstract fun draw(canvas:Canvas)
 
-
      abstract fun update(interval: Double)
 
 

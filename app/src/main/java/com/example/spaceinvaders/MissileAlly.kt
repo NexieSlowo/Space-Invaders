@@ -15,7 +15,8 @@ class MissileAlly(
         missileDebut,
         missileFin,
         initialMissileVitesse,
-        width,view){
+        width,
+    view){
 
     init {
         missilePaint.color = Color.GREEN}
@@ -30,7 +31,7 @@ class MissileAlly(
         if(missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
         {
             missileOnScreen = false
-            enemySpaceship.vie -= 1
+            enemySpaceship.vie =2
 
 
 

@@ -4,41 +4,35 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 
 class AllySpaceship(
-    vie                     : Int       = 3,
-    SpaceshipDistance       : Float     = 0f,
-    SpaceshipDebut          : Float     = 0f,
-    SpaceshipFin            : Float     = 0f,
-    initialSpaceshipVitesse : Float     = 700f,
-    width                   : Float     = 300f,
-    view                    : SpaceView,
+    vie                     : Int       = 3    ,
+    SpaceshipDistance       : Float     = 0f   ,
+    SpaceshipDebut          : Float     = 0f   ,
+    SpaceshipFin            : Float     = 0f   ,
+    initialSpaceshipVitesse : Float     = 700f ,
+    width                   : Float     = 300f ,
+    view                    : SpaceView        ,
     context                 : SpaceView):
 
     SpaceShip(
-    vie,
-    SpaceshipDistance,
-    SpaceshipDebut,
-    SpaceshipFin,
-    initialSpaceshipVitesse,
-    width,
-    view,
+    vie                     ,
+    SpaceshipDistance       ,
+    SpaceshipDebut          ,
+    SpaceshipFin            ,
+    initialSpaceshipVitesse ,
+    width                   ,
+    view                    ,
     context){
      var image = BitmapFactory.decodeResource(context.resources,R.drawable.player2)
 
 
     override fun setRect() {
-
+        spaceshipVitesse = initialSpaceshipVitesse
         spaceship.set(
             SpaceshipDistance.toInt(), SpaceshipDebut.toInt(),
-            (SpaceshipDistance + width).toInt(), SpaceshipFin.toInt()
-        )
-        spaceshipVitesse= initialSpaceshipVitesse
-
-    }
+            (SpaceshipDistance + width).toInt(), SpaceshipFin.toInt())}
 
     override fun draw(canvas: Canvas) {
-        canvas.drawBitmap(image,SpaceshipDistance,SpaceshipFin-view.height/8,null)
-
-    }
+        canvas.drawBitmap(image,SpaceshipDistance,SpaceshipFin-view.height/8,null)}
 
     override fun update(interval: Double) { //Cette methode fait le mouvement
         var up = (interval * spaceshipVitesse).toFloat()

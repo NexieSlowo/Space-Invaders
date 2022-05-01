@@ -39,12 +39,13 @@ class SpaceView @JvmOverloads constructor(
 
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
-    val etoile1        = AllySpaceship (view=this, context = this)
-    val etoile2        = AllySpaceship (view=this, context = this)
-    val etoile3        = AllySpaceship (view=this, context = this)
-    val etoile4        = AllySpaceship (view=this, context = this)
-    val etoile5        = AllySpaceship (view=this, context = this)
-    val etoile6        = AllySpaceship (view=this, context = this)
+    val etoile1        = etoile (view=this, context = this)
+    val etoile2        = etoile (view=this, context = this)
+    val etoile3        = etoile (view=this, context = this)
+    val etoile4        = etoile (view=this, context = this)
+    val etoile5        = etoile (view=this, context = this)
+    val etoile6        = etoile (view=this, context = this)
+    val bonus          = Bonus (view=this,context= this)
 
     val lesMissilesAlly = arrayListOf<MissileAlly>()
     val lesMissilesEnemy = arrayListOf<MissileEnemy>()
@@ -94,41 +95,40 @@ class SpaceView @JvmOverloads constructor(
         textPaint.setTextSize(50f)
         textPaint.isAntiAlias = true
 
-        etoile1.SpaceshipDistance = (5*w/10000f)
-        etoile1.SpaceshipDebut = (1500*h/10000f)
-        etoile1.SpaceshipFin = etoile1.SpaceshipDebut
-        etoile1.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile1.EtoileDistance = (5*w/10000f)
+        etoile1.EtoileDebut = (2400*h/10000f)
+        etoile1.EtoileFin = etoile1.EtoileDebut
         etoile1.setRect()
 
-        etoile2.SpaceshipDistance = (1200*w/10000f)
-        etoile2.SpaceshipDebut = etoile1.SpaceshipDebut
-        etoile2.SpaceshipFin = etoile1.SpaceshipDebut
-        etoile2.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile2.EtoileDistance = (1200*w/10000f)
+        etoile2.EtoileDebut = etoile1.EtoileDebut
+        etoile2.EtoileFin = etoile1.EtoileDebut
         etoile2.setRect()
 
-        etoile3.SpaceshipDistance = (2400*w/10000f)
-        etoile3.SpaceshipDebut = etoile1.SpaceshipDebut
-        etoile3.SpaceshipFin = etoile1.SpaceshipDebut
-        etoile3.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile3.EtoileDistance = (2400*w/10000f)
+        etoile3.EtoileDebut = etoile1.EtoileDebut
+        etoile3.EtoileDebut = etoile1.EtoileDebut
         etoile3.setRect()
 
-        etoile4.SpaceshipDistance = etoile1.SpaceshipDistance
-        etoile4.SpaceshipDebut = (10000*h/10000f)
-        etoile4.SpaceshipFin = etoile4.SpaceshipDebut
-        etoile4.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile4.EtoileDistance = etoile1.EtoileDistance
+        etoile4.EtoileDebut = (10900*h/10000f)
+        etoile4.EtoileFin = etoile4.EtoileDebut
         etoile4.setRect()
 
-        etoile5.SpaceshipDistance = etoile2.SpaceshipDistance
-        etoile5.SpaceshipDebut = etoile4.SpaceshipDebut
-        etoile5.SpaceshipFin = etoile4.SpaceshipDebut
-        etoile5.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile5.EtoileDistance = etoile2.EtoileDistance
+        etoile5.EtoileDebut = etoile4.EtoileDebut
+        etoile5.EtoileFin = etoile4.EtoileDebut
         etoile5.setRect()
 
-        etoile6.SpaceshipDistance = etoile3.SpaceshipDistance
-        etoile6.SpaceshipDebut = etoile4.SpaceshipDebut
-        etoile6.SpaceshipFin = etoile4.SpaceshipDebut
-        etoile6.image=BitmapFactory.decodeResource(context.resources,R.drawable.star2)
+        etoile6.EtoileDistance = etoile3.EtoileDistance
+        etoile6.EtoileDebut = etoile4.EtoileDebut
+        etoile6.EtoileFin = etoile4.EtoileDebut
         etoile6.setRect()
+
+        bonus.Distance = (1*w/2f)
+        bonus.Debut = (1*h/2f)
+        bonus.Fin = bonus.Debut
+        bonus.setRect()
 
     }
     fun draw() { //Ceci fait le déssin final, il se sert de draw() définis dans  enemySpaceship et Spacheship
@@ -137,6 +137,7 @@ class SpaceView @JvmOverloads constructor(
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
+            bonus.draw(canvas)
 
             when (enemySpaceship.vie){
                 3 -> {

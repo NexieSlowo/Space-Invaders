@@ -22,6 +22,10 @@ open abstract class Missile(
     var missileOnScreen = true
     init {missilePaint.color = Color.BLUE}
 
+    fun missile_disparait(){
+        missileOnScreen = false
+    }
+
     fun setRect(){
         if(missileOnScreen){
             missileVitesse = initialMissileVitesse
@@ -49,6 +53,8 @@ open abstract class Missile(
         enemySpaceship : EnemySpaceship,
         allySpaceship  : AllySpaceship)
 
+    abstract fun deplacement_du_missile(
+        interval       : Double)
     /*fun interact(){
         if(missileDebut < view.width)
            missileOnScreen = false

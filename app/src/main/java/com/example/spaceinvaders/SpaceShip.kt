@@ -36,7 +36,7 @@ abstract class SpaceShip(
 
      abstract fun update(interval: Double)
 
-
+     abstract fun deplacement_du_vaisseau(up: Float)
 
     /* abstract fun reset()*/
 

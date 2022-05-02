@@ -10,4 +10,7 @@ interface InterfaceAddTime {
     fun addtime(){
         timeleft += hit_reward
     }
+    fun removetime(){
+        timeleft -=  hit_reward
+    }
 }

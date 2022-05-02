@@ -44,29 +44,41 @@ class EnemySpaceship(
 
 
     override fun draw(canvas: Canvas) {
-
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipFin-view.height/8,null)
-
     }
 
 
 
     override fun update(interval: Double) { //Cette methode fait le mouvement
+        val up = (interval * spaceshipVitesse).toFloat()
+        val vaisseau_touche_bord = (spaceship.left+view.width/20 < 0 || spaceship.right+ view.width/15.3f > view.screenWidth)
 
-        var up = (interval * spaceshipVitesse).toFloat()
-        spaceship.offset(up.toInt(), 0)
-        if (spaceship.left+view.width/20 < 0 || spaceship.right+ view.width/15.3f > view.screenWidth) {
-            spaceshipVitesse *= -1
-            up = (interval * 4 * spaceshipVitesse).toFloat()
-            spaceship.offset(up.toInt(), 0)
+        deplacement_du_vaisseau(up)
+
+        if (vaisseau_touche_bord) {
+            changeVitesse()
+            change_distance_parcourue(interval)
         }
-        SpaceshipDistance = SpaceshipDistance + up
-        println("interaction spaceship enemy avec missile")}
+        mise_a_jour_de_position_du_vaisseau(up)
+    }
 
 
+    override fun deplacement_du_vaisseau(up:Float){
+        spaceship.offset(up.toInt(), 0)
+    }
+
+    fun changeVitesse(){
+        spaceshipVitesse *= -1
+    }
+    fun change_distance_parcourue(interval: Double){
+        val up = (interval * 4 * spaceshipVitesse).toFloat()
+        deplacement_du_vaisseau(up)
+    }
 
 
-
+    fun mise_a_jour_de_position_du_vaisseau(up: Float){
+        SpaceshipDistance += up
+    }
 
 
 }

@@ -8,25 +8,54 @@ class Bonus(
     var Fin: Float= 0f ,
     var width: Float = 300f,
     var view: SpaceView,
-    context: SpaceView) : InterfaceAddTime{
+    context: SpaceView)
+
+    :InterfaceAddTime{
+
     override fun addtime() {
         TODO("Not yet implemented")
     }
 
+    var bonusOnScreen = false
+    val bonusPaint    = Paint()
+    init {bonusPaint.color = Color.WHITE}
     val bonus= RectF(
         Distance,
         Debut,
         Distance + width,
         Fin)
 
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus)
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
 
     fun setRect() {
-        bonus.set(
-            Distance, Debut,
-            (Distance + width), (Fin))}
+        if (bonusOnScreen){
+            bonus.set(
+                Distance, Debut,
+                (Distance + width), (Fin))}
+        else {
+            Distance =0f
+            Debut =0f
+            width = 0f
+            Fin = 0f
+        }
+    }
 
 
 
     fun draw(canvas: Canvas) {
-        canvas.drawBitmap(image,Distance,Debut-view.screenHeight/5,null)}}
+        if(bonusOnScreen){
+            canvas.drawBitmap(image,Distance,Debut-view.screenHeight/5,null)}}
+
+
+
+    fun drawRectangle(canvas: Canvas){
+        if(bonusOnScreen){
+            canvas.drawRect(bonus, bonusPaint)}}
+
+    fun shining(){
+        bonusOnScreen = !bonusOnScreen
+
+    }
+
+    }
+

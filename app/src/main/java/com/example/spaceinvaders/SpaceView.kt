@@ -36,6 +36,7 @@ class SpaceView @JvmOverloads constructor(
     val textPaint          = Paint()
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
+    var randomTimer2:Double = 0.0
 
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
@@ -126,7 +127,7 @@ class SpaceView @JvmOverloads constructor(
         etoile6.setRect()
 
         bonus.Distance = (1*w/2f)
-        bonus.Debut = (1*h/2f)
+        bonus.Debut = (4*h/8f)
         bonus.Fin = bonus.Debut
         bonus.setRect()
 
@@ -200,14 +201,22 @@ class SpaceView @JvmOverloads constructor(
 
         timeLeft -= interval
         randomTimer -= interval
+        randomTimer2 -= interval
         if (timeLeft/60 <= 0.0) drawing = false
 
         if(randomTimer<=0.0) {
             lesMissilesEnemy.add(MissileEnemy(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDebut + width/7f,height/2f,10f,this))
             lesMissilesJaunes.add(MissileJaune(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDebut + width/8f,height/2f,10f,this))
-            randomTimer = (Random.nextInt(3,5)).toDouble()
+
+            randomTimer = (Random.nextInt(2,5)).toDouble()
         }
 
+        if(randomTimer2<=0.0) {
+
+            bonus.shining()
+            randomTimer2 = (Random.nextInt(1,3)).toDouble()
+
+        }
     }
     fun updateAllySpaceshipPosition(elapsedTimeMS: Double){
         val interval = elapsedTimeMS / 1000.0
@@ -228,6 +237,7 @@ class SpaceView @JvmOverloads constructor(
             }
 
         }
+
 
 
         return true

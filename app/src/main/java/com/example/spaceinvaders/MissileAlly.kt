@@ -27,15 +27,21 @@ class MissileAlly(
         val up = (interval * missileVitesse).toFloat()
         missile.offset(0f, -up)
         //missileDebut += up
-
+        if(missileDebut < enemySpaceship.SpaceshipFin)
+        {
+            missileOnScreen = false
+            enemySpaceship.vie = 2
+        }
+        /*
         if(missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
         {
             missileOnScreen = false
             enemySpaceship.vie =2
-
-
-
         }
+         */
+
+
+
     }
 
 

@@ -8,7 +8,10 @@ class Bonus(
     var Fin: Float= 0f ,
     var width: Float = 300f,
     var view: SpaceView,
-    context: SpaceView){
+    context: SpaceView) : InterfaceAddTime{
+    override fun addtime() {
+        TODO("Not yet implemented")
+    }
 
     val bonus= RectF(
         Distance,
@@ -16,7 +19,7 @@ class Bonus(
         Distance + width,
         Fin)
 
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus)
 
     fun setRect() {
         bonus.set(

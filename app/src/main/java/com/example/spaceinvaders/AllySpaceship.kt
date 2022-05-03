@@ -49,7 +49,7 @@ class AllySpaceship(
         interval: Double){
         //Cette methode fait le mouvement
         val up = (interval * spaceshipVitesse).toFloat()
-        val vaisseau_touche_bord = (spaceship.left+view.width/20 < 0 || spaceship.right+ view.width/15.3f > view.screenWidth)
+        var vaisseau_touche_bord = (spaceship.left+view.width/20 < 0 || spaceship.right+ view.width/15.3f > view.screenWidth)
 
         deplacement_du_vaisseau(up)
         if (vaisseau_touche_bord) {

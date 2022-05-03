@@ -48,6 +48,7 @@ open abstract class Missile(
          if(missileOnScreen){
              canvas.drawRect(missile, missilePaint)}}
 
+
     abstract fun update(
         interval       : Double,
         enemySpaceship : EnemySpaceship,

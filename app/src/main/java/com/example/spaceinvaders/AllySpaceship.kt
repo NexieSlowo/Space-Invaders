@@ -44,7 +44,7 @@ class AllySpaceship(
             SpaceshipFin-view.height/8 ,
             null)
     }
-/*
+
     override fun update(
         interval: Double){
         //Cette methode fait le mouvement
@@ -59,8 +59,8 @@ class AllySpaceship(
         mise_a_jour_de_position_du_vaisseau(up)
     }
 
- */
 
+/*
     override fun update(
         interval: Double){
         var up = (interval * spaceshipVitesse).toFloat()
@@ -72,6 +72,8 @@ class AllySpaceship(
         }
         SpaceshipDistance =SpaceshipDistance+up
     }
+
+ */
 
 
 

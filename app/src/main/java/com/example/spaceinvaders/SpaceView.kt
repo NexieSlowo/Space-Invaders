@@ -148,6 +148,7 @@ class SpaceView @JvmOverloads constructor(
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
+            bonus.drawRectangle(canvas)
             bonus.draw(canvas)
 
             when (enemySpaceship.vie){

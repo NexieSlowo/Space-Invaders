@@ -33,19 +33,21 @@ class MissileAlly(
 
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship) {
-        var missile_touche_vaisseau: Boolean = (missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
+        if(missileOnScreen){
+            var missile_touche_vaisseau: Boolean = (missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
 
-        deplacement_du_missile(interval)
+            deplacement_du_missile(interval)
 
-        if(missile_touche_vaisseau){
-            missile_disparait()
-            ennemi_perd_vie(enemySpaceship)
+            if(missile_touche_vaisseau){
+                missile_disparait()
+                ennemi_perd_vie(enemySpaceship)
+            }
         }
     }
 
 
     fun ennemi_perd_vie(enemySpaceship: EnemySpaceship){
-        enemySpaceship.vie =2
+        enemySpaceship.vie--
     }
 
 

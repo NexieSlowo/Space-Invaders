@@ -1,6 +1,6 @@
 package com.example.spaceinvaders
 
 class Timeee (
-    var timeLeft : Double = 10.0
+    var timeLeft : Double = 100.0
 ) {
 }

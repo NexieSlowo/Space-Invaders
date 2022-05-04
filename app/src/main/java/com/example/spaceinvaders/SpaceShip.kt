@@ -19,14 +19,14 @@ abstract class SpaceShip(
 
     ) {
 
-    open val spaceship= Rect(
-        SpaceshipDistance.toInt(), SpaceshipDebut.toInt(),
-        (SpaceshipDistance + width).toInt(), SpaceshipFin.toInt()
+    open val spaceship= RectF(
+        SpaceshipDistance, SpaceshipDebut,
+        SpaceshipDistance + width, SpaceshipFin
     )
     //val spaceshipPaint = Paint()
     var spaceshipVitesse= initialSpaceshipVitesse
-
-
+    val spaceshipPaint = Paint()
+    init{spaceshipPaint.color = Color.WHITE}
 
 
 

@@ -35,8 +35,8 @@ class EnemySpaceship(
     override fun setRect() {
 
         spaceship.set(
-            SpaceshipDistance.toInt(), SpaceshipDebut.toInt(),
-            (SpaceshipDistance + width).toInt(), SpaceshipFin.toInt()
+            SpaceshipDistance, SpaceshipDebut,
+            (SpaceshipDistance + width), SpaceshipFin
         )
         spaceshipVitesse= initialSpaceshipVitesse
 
@@ -44,6 +44,7 @@ class EnemySpaceship(
 
 
     override fun draw(canvas: Canvas) {
+        canvas.drawRect(spaceship,spaceshipPaint)
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipFin-view.height/8,null)
     }
 
@@ -64,7 +65,7 @@ class EnemySpaceship(
 
 
     override fun deplacement_du_vaisseau(up:Float){
-        spaceship.offset(up.toInt(), 0)
+        spaceship.offset(up,0f)
     }
 
     fun changeVitesse(){

@@ -87,12 +87,12 @@ class SpaceView @JvmOverloads constructor(
 
         enemySpaceship.SpaceshipDistance = (w/3f)
         enemySpaceship.SpaceshipDebut    = (0.3f*h)
-        enemySpaceship.SpaceshipFin      = (0.3f*h)
+        enemySpaceship.SpaceshipFin      = enemySpaceship.SpaceshipDebut+100
         enemySpaceship.setRect()
 
-        allySpaceship.SpaceshipDistance  = (w/5f)
-        allySpaceship.SpaceshipDebut     = (9999*h/10000f-200)
-        allySpaceship.SpaceshipFin       = (9999*h/10000f-200)
+        allySpaceship.SpaceshipDistance  = (3*w/25f)
+        allySpaceship.SpaceshipDebut     = (8000*h/10000f-200)
+        allySpaceship.SpaceshipFin       = allySpaceship.SpaceshipDebut+100
         allySpaceship.setRect()
 
         textPaint.setTextSize(50f)
@@ -130,7 +130,7 @@ class SpaceView @JvmOverloads constructor(
 
         bonus.Distance                   = (1*w/2f)
         bonus.Debut                      = (4*h/8f)
-        bonus.Fin                        = bonus.Debut
+        bonus.Fin                        = (5*h/8f)
         bonus.setRect()
 
         /*missile.missileDistance = (w/6f)
@@ -148,7 +148,6 @@ class SpaceView @JvmOverloads constructor(
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
-            bonus.drawRectangle(canvas)
             bonus.draw(canvas)
 
             when (enemySpaceship.vie){
@@ -156,38 +155,45 @@ class SpaceView @JvmOverloads constructor(
                 3 -> {
                     etoile1.draw(canvas)
                     etoile2.draw(canvas)
-                    etoile3.draw(canvas)}
+                    etoile3.draw(canvas)
+                }
                 2 -> {
                     etoile1.draw(canvas)
-                    etoile2.draw(canvas)}
+                    etoile2.draw(canvas)
+                }
                 1 -> {
-                    etoile1.draw(canvas)}}
-
+                    etoile1.draw(canvas)
+                }
+            }
             when(allySpaceship.vie){
 
                 3 -> {
                     etoile4.draw(canvas)
                     etoile5.draw(canvas)
-                    etoile6.draw(canvas)}
+                    etoile6.draw(canvas)
+                }
                 2 -> {
                     etoile4.draw(canvas)
-                    etoile5.draw(canvas)}
+                    etoile5.draw(canvas)
+                }
                 1 -> {
-                    etoile4.draw(canvas)}}
-
+                    etoile4.draw(canvas)
+                }
+            }
             canvas.drawText("Il reste ${String.format("%.2f", timeLeft)} s", 50f, 40f, textPaint)
 
             for (m in lesMissilesAlly){
-              m.draw(canvas)}
-
+              m.draw(canvas)
+            }
             for(j in lesMissilesEnemy){
-                j.draw(canvas)}
-
+                j.draw(canvas)
+            }
             for(k in lesMissilesJaunes){
-                k.draw(canvas)}
-
-            holder.unlockCanvasAndPost(canvas)}}
-
+                k.draw(canvas)
+            }
+            holder.unlockCanvasAndPost(canvas)
+        }
+    }
     fun updatePositions(elapsedTimeMS: Double) {
         /*Ceci est la méthode qui change la position des objets,
         elle se sert de la méthode update() définie differament dans chaque*/
@@ -228,15 +234,16 @@ class SpaceView @JvmOverloads constructor(
                 10f,
                 this))
 
-            randomTimer = (Random.nextInt(2,5)).toDouble()}
+            randomTimer = (Random.nextInt(2,5)).toDouble()
+        }
 
         if(randomTimer2<=0.0) {
             bonus.shining()
-            randomTimer2 = (Random.nextInt(1,3)).toDouble()}}
+            randomTimer2 = (Random.nextInt(1,3)).toDouble()
+        }
+    }
 
-    fun updateAllySpaceshipPosition(elapsedTimeMS: Double){
-        val interval = elapsedTimeMS / 1000.0
-        allySpaceship.update(interval)}
+
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
 

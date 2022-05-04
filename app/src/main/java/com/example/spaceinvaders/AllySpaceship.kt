@@ -2,6 +2,8 @@ package com.example.spaceinvaders
 
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 
 class AllySpaceship(
     vie                     : Int       = 3    ,
@@ -23,6 +25,8 @@ class AllySpaceship(
         view                    ,
         context){
 
+
+
     private var image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
@@ -30,19 +34,15 @@ class AllySpaceship(
     override fun setRect() {
         spaceshipVitesse = initialSpaceshipVitesse
         spaceship.set(
-            SpaceshipDistance.toInt()          ,
-            SpaceshipDebut.toInt()             ,
-            (SpaceshipDistance + width).toInt(),
-            SpaceshipFin.toInt())
+            SpaceshipDistance         ,
+            SpaceshipDebut            ,
+            (SpaceshipDistance + width),
+            SpaceshipFin)
     }
 
-    override fun draw(
-        canvas: Canvas) {
-        canvas.drawBitmap(
-            image                          ,
-            SpaceshipDistance              ,
-            SpaceshipFin-view.height/8 ,
-            null)
+    override fun draw(canvas: Canvas) {
+        canvas.drawRect(spaceship,spaceshipPaint)
+        canvas.drawBitmap(image, SpaceshipDistance, SpaceshipDebut,null)
     }
 
     override fun update(
@@ -60,6 +60,8 @@ class AllySpaceship(
     }
 
 
+
+
 /*
     override fun update(
         interval: Double){
@@ -72,14 +74,15 @@ class AllySpaceship(
         }
         SpaceshipDistance =SpaceshipDistance+up
     }
-
  */
+
+
 
 
 
     override fun deplacement_du_vaisseau(
         up: Float){
-        spaceship.offset(up.toInt(),0)
+        spaceship.offset(up,0f)
     }
 
     fun changeVitesse(){

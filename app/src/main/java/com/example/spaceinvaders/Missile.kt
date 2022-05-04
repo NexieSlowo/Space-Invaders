@@ -47,7 +47,9 @@ open abstract class Missile(
 
 
      fun draw(canvas: Canvas){
-             canvas.drawRect(missile, missilePaint)
+             if(missileOnScreen){
+                 canvas.drawRect(missile, missilePaint)
+             }
      }
 
 

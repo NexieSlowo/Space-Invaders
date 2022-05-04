@@ -6,11 +6,11 @@ import android.widget.ImageView
 import android.widget.Toast
 
 class MissileAlly(
-    missileDistance       : Float,
-    missileDebut          : Float,
-    missileFin            : Float,
-    initialMissileVitesse : Float,
-    width                 : Float,
+    missileDistance       : Float ,
+    missileDebut          : Float ,
+    missileFin            : Float ,
+    initialMissileVitesse : Float ,
+    width                 : Float ,
     view                  : SpaceView):
 
     Missile(

@@ -25,16 +25,9 @@ class Bonus(
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
 
     fun setRect() {
-        if (bonusOnScreen){
-            bonus.set(
-                Distance, Debut,
-                (Distance + width), (Fin))}
-        else {
-            Distance =0f
-            Debut =0f
-            width = 0f
-            Fin = 0f
-        }
+        bonus.set(
+            Distance, Debut,
+            (Distance + width), (Fin))
     }
 
 

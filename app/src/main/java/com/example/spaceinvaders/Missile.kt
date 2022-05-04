@@ -27,22 +27,13 @@ open abstract class Missile(
     }
 
     fun setRect(){
-        if(missileOnScreen){
-            missileVitesse = initialMissileVitesse
-            missile.set(
-                missileDistance             ,
-                missileDebut                ,
-                missileDistance + width,
-                missileFin
-            )
-        }
-        else{
-            missileDistance = 0f
-            missileDebut = 0f
-            missileFin = 0f
-            width = 0f
-            initialMissileVitesse = 0f
-        }
+        missileVitesse = initialMissileVitesse
+        missile.set(
+            missileDistance             ,
+            missileDebut                ,
+            missileDistance + width,
+            missileFin
+        )
 }
 
 

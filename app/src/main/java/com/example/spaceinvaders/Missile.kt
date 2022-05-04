@@ -30,14 +30,16 @@ open abstract class Missile(
         if(missileOnScreen){
             missileVitesse = initialMissileVitesse
             missile.set(
-                missileDistance,
-                missileDebut,
+                missileDistance             ,
+                missileDebut                ,
                 missileDistance + width,
-                missileFin)}
+                missileFin
+            )
+        }
         else{
-            missileDistance = 0f
-            missileDebut = 0f
-            missileFin = 0f
+            missileDistance = view.width.toFloat()/2
+            missileDebut = view.height.toFloat()/2
+            missileFin = missileDebut
             width = 0f
             initialMissileVitesse = 0f
         }
@@ -45,8 +47,8 @@ open abstract class Missile(
 
 
      fun draw(canvas: Canvas){
-         if(missileOnScreen){
-             canvas.drawRect(missile, missilePaint)}}
+             canvas.drawRect(missile, missilePaint)
+     }
 
 
     abstract fun update(

@@ -27,7 +27,7 @@ class EnemySpaceship(
     initialSpaceshipVitesse,
     width,view,context){
 
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
+    private var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
 
 
 

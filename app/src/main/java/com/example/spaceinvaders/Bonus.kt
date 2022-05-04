@@ -25,7 +25,7 @@ class Bonus(
         Distance + width,
         Fin)
 
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
+    private var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
 
     fun setRect() {
         if (bonusOnScreen){

@@ -45,7 +45,7 @@ class MissileAlly(
 
 
     fun ennemi_perd_vie(enemySpaceship: EnemySpaceship){
-        enemySpaceship.vie =2
+        enemySpaceship.vie--
     }
 
 

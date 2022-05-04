@@ -32,7 +32,6 @@ class SpaceView @JvmOverloads constructor(
     var screenWidth        = 0f
     var screenHeight       = 0f
     var drawing            = false
-    var timeLeft           = 0.0
     val textPaint          = Paint()
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
@@ -47,17 +46,20 @@ class SpaceView @JvmOverloads constructor(
     val etoile5        = etoile (view=this, context = this)
     val etoile6        = etoile (view=this, context = this)
     val bonus          = Bonus (view=this,context= this)
+    var timeee         = Timeee ()
+    var timeLeft = timeee.timeLeft
 
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
     val lesMissilesEnemy  = arrayListOf<MissileEnemy>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
     val imageBackground   = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
+
     init{
         backgroundPaint.color = Color.WHITE     // Création du background
         textPaint.textSize    = screenWidth/20  // timer taille
-        textPaint.color       = Color.WHITE     // timer couleur
-        timeLeft              = 120.0}          // timer temps restant
+        textPaint.color       = Color.WHITE}    // timer couleur
+
 
 
 

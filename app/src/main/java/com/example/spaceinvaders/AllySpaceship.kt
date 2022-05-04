@@ -23,7 +23,7 @@ class AllySpaceship(
         view                    ,
         context){
 
-    var image = BitmapFactory.decodeResource(
+    private var image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
 

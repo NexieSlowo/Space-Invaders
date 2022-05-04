@@ -206,13 +206,13 @@ class SpaceView @JvmOverloads constructor(
 
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
-                m.update(interval,enemySpaceship,allySpaceship)}
+                m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
             for( j in lesMissilesEnemy){
-                j.update(interval,enemySpaceship,allySpaceship)}
+                j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
         for( k in lesMissilesJaunes){
-            k.update(interval,enemySpaceship,allySpaceship)}
+            k.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
 
         timeLeft -= interval
@@ -242,7 +242,7 @@ class SpaceView @JvmOverloads constructor(
         if(randomTimer2<=0.0) {
             val tempsMin = 3
             val tempsMax = 6
-            val randomDist = Random.nextFloat()
+            val randomDist = Random.nextDouble(0.0,0.8).toFloat()
             val randomDebut = Random.nextDouble(0.15,0.6).toFloat()
             bonus.Distance                   = randomDist*screenWidth
             bonus.Debut                      = randomDebut*screenHeight

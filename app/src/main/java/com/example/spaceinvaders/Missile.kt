@@ -44,10 +44,7 @@ open abstract class Missile(
      }
 
 
-    abstract fun update(
-        interval       : Double,
-        enemySpaceship : EnemySpaceship,
-        allySpaceship  : AllySpaceship)
+    abstract fun update(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, bonus: Bonus,timeee: Timeee)
 
     abstract fun deplacement_du_missile(
         interval       : Double)

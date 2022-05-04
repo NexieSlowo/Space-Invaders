@@ -45,6 +45,7 @@ class MissileAlly(
             }
             if(missile_touche_bonus){
                 rajouteTemps(timeee)
+                missile_disparait()
             }
         }
     }

@@ -19,28 +19,64 @@ abstract class SpaceShip(
 
     ) {
 
-    open val spaceship= Rect(
-        SpaceshipDistance.toInt(), SpaceshipDebut.toInt(),
-        (SpaceshipDistance + width).toInt(), SpaceshipFin.toInt()
+    open val spaceship= RectF(
+        SpaceshipDistance, SpaceshipDebut,
+        SpaceshipDistance + width, SpaceshipFin
     )
     //val spaceshipPaint = Paint()
     var spaceshipVitesse= initialSpaceshipVitesse
+    val spaceshipPaint = Paint()
+    init{spaceshipPaint.color = Color.WHITE}
 
 
-
-
-
-     abstract fun setRect()
+     fun setRect() {
+        spaceshipVitesse = initialSpaceshipVitesse
+        spaceship.set(
+            SpaceshipDistance         ,
+            SpaceshipDebut            ,
+            (SpaceshipDistance + width),
+            SpaceshipFin)
+    }
 
      abstract fun draw(canvas:Canvas)
 
-     abstract fun update(interval: Double)
+     fun update(
+        interval: Double){
+        //Cette methode fait le mouvement
+        val up = (interval * spaceshipVitesse).toFloat()
+        val vaisseauToucheBord = (spaceship.left < 0 || spaceship.right > view.screenWidth)
+        val decallementt: Int = 4
 
-     abstract fun deplacement_du_vaisseau(up: Float)
+        deplacement_du_vaisseau(up)
+         if (vaisseauToucheBord) {
+            changeVitesse()
+            change_distance_parcourue(interval,decallementt)
+         }
+
+        mise_a_jour_de_position_du_vaisseau(up)
+    }
+
+
 
     /* abstract fun reset()*/
 
+     fun deplacement_du_vaisseau(up: Float){
+        spaceship.offset(up,0f)
+    }
 
+    fun changeVitesse(){
+        spaceshipVitesse *= -1
+    }
+
+    fun change_distance_parcourue(interval: Double, decallement: Int){
+        val up = (interval * decallement * spaceshipVitesse).toFloat()
+        deplacement_du_vaisseau(up)
+    }
+
+
+    fun mise_a_jour_de_position_du_vaisseau(up: Float){
+        SpaceshipDistance += up
+    }
 
 
 

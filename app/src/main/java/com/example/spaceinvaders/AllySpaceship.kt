@@ -2,6 +2,8 @@ package com.example.spaceinvaders
 
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 
 class AllySpaceship(
     vie                     : Int       = 3    ,
@@ -23,44 +25,25 @@ class AllySpaceship(
         view                    ,
         context){
 
-    var image = BitmapFactory.decodeResource(
+
+
+    private var image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
 
-    override fun setRect() {
-        spaceshipVitesse = initialSpaceshipVitesse
-        spaceship.set(
-            SpaceshipDistance.toInt()          ,
-            SpaceshipDebut.toInt()             ,
-            (SpaceshipDistance + width).toInt(),
-            SpaceshipFin.toInt())
+
+
+    override fun draw(canvas: Canvas) {
+        canvas.drawRect(spaceship,spaceshipPaint)
+        canvas.drawBitmap(image, SpaceshipDistance, SpaceshipDebut,null)
     }
 
-    override fun draw(
-        canvas: Canvas) {
-        canvas.drawBitmap(
-            image                          ,
-            SpaceshipDistance              ,
-            SpaceshipFin-view.height/8 ,
-            null)
-    }
-
-    /*override fun update(
-        interval: Double){
-        //Cette methode fait le mouvement
-        val up = (interval * spaceshipVitesse).toFloat()
-        var vaisseau_touche_bord = (spaceship.left+view.width/20 < 0 || spaceship.right+ view.width/15.3f > view.screenWidth)
-
-        deplacement_du_vaisseau(up)
-        if (vaisseau_touche_bord) {
-            changeVitesse()
-            change_distance_parcourue(interval)
-        }
-        mise_a_jour_de_position_du_vaisseau(up)
-    }*/
 
 
 
+
+
+/*
     override fun update(
         interval: Double){
         var up = (interval * spaceshipVitesse).toFloat()
@@ -72,30 +55,13 @@ class AllySpaceship(
         }
         SpaceshipDistance =SpaceshipDistance+up
     }
+ */
 
 
 
 
 
-    override fun deplacement_du_vaisseau(
-        up: Float){
-        spaceship.offset(up.toInt(),0)
-    }
 
-    fun changeVitesse(){
-        spaceshipVitesse *= -1
-    }
-
-    fun change_distance_parcourue(
-        interval: Double){
-        val up = (interval * 4 * spaceshipVitesse).toFloat()
-        deplacement_du_vaisseau(up)
-    }
-
-
-    fun mise_a_jour_de_position_du_vaisseau(up: Float){
-        SpaceshipDistance += up
-    }
 
     /*override fun reset() {
 

@@ -6,8 +6,6 @@ class MissileVert(missileDistance : Float,missileDebut : Float,missileFin:Float,
     init {
         missilePaint.color = Color.GREEN
     }
-    override fun addtime() {
-        TODO("Not yet implemented")
-    }
+
 
 }

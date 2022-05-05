@@ -32,7 +32,6 @@ class SpaceView @JvmOverloads constructor(
     var screenWidth        = 0f
     var screenHeight       = 0f
     var drawing            = false
-    var timeLeft           = 0.0
     val textPaint          = Paint()
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
@@ -47,17 +46,20 @@ class SpaceView @JvmOverloads constructor(
     val etoile5        = etoile (view=this, context = this)
     val etoile6        = etoile (view=this, context = this)
     val bonus          = Bonus (view=this,context= this)
+    var timeee         = Timeee ()
+    var timeLeft = timeee.timeLeft
 
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
     val lesMissilesEnemy  = arrayListOf<MissileEnemy>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
     val imageBackground   = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
+
     init{
         backgroundPaint.color = Color.WHITE     // Création du background
         textPaint.textSize    = screenWidth/20  // timer taille
-        textPaint.color       = Color.WHITE     // timer couleur
-        timeLeft              = 120.0}          // timer temps restant
+        textPaint.color       = Color.WHITE}    // timer couleur
+
 
 
 
@@ -84,13 +86,14 @@ class SpaceView @JvmOverloads constructor(
         screenHeight                     = h.toFloat()
 
         enemySpaceship.SpaceshipDistance = (w/3f)
-        enemySpaceship.SpaceshipDebut    = (0.3f*h)
-        enemySpaceship.SpaceshipFin      = (0.3f*h)
+        enemySpaceship.SpaceshipDebut    = (0.15f*h)
+        enemySpaceship.SpaceshipFin      = enemySpaceship.SpaceshipDebut+300
+        enemySpaceship.width             = 280f
         enemySpaceship.setRect()
 
-        allySpaceship.SpaceshipDistance  = (w/5f)
-        allySpaceship.SpaceshipDebut     = (9999*h/10000f-200)
-        allySpaceship.SpaceshipFin       = (9999*h/10000f-200)
+        allySpaceship.SpaceshipDistance  = (3*w/25f)
+        allySpaceship.SpaceshipDebut     = (7800*h/10000f-200)
+        allySpaceship.SpaceshipFin       = allySpaceship.SpaceshipDebut+300
         allySpaceship.setRect()
 
         textPaint.setTextSize(50f)
@@ -128,7 +131,8 @@ class SpaceView @JvmOverloads constructor(
 
         bonus.Distance                   = (1*w/2f)
         bonus.Debut                      = (4*h/8f)
-        bonus.Fin                        = bonus.Debut
+        bonus.Fin                        = bonus.Debut+250
+        bonus.width                      = 250f
         bonus.setRect()
 
         /*missile.missileDistance = (w/6f)
@@ -146,7 +150,6 @@ class SpaceView @JvmOverloads constructor(
             canvas.drawBitmap(imageBackground,0f,0f, null)
             enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
-            bonus.drawRectangle(canvas)
             bonus.draw(canvas)
 
             when (enemySpaceship.vie){
@@ -154,38 +157,45 @@ class SpaceView @JvmOverloads constructor(
                 3 -> {
                     etoile1.draw(canvas)
                     etoile2.draw(canvas)
-                    etoile3.draw(canvas)}
+                    etoile3.draw(canvas)
+                }
                 2 -> {
                     etoile1.draw(canvas)
-                    etoile2.draw(canvas)}
+                    etoile2.draw(canvas)
+                }
                 1 -> {
-                    etoile1.draw(canvas)}}
-
+                    etoile1.draw(canvas)
+                }
+            }
             when(allySpaceship.vie){
 
                 3 -> {
                     etoile4.draw(canvas)
                     etoile5.draw(canvas)
-                    etoile6.draw(canvas)}
+                    etoile6.draw(canvas)
+                }
                 2 -> {
                     etoile4.draw(canvas)
-                    etoile5.draw(canvas)}
+                    etoile5.draw(canvas)
+                }
                 1 -> {
-                    etoile4.draw(canvas)}}
-
+                    etoile4.draw(canvas)
+                }
+            }
             canvas.drawText("Il reste ${String.format("%.2f", timeLeft)} s", 50f, 40f, textPaint)
 
             for (m in lesMissilesAlly){
-              m.draw(canvas)}
-
+              m.draw(canvas)
+            }
             for(j in lesMissilesEnemy){
-                j.draw(canvas)}
-
+                j.draw(canvas)
+            }
             for(k in lesMissilesJaunes){
-                k.draw(canvas)}
-
-            holder.unlockCanvasAndPost(canvas)}}
-
+                k.draw(canvas)
+            }
+            holder.unlockCanvasAndPost(canvas)
+        }
+    }
     fun updatePositions(elapsedTimeMS: Double) {
         /*Ceci est la méthode qui change la position des objets,
         elle se sert de la méthode update() définie differament dans chaque*/
@@ -196,13 +206,13 @@ class SpaceView @JvmOverloads constructor(
 
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
-                m.update(interval,enemySpaceship,allySpaceship)}
+                m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
             for( j in lesMissilesEnemy){
-                j.update(interval,enemySpaceship,allySpaceship)}
+                j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
         for( k in lesMissilesJaunes){
-            k.update(interval,enemySpaceship,allySpaceship)}
+            k.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
 
         timeLeft -= interval
@@ -215,26 +225,40 @@ class SpaceView @JvmOverloads constructor(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipDebut,
                 enemySpaceship.SpaceshipDebut + width/7f,
-                height/2f,
+                height*2f,
                 10f,
                 this))
             lesMissilesJaunes.add(MissileJaune(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipDebut,
                 enemySpaceship.SpaceshipDebut + width/8f,
-                height/2f,
+                height*2f,
                 10f,
                 this))
 
-            randomTimer = (Random.nextInt(2,5)).toDouble()}
+            randomTimer = (Random.nextInt(2,5)).toDouble()
+        }
 
         if(randomTimer2<=0.0) {
-            bonus.shining()
-            randomTimer2 = (Random.nextInt(1,3)).toDouble()}}
+            val tempsMin = 3
+            val tempsMax = 6
+            val randomDist = Random.nextDouble(0.0,0.8).toFloat()
+            val randomDebut = Random.nextDouble(0.15,0.6).toFloat()
+            bonus.Distance                   = randomDist*screenWidth
+            bonus.Debut                      = randomDebut*screenHeight
+            bonus.Fin                        = bonus.Debut+250
+            bonus.setRect()
 
-    fun updateAllySpaceshipPosition(elapsedTimeMS: Double){
-        val interval = elapsedTimeMS / 1000.0
-        allySpaceship.update(interval)}
+            etoileClignotte(tempsMin,tempsMax)
+
+        }
+    }
+
+    fun etoileClignotte(tempsMin: Int, tempsMax: Int){
+        val random = Random.nextInt(tempsMin,tempsMax)
+        bonus.shining()
+        randomTimer2 = (random).toDouble()
+    }
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
@@ -244,9 +268,9 @@ class SpaceView @JvmOverloads constructor(
                 //val y = e.rawY.toInt() - 300
                 lesMissilesAlly.add(MissileAlly(
                     allySpaceship.SpaceshipDistance+allySpaceship.width/2,
-                    allySpaceship.SpaceshipDebut-14*height/60,
-                    allySpaceship.SpaceshipFin-10*height/60,
-                    this.height/1.5f,
+                    allySpaceship.SpaceshipDebut-100,
+                    allySpaceship.SpaceshipDebut*1,
+                    height*2f,
                     10f,
                     this))
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))

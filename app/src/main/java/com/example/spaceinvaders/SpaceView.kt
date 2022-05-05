@@ -49,7 +49,7 @@ class SpaceView @JvmOverloads constructor(
     var timeee         = Timeee ()
 
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
-    val lesMissilesEnemy  = arrayListOf<MissileEnemy>()
+    val lesMissilesRouges  = arrayListOf<MissileRouge>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
     val imageBackground   = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
@@ -187,7 +187,7 @@ class SpaceView @JvmOverloads constructor(
             for (m in lesMissilesAlly){
               m.draw(canvas)
             }
-            for(j in lesMissilesEnemy){
+            for(j in lesMissilesRouges){
                 j.draw(canvas)
             }
             for(k in lesMissilesJaunes){
@@ -210,7 +210,7 @@ class SpaceView @JvmOverloads constructor(
             for(m in lesMissilesAlly){
                 m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
-            for( j in lesMissilesEnemy){
+            for( j in lesMissilesRouges){
                 j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
         for( k in lesMissilesJaunes){
@@ -223,14 +223,14 @@ class SpaceView @JvmOverloads constructor(
         if (timeee.timeLeft/60 <= 0.0) drawing = false
 
         if(randomTimer<=0.0) {
-            lesMissilesEnemy.add(MissileEnemy(
+            lesMissilesRouges.add(MissileRouge(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipFin,
                 enemySpaceship.SpaceshipDebut + width/7f,
                 height/2f,
                 10f,
                 this))
-            /*
+
             lesMissilesJaunes.add(MissileJaune(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipFin,
@@ -239,7 +239,7 @@ class SpaceView @JvmOverloads constructor(
                 10f,
                 this))
 
-             */
+
 
             val random = Random.nextInt(2,5)
             randomTimer = random.toDouble()

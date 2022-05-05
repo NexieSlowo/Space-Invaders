@@ -7,6 +7,8 @@ class MissileJaune(missileDistance : Float,missileDebut : Float,missileFin : Flo
     init {
         missilePaint.color = Color.YELLOW
     }
-
+    override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+        timeee.timeLeft -=5.0
+    }
 
 }

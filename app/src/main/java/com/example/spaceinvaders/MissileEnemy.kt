@@ -1,7 +1,7 @@
 package com.example.spaceinvaders
 import android.graphics.Canvas
 import android.graphics.Color
-open class MissileEnemy(
+open abstract class MissileEnemy(
     missileDistance : Float,
     missileDebut : Float,
     missileFin : Float,
@@ -34,14 +34,12 @@ open class MissileEnemy(
                 //missileDisparait()
                 //joueurPerdVie(allySpaceship)
                 missileOnScreen = false
-                allySpaceship.vie -=1
+                faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
             }
         }
     }
-    fun joueurPerdVie(allySpaceship: AllySpaceship){
-        allySpaceship.vie-=1
-    }
 
+    abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
 
 
 }

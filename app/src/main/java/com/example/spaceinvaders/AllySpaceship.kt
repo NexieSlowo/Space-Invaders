@@ -34,7 +34,14 @@ class AllySpaceship(
         R.drawable.player2)
 
 
+    override fun reset(){
+        vie = 3
+        SpaceshipDistance  = (3*view.width/25f)
+        SpaceshipDebut     = (7800*view.height/10000f-200)
+        SpaceshipFin       = SpaceshipDebut+300
+        setRect()
 
+    }
     override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
         //canvas.drawBitmap(image, SpaceshipDistance, SpaceshipDebut,null)

@@ -3,14 +3,18 @@ package com.example.spaceinvaders
 
 
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.*
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.widget.Button
-import java.util.*
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import kotlin.random.Random
 
 
@@ -36,7 +40,7 @@ class SpaceView @JvmOverloads constructor(
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
     var randomTimer2:Double = 0.0
-
+    val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
     val etoile1        = etoile (view=this, context = this)
@@ -47,7 +51,7 @@ class SpaceView @JvmOverloads constructor(
     val etoile6        = etoile (view=this, context = this)
     val bonus          = Bonus (view=this,context= this)
     var timeee         = Timeee ()
-
+    var gameOver       = false
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
     val lesMissilesRouges  = arrayListOf<MissileRouge>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
@@ -84,16 +88,8 @@ class SpaceView @JvmOverloads constructor(
         screenWidth                      = w.toFloat()
         screenHeight                     = h.toFloat()
 
-        enemySpaceship.SpaceshipDistance = (w/3f)
-        enemySpaceship.SpaceshipDebut    = (0.15f*h)
-        enemySpaceship.SpaceshipFin      = enemySpaceship.SpaceshipDebut+300
-        enemySpaceship.width             = 280f
-        enemySpaceship.setRect()
-
-        allySpaceship.SpaceshipDistance  = (3*w/25f)
-        allySpaceship.SpaceshipDebut     = (7800*h/10000f-200)
-        allySpaceship.SpaceshipFin       = allySpaceship.SpaceshipDebut+300
-        allySpaceship.setRect()
+        enemySpaceship.reset()
+        allySpaceship.reset()
 
         textPaint.setTextSize(50f)
         textPaint.isAntiAlias            = true
@@ -308,5 +304,63 @@ class SpaceView @JvmOverloads constructor(
     }
 
 
+    fun newGame(){
+        allySpaceship.reset()
+        enemySpaceship.reset()
+        timeee.reset()
+
+        for (m in lesMissilesAlly){
+            m.reset()
+        }
+        for (m in lesMissilesRouges){
+            m.reset()
+        }
+        for (m in lesMissilesJaunes){
+            m.reset()
+        }
+        if (gameOver){
+            gameOver = false
+            run()
+            resume()
+        }
+    }
+    fun gameOver(){
+        drawing=false
+        showGameOverDialog(R.string.win)
+        gameOver = true
+    }
+
+    fun showGameOverDialog(messageId: Int) {
+        class GameResult: DialogFragment() {
+            override fun onCreateDialog(bundle: Bundle?): Dialog {
+                val builder = AlertDialog.Builder(getActivity())
+                builder.setTitle(resources.getString(messageId))
+                builder.setMessage(
+                    resources.getString(
+                        R.string.results_format
+                    )
+                )
+                builder.setPositiveButton(R.string.reset_game,
+                    DialogInterface.OnClickListener { _, _->newGame()}
+                )
+                return builder.create()
+            }
+        }
+
+        activity.runOnUiThread(
+            Runnable {
+                val ft = activity.supportFragmentManager.beginTransaction()
+                val prev =
+                    activity.supportFragmentManager.findFragmentByTag("dialog")
+                if (prev != null) {
+                    ft.remove(prev)
+                }
+                ft.addToBackStack(null)
+                val gameResult = GameResult()
+                gameResult.setCancelable(false)
+                gameResult.show(ft,"dialog")
+            }
+        )
+    }
 
 }

@@ -10,5 +10,7 @@ class MissileJaune(missileDistance : Float,missileDebut : Float,missileFin : Flo
     override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
         timeee.timeLeft -=5.0
     }
-
+    override fun reset(){
+        missileOnScreen = false
+    }
 }

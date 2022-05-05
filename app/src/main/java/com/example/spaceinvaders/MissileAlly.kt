@@ -25,7 +25,9 @@ class MissileAlly(
         missilePaint.color = Color.GREEN
     }
 
-
+    override fun reset(){
+        missileOnScreen = false
+    }
     override fun deplacementMissile(interval: Double){
         val up = (interval * missileVitesse).toFloat()
         missile.offset(0f, -up)
@@ -51,7 +53,9 @@ class MissileAlly(
                 }
 
             }
-
+            if(enemySpaceship.vie == 0){
+                view.gameOver()
+            }
 
         }
     }

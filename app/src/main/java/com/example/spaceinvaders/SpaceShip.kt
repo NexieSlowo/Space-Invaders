@@ -40,7 +40,7 @@ abstract class SpaceShip(
 
      abstract fun draw(canvas:Canvas)
 
-
+     abstract fun reset()
 
     fun changeVitesse(){
         spaceshipVitesse *= -1

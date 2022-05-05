@@ -30,7 +30,14 @@ class EnemySpaceship(
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
 
 
-
+    override fun reset(){
+        vie = 3
+        SpaceshipDistance = (view.width/3f)
+        SpaceshipDebut    = (0.15f*view.height)
+        SpaceshipFin      = SpaceshipDebut+300
+        width             = 280f
+        setRect()
+    }
 
 
 

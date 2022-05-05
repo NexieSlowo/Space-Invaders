@@ -26,6 +26,7 @@ open abstract class Missile(
         missileOnScreen = false
     }
 
+    abstract fun reset()
     fun setRect(){
         missileVitesse = initialMissileVitesse
         missile.set(

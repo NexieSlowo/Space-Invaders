@@ -10,5 +10,7 @@ class MissileVert(missileDistance : Float,missileDebut : Float,missileFin:Float,
         timeee.timeLeft +=5.0
 
     }
-
+    override fun reset(){
+        missileOnScreen = false
+    }
 }

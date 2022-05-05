@@ -40,7 +40,7 @@ class SecondActivity : AppCompatActivity(){
 
 
         changeActivityBTN.setOnClickListener{
-            Toast.makeText(this,"Redémarrage du jeu", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Revenu au menu principal", Toast.LENGTH_SHORT).show()
             stopAudio()
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)

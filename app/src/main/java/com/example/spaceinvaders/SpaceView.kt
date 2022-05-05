@@ -52,6 +52,8 @@ class SpaceView @JvmOverloads constructor(
     val bonus          = Bonus (view=this,context= this)
     var timeee         = Timeee ()
     var gameOver       = false
+    var shotsFired = 0
+    var totalElapsedTime = 0.0
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
     val lesMissilesRouges  = arrayListOf<MissileRouge>()
     val lesMissilesJaunes = arrayListOf<MissileJaune>()
@@ -69,10 +71,12 @@ class SpaceView @JvmOverloads constructor(
     override fun run() {
         /*Cette fonction met en ouvre le thread, qui fait le mouvement des objets.
         Elle existe déjà donc on le modifie avec override.*/
+
         var previousFrameTime = System.currentTimeMillis()
         while (drawing) {
             val currentTime = System.currentTimeMillis()
             val elapsedTimeMS = (currentTime-previousFrameTime).toDouble()
+            totalElapsedTime += elapsedTimeMS / 1000.0
             updatePositions(elapsedTimeMS) //Méthode définie plus bas qui fait le changement de la position des objets.
             draw()
             previousFrameTime = currentTime
@@ -255,8 +259,10 @@ class SpaceView @JvmOverloads constructor(
                 val random = Random.nextInt(5,10)   //reste "inapparu" entre 5 et 10 s
                 randomTimer2 = random.toDouble()
             }
-
-
+        }
+        if(timeee.timeLeft <= 0.0){
+            timeee.timeLeft = 0.0
+            gameOver(R.string.lose)
         }
     }
 
@@ -276,7 +282,10 @@ class SpaceView @JvmOverloads constructor(
                     10f,
                     this))
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
-                allySpaceship.changeVitesse()}}
+                allySpaceship.changeVitesse()
+                ++shotsFired
+            }
+        }
         return true}
 
 
@@ -308,7 +317,7 @@ class SpaceView @JvmOverloads constructor(
         allySpaceship.reset()
         enemySpaceship.reset()
         timeee.reset()
-
+        shotsFired = 0
         for (m in lesMissilesAlly){
             m.reset()
         }
@@ -323,10 +332,21 @@ class SpaceView @JvmOverloads constructor(
             run()
             resume()
         }
+
     }
-    fun gameOver(){
+    fun gameOver(titreDialog: Int){
+        for (m in lesMissilesAlly){
+            m.reset()
+        }
+        for (m in lesMissilesRouges){
+            m.reset()
+        }
+        for (m in lesMissilesJaunes){
+            m.reset()
+        }
         drawing=false
-        showGameOverDialog(R.string.win)
+
+        showGameOverDialog(titreDialog)
         gameOver = true
     }
 

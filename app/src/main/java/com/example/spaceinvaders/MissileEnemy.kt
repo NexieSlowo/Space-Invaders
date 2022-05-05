@@ -36,6 +36,9 @@ open abstract class MissileEnemy(
                 missileOnScreen = false
                 faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
             }
+            if(allySpaceship.vie ==0){
+                view.gameOver(R.string.lose)
+            }
         }
     }
 

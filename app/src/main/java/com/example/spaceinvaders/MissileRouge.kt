@@ -7,7 +7,7 @@ class MissileRouge(missileDistance : Float,missileDebut:Float,missileFin:Float,i
         missilePaint.color = Color.RED
     }
     override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-        allySpaceship.vie-=1
+        allySpaceship.vie--
     }
     override fun reset(){
         missileOnScreen = false

@@ -1,6 +1,7 @@
 package com.example.spaceinvaders
 
 import android.graphics.*
+import kotlin.random.Random
 
 class Bonus(
     var Distance: Float= 0f,
@@ -16,7 +17,7 @@ class Bonus(
         TODO("Not yet implemented")
     }
 
-    var bonusOnScreen = false
+    var OnScreen = true
     val bonusPaint    = Paint()
 
     val bonus= RectF(Distance, Debut, Distance + width, Fin)
@@ -25,27 +26,34 @@ class Bonus(
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
 
     fun setRect() {
-        bonus.set(
-            Distance, Debut,
-            (Distance + width), (Fin))
+        bonus.set(Distance, Debut, (Distance + width), (Fin))
     }
 
 
 
     fun draw(canvas: Canvas) {
-        if(bonusOnScreen){
-            canvas.drawRect(bonus, bonusPaint)
+        if(OnScreen){
+            //canvas.drawRect(bonus, bonusPaint)
             canvas.drawBitmap(image,Distance,Debut,null)
+
         }
     }
 
 
+    fun apparitionAleatoire(){
+        val randomDist = Random.nextDouble(0.0,0.8).toFloat()
+        val randomDebut = Random.nextDouble(0.15,0.6).toFloat()
 
+        Distance                   = randomDist*view.screenWidth
+        Debut                      = randomDebut*view.screenHeight
+        Fin                        = Debut+250
+        setRect()
+    }
 
 
 
     fun shining(){
-        bonusOnScreen = !bonusOnScreen
+        OnScreen = !OnScreen
 
     }
 

@@ -43,10 +43,16 @@ class MissileAlly(
                 missileDisparait()
                 ennemiPerdVie(enemySpaceship)
             }
-            if(missile.intersect(bonus.Distance,bonus.Debut,bonus.Distance+bonus.width,bonus.Fin)){
-                rajouteTemps(timeee)
-                missileDisparait()
+
+            if(bonus.OnScreen){
+                if(missile.intersect(bonus.Distance,bonus.Debut,bonus.Distance+bonus.width,bonus.Fin)){
+                    rajouteTemps(timeee)
+                    missileDisparait()
+                }
+
             }
+
+
         }
     }
 
@@ -55,7 +61,7 @@ class MissileAlly(
         enemySpaceship.vie--
     }
     fun rajouteTemps(timeee: Timeee){
-        timeee.timeLeft +=10
+        timeee.timeLeft +=5.0
     }
 
 }

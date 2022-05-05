@@ -30,7 +30,7 @@ open class MissileEnemy(
         if(missileOnScreen){
             deplacementMissile(interval)
             //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
-            if(missile.intersect(allySpaceship.SpaceshipDistance,view.screenHeight-350f,allySpaceship.SpaceshipDistance+view.screenWidth/4, view.screenHeight-100f)){
+            if(missile.intersect(allySpaceship.SpaceshipDistance,allySpaceship.SpaceshipDebut,allySpaceship.SpaceshipDistance+allySpaceship.width, allySpaceship.SpaceshipFin)){
                 //missileDisparait()
                 //joueurPerdVie(allySpaceship)
                 missileOnScreen = false

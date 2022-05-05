@@ -39,7 +39,7 @@ abstract class SpaceShip(
     }
 
      abstract fun draw(canvas:Canvas)
-     abstract fun updateBitmap(interval:Double)
+
 
 
     fun changeVitesse(){
@@ -62,8 +62,7 @@ abstract class SpaceShip(
 
        MAJPositionVaisseau(up)
    }*/
-     /*fun update(
-         interval: Double){
+     /*fun update(interval: Double){
          var up = (interval * spaceshipVitesse).toFloat()
          spaceship.offset(up,0f)
          if(spaceship.left < 0 ||  spaceship.right  > view.screenWidth){
@@ -75,7 +74,18 @@ abstract class SpaceShip(
      }*/
 
 
+     fun updateBitmap(interval:Double){
 
+         var up = (interval * spaceshipVitesse).toFloat()
+         SpaceshipDistance = SpaceshipDistance+up
+         if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
+            spaceshipVitesse = -spaceshipVitesse
+            up = (interval*3*spaceshipVitesse).toFloat()
+            SpaceshipDistance = SpaceshipDistance+up
+         }
+
+
+    }
 
 
     /* abstract fun reset()*/

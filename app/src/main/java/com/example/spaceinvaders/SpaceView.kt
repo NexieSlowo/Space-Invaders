@@ -47,7 +47,6 @@ class SpaceView @JvmOverloads constructor(
     val etoile6        = etoile (view=this, context = this)
     val bonus          = Bonus (view=this,context= this)
     var timeee         = Timeee ()
-    var timeLeft = timeee.timeLeft
 
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
     val lesMissilesEnemy  = arrayListOf<MissileEnemy>()
@@ -182,7 +181,8 @@ class SpaceView @JvmOverloads constructor(
                     etoile4.draw(canvas)
                 }
             }
-            canvas.drawText("Il reste ${String.format("%.2f", timeLeft)} s", 50f, 40f, textPaint)
+
+            canvas.drawText("${(timeee.timeLeft/60).toInt()}: ${(timeee.timeLeft%60).toInt()}", 10f, 50f, textPaint)
 
             for (m in lesMissilesAlly){
               m.draw(canvas)
@@ -217,10 +217,10 @@ class SpaceView @JvmOverloads constructor(
             k.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
 
-        timeLeft -= interval
+        timeee.timeLeft -= interval
         randomTimer -= interval
         randomTimer2 -= interval
-        if (timeLeft/60 <= 0.0) drawing = false
+        if (timeee.timeLeft/60 <= 0.0) drawing = false
 
         if(randomTimer<=0.0) {
             lesMissilesEnemy.add(MissileEnemy(
@@ -230,6 +230,7 @@ class SpaceView @JvmOverloads constructor(
                 height/2f,
                 10f,
                 this))
+            /*
             lesMissilesJaunes.add(MissileJaune(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipFin,
@@ -238,29 +239,32 @@ class SpaceView @JvmOverloads constructor(
                 10f,
                 this))
 
-            randomTimer = (Random.nextInt(2,5)).toDouble()
+             */
+
+            val random = Random.nextInt(2,5)
+            randomTimer = random.toDouble()
         }
 
         if(randomTimer2<=0.0) {
-            val tempsMin = 3
-            val tempsMax = 6
-            val randomDist = Random.nextDouble(0.0,0.8).toFloat()
-            val randomDebut = Random.nextDouble(0.15,0.6).toFloat()
-            bonus.Distance                   = randomDist*screenWidth
-            bonus.Debut                      = randomDebut*screenHeight
-            bonus.Fin                        = bonus.Debut+250
-            bonus.setRect()
 
-            etoileClignotte(tempsMin,tempsMax)
+
+            bonus.apparitionAleatoire()
+            bonus.shining()                                     //bonus apparait ou disparait
+
+            if(bonus.OnScreen){
+                val random = Random.nextInt(3,5)     //reste "apparu" entre 3 et 5 s
+                randomTimer2 = random.toDouble()
+            }
+            else{
+                val random = Random.nextInt(5,10)   //reste "inapparu" entre 5 et 10 s
+                randomTimer2 = random.toDouble()
+            }
+
 
         }
     }
 
-    fun etoileClignotte(tempsMin: Int, tempsMax: Int){
-        val random = Random.nextInt(tempsMin,tempsMax)
-        bonus.shining()
-        randomTimer2 = (random).toDouble()
-    }
+
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
 

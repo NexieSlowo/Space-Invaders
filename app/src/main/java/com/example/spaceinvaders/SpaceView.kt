@@ -182,7 +182,7 @@ class SpaceView @JvmOverloads constructor(
                 }
             }
 
-            canvas.drawText("${(timeee.timeLeft/60).toInt()}: ${(timeee.timeLeft%60).toInt()}", 10f, 50f, textPaint)
+            canvas.drawText("Temps restant ${(timeee.timeLeft/60).toInt()}:${(timeee.timeLeft%60).toInt()}", 10f, 70f, textPaint)
 
             for (m in lesMissilesAlly){
               m.draw(canvas)

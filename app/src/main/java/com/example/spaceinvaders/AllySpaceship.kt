@@ -45,7 +45,7 @@ class AllySpaceship(
             null)
     }
 
-    override fun update(
+    /*override fun update(
         interval: Double){
         //Cette methode fait le mouvement
         val up = (interval * spaceshipVitesse).toFloat()
@@ -57,10 +57,10 @@ class AllySpaceship(
             change_distance_parcourue(interval)
         }
         mise_a_jour_de_position_du_vaisseau(up)
-    }
+    }*/
 
 
-/*
+
     override fun update(
         interval: Double){
         var up = (interval * spaceshipVitesse).toFloat()
@@ -73,7 +73,7 @@ class AllySpaceship(
         SpaceshipDistance =SpaceshipDistance+up
     }
 
- */
+
 
 
 

@@ -7,17 +7,17 @@ open class MissileEnemy(missileDistance : Float, missileDebut : Float, missileFi
         missilePaint.color = Color.RED
     }
 
-    override fun deplacement_du_missile(interval: Double){
+    override fun deplacementMissile(interval: Double){
         var up = (interval * missileVitesse).toFloat()
         missile.offset(0f, up)
     }
 
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship) {
-        deplacement_du_missile(interval)
-        var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
-        if(missile_touche_vaisseau){
-            missile_disparait()
+        deplacementMissile(interval)
+        var missileToucheVaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
+        if(missileToucheVaisseau){
+            missileDisparait()
 
         }
     }

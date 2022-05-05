@@ -27,8 +27,9 @@ class EnemySpaceship(
     initialSpaceshipVitesse,
     width,view,context){
 
-    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
 
+    var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
+    var rectangle = Rect(100,100,200,100)
 
 
 
@@ -43,8 +44,12 @@ class EnemySpaceship(
     }
 
 
+
+
+
     override fun draw(canvas: Canvas) {
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipFin-view.height/8,null)
+        canvas.drawBitmap(image,rectangle,spaceship,null)
     }
 
 

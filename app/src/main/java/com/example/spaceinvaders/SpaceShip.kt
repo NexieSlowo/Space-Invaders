@@ -39,44 +39,61 @@ abstract class SpaceShip(
     }
 
      abstract fun draw(canvas:Canvas)
+     abstract fun updateBitmap(interval:Double)
 
-     fun update(
-        interval: Double){
-        //Cette methode fait le mouvement
-        val up = (interval * spaceshipVitesse).toFloat()
-        val vaisseauToucheBord = (spaceship.left < 0 || spaceship.right > view.screenWidth)
-        val decallementt: Int = 4
-
-        deplacement_du_vaisseau(up)
-         if (vaisseauToucheBord) {
-            changeVitesse()
-            change_distance_parcourue(interval,decallementt)
-         }
-
-        mise_a_jour_de_position_du_vaisseau(up)
-    }
-
-
-
-    /* abstract fun reset()*/
-
-     fun deplacement_du_vaisseau(up: Float){
-        spaceship.offset(up,0f)
-    }
 
     fun changeVitesse(){
         spaceshipVitesse *= -1
     }
 
-    fun change_distance_parcourue(interval: Double, decallement: Int){
+
+    /*open fun update(
+       interval: Double){
+       //Cette methode fait le mouvement
+       val up = (interval * spaceshipVitesse).toFloat()
+       val vaisseauToucheBord = (spaceship.left < 0 || spaceship.right > view.screenWidth)
+       val decallementt: Int = 4
+
+       deplacement_du_vaisseau(up)
+        if (vaisseauToucheBord) {
+           changeVitesse()
+           changeDistanceParcourue(interval,decallementt)
+        }
+
+       MAJPositionVaisseau(up)
+   }*/
+     /*fun update(
+         interval: Double){
+         var up = (interval * spaceshipVitesse).toFloat()
+         spaceship.offset(up,0f)
+         if(spaceship.left < 0 ||  spaceship.right  > view.screenWidth){
+             spaceshipVitesse *= -1
+             up = (interval *4 * spaceshipVitesse).toFloat()
+             spaceship.offset(up,0f)
+         }
+         SpaceshipDistance =SpaceshipDistance+up
+     }*/
+
+
+
+
+
+    /* abstract fun reset()*/
+
+     /*fun deplacement_du_vaisseau(up: Float){
+        spaceship.offset(up,0f)
+    }
+
+
+    fun changeDistanceParcourue(interval: Double, decallement: Int){
         val up = (interval * decallement * spaceshipVitesse).toFloat()
         deplacement_du_vaisseau(up)
     }
 
 
-    fun mise_a_jour_de_position_du_vaisseau(up: Float){
+    fun MAJPositionVaisseau(up: Float){
         SpaceshipDistance += up
-    }
+    }*/
 
 
 

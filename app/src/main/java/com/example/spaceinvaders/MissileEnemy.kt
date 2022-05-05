@@ -20,7 +20,7 @@ open class MissileEnemy(
         missilePaint.color = Color.RED
     }
 
-    override fun deplacement_du_missile(interval: Double){
+    override fun deplacementMissile(interval: Double){
         var up = (interval * missileVitesse).toFloat()
         missile.offset(0f, up)
     }
@@ -28,16 +28,18 @@ open class MissileEnemy(
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship,bonus: Bonus,timeee: Timeee) {
         if(missileOnScreen){
-            deplacement_du_missile(interval)
-            var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
-            if(missile_touche_vaisseau){
-                missile_disparait()
-                joueurPerdVie(allySpaceship)
+            deplacementMissile(interval)
+            //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
+            if(missile.intersect(allySpaceship.SpaceshipDistance,view.screenHeight-350f,allySpaceship.SpaceshipDistance+view.screenWidth/4, view.screenHeight-100f)){
+                //missileDisparait()
+                //joueurPerdVie(allySpaceship)
+                missileOnScreen = false
+                allySpaceship.vie -=1
             }
         }
     }
     fun joueurPerdVie(allySpaceship: AllySpaceship){
-        allySpaceship.vie--
+        allySpaceship.vie-=1
     }
 
 

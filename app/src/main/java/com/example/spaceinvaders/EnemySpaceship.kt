@@ -36,11 +36,20 @@ class EnemySpaceship(
 
 
     override fun draw(canvas: Canvas) {
-        canvas.drawRect(spaceship,spaceshipPaint)
+        //canvas.drawRect(spaceship,spaceshipPaint)
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
     }
 
+    override fun updateBitmap(interval:Double){
+        var up = (interval * spaceshipVitesse).toFloat()
+        SpaceshipDistance = SpaceshipDistance+up
+        if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
+            spaceshipVitesse = -spaceshipVitesse
+            up = (interval*3*spaceshipVitesse).toFloat()
+            SpaceshipDistance = SpaceshipDistance+up
+        }
 
+    }
 
 
 

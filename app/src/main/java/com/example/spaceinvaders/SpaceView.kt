@@ -201,8 +201,10 @@ class SpaceView @JvmOverloads constructor(
         elle se sert de la méthode update() définie differament dans chaque*/
 
         val interval = elapsedTimeMS / 1000.0
-        enemySpaceship.update(interval)
-        allySpaceship.update(interval)
+        //enemySpaceship.update(interval)
+        //allySpaceship.update(interval)
+        enemySpaceship.updateBitmap(interval)
+        allySpaceship.updateBitmap(interval)
 
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
@@ -223,16 +225,16 @@ class SpaceView @JvmOverloads constructor(
         if(randomTimer<=0.0) {
             lesMissilesEnemy.add(MissileEnemy(
                 enemySpaceship.SpaceshipDistance,
-                enemySpaceship.SpaceshipDebut,
+                enemySpaceship.SpaceshipFin,
                 enemySpaceship.SpaceshipDebut + width/7f,
-                height*2f,
+                height/2f,
                 10f,
                 this))
             lesMissilesJaunes.add(MissileJaune(
                 enemySpaceship.SpaceshipDistance,
-                enemySpaceship.SpaceshipDebut,
+                enemySpaceship.SpaceshipFin,
                 enemySpaceship.SpaceshipDebut + width/8f,
-                height*2f,
+                height/2f,
                 10f,
                 this))
 
@@ -270,7 +272,7 @@ class SpaceView @JvmOverloads constructor(
                     allySpaceship.SpaceshipDistance+allySpaceship.width/2,
                     allySpaceship.SpaceshipDebut-100,
                     allySpaceship.SpaceshipDebut*1,
-                    height*2f,
+                    height/2f,
                     10f,
                     this))
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))

@@ -13,4 +13,5 @@ interface InterfaceAddTime {
     fun removetime(){
         timeleft -=  hit_reward
     }
+   // abstract fun changetime(enemySpaceship: EnemySpaceship)
 }

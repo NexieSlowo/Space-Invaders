@@ -39,7 +39,7 @@ class AllySpaceship(
         SpaceshipDistance  = (3*view.width/25f)
         SpaceshipDebut     = (7800*view.height/10000f-200)
         SpaceshipFin       = SpaceshipDebut+300
-        setRect()
+        //setRect()
 
     }
     override fun draw(canvas: Canvas) {

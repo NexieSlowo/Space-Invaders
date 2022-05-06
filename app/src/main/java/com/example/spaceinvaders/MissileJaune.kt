@@ -7,10 +7,23 @@ class MissileJaune(missileDistance : Float,missileDebut : Float,missileFin : Flo
     init {
         missilePaint.color = Color.YELLOW
     }
-    override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-        timeee.timeLeft -=5.0
-    }
-    override fun reset(){
-        missileOnScreen = false
-    }
+
+    /*override fun faitQlqCh(
+        enemySpaceship: EnemySpaceship,
+        allySpaceship: AllySpaceship,
+        bonus: Bonus,
+        timeee: Timeee
+    ) {
+        TODO("Not yet implemented")
+    }*/
+
+    //override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+        //view.timeLeft -=5.0
+   // }
+
+
+    //override fun changetime() {
+
+       // view.timeLeft -= -10.0
+    //}
 }

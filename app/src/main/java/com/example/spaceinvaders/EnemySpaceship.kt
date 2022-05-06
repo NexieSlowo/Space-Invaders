@@ -4,6 +4,7 @@ package com.example.spaceinvaders
 //Classe du vaisseau de l'enemi
 
 import android.graphics.*
+import com.example.spaceinvaders.MissileEnemy
 import android.widget.Space
 import java.util.*
 
@@ -28,7 +29,14 @@ class EnemySpaceship(
     width,view,context){
 
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
+    //var lesMissilesJaunes = arrayListOf<MissileJaune>()
+    //var lesMissilesVerts = arrayListOf<MissileVert>()
+    //var lesMissilesRouges = arrayListOf<MissileRouge>()
+    var lesMissilesEnnemi = arrayListOf<MissileEnemy>()
 
+    //lateinit var allySpaceship: AllySpaceship
+    //lateinit var bonus : Bonus
+    //lateinit var timeee : Timeee
 
     override fun reset(){
         vie = 3
@@ -36,7 +44,7 @@ class EnemySpaceship(
         SpaceshipDebut    = (0.15f*view.height)
         SpaceshipFin      = SpaceshipDebut+300
         width             = 280f
-        setRect()
+        //setRect()
     }
 
 
@@ -44,18 +52,60 @@ class EnemySpaceship(
 
     override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
+        for(i in lesMissilesEnnemi){
+            i.draw(canvas)
+        }
+
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
+    }
+    fun createMissileJaune(){
+        lesMissilesEnnemi.add(MissileRouge(SpaceshipDistance,
+            SpaceshipFin,
+            SpaceshipDebut + view.screenWidth/7f,
+            view.screenHeight/2f,
+            10f,
+            view))
+    }
+    fun createMissileRouge(){
+        lesMissilesEnnemi.add(MissileRouge(SpaceshipDistance,
+            SpaceshipFin,
+            SpaceshipDebut + view.screenWidth/7f,
+            view.screenHeight/2f,
+            10f,
+            view))
+
+    }
+    fun createMissileVerte() {
+        lesMissilesEnnemi.add(MissileVert(SpaceshipDistance,
+            SpaceshipFin,
+            SpaceshipDebut + view.screenWidth/7f,
+            view.screenHeight/2f,
+            10f,
+            view))}
+
+
+
+
+       override fun updateBitmap(interval:Double,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+
+            var up = (interval * spaceshipVitesse).toFloat()
+            SpaceshipDistance = SpaceshipDistance+up
+            if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
+                spaceshipVitesse = -spaceshipVitesse
+                up = (interval*3*spaceshipVitesse).toFloat()
+                SpaceshipDistance = SpaceshipDistance+up
+            }
+           for (j in lesMissilesEnnemi){
+               j.update(interval,this,allySpaceship,bonus,timeee)
+           }
+
+        }
+
     }
 
 
 
 
-
-
-
-
-
-}
 
 
 

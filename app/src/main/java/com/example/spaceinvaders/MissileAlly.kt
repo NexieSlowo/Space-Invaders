@@ -25,10 +25,7 @@ class MissileAlly(
         missilePaint.color = Color.GREEN
     }
 
-    override fun reset(){
-        missileOnScreen = false
-    }
-    override fun deplacementMissile(interval: Double){
+    override fun updatePosition(interval: Double){
         val up = (interval * missileVitesse).toFloat()
         missile.offset(0f, -up)
     }
@@ -39,7 +36,7 @@ class MissileAlly(
             //var missile_touche_vaisseau: Boolean = (missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
             //var missile_touche_bonus: Boolean = (missile.top< bonus.Debut && missile.left > bonus.Distance && missile.right < bonus.Distance + bonus.width)
 
-            deplacementMissile(interval)
+            updatePosition(interval)
 
             if(missile.intersect(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDistance+enemySpaceship.width,enemySpaceship.SpaceshipFin)){
                 missileDisparait()

@@ -50,6 +50,12 @@ class Bonus(
         setRect()
     }
 
+    //override fun changetime(enemySpaceship: EnemySpaceship) {
+
+           // view.timeLeft -= -10.0
+
+   // }
+
 
 
     fun shining(){

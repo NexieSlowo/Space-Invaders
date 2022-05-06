@@ -40,6 +40,8 @@ class SpaceView @JvmOverloads constructor(
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
     var randomTimer2:Double = 0.0
+    var randomTimer3 : Double = 0.0
+    var randomTimer4 : Double = 0.0
     val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
@@ -190,12 +192,14 @@ class SpaceView @JvmOverloads constructor(
             for(j in lesMissilesRouges){
                 j.draw(canvas)
             }
-            for(k in lesMissilesJaunes){
-                k.draw(canvas)
-            }
+            //for(k in lesMissilesJaunes){
+                //k.draw(canvas)
+            //}
             holder.unlockCanvasAndPost(canvas)
         }
     }
+
+
     fun updatePositions(elapsedTimeMS: Double) {
         /*Ceci est la méthode qui change la position des objets,
         elle se sert de la méthode update() définie differament dans chaque*/
@@ -203,45 +207,50 @@ class SpaceView @JvmOverloads constructor(
         val interval = elapsedTimeMS / 1000.0
         //enemySpaceship.update(interval)
         //allySpaceship.update(interval)
-        enemySpaceship.updateBitmap(interval)
-        allySpaceship.updateBitmap(interval)
+        enemySpaceship.updateBitmap(interval,allySpaceship,bonus,timeee)
+        allySpaceship.updateBitmap(interval,allySpaceship,bonus,timeee)
 
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
                 m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
-            for( j in lesMissilesRouges){
-                j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
+            //for( j in lesMissilesRouges){
+                //j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
-        for( k in lesMissilesJaunes){
-            k.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
+        //for( k in lesMissilesJaunes){
+            //k.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
 
         timeee.timeLeft -= interval
         randomTimer -= interval
         randomTimer2 -= interval
+        randomTimer3 -= interval
+        randomTimer4 -= interval
         if (timeee.timeLeft/60 <= 0.0) drawing = false
 
         if(randomTimer<=0.0) {
-            lesMissilesRouges.add(MissileRouge(
+            /*lesMissilesRouges.add(MissileRouge(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipFin,
                 enemySpaceship.SpaceshipDebut + width/7f,
                 height/2f,
                 10f,
-                this))
+                this))*/
 
-            lesMissilesJaunes.add(MissileJaune(
+            /*lesMissilesJaunes.add(MissileJaune(
                 enemySpaceship.SpaceshipDistance,
                 enemySpaceship.SpaceshipFin,
                 enemySpaceship.SpaceshipDebut + width/8f,
                 height/2f,
                 10f,
-                this))
+                this))**/
+
+
+            enemySpaceship.createMissileJaune()
 
 
 
-            val random = Random.nextInt(2,5)
+            val random = Random.nextInt(1,3)
             randomTimer = random.toDouble()
         }
 
@@ -259,6 +268,16 @@ class SpaceView @JvmOverloads constructor(
                 val random = Random.nextInt(5,10)   //reste "inapparu" entre 5 et 10 s
                 randomTimer2 = random.toDouble()
             }
+        }
+        if(randomTimer3 <=0.0){
+            enemySpaceship.createMissileRouge()
+            val random = Random.nextInt(2,3)
+            randomTimer3 = random.toDouble()
+        }
+        if(randomTimer4 <=0.0){
+            enemySpaceship.createMissileVerte()
+            val random = Random.nextInt(7,9)
+            randomTimer4 = random.toDouble()
         }
         if(timeee.timeLeft <= 0.0){
             timeee.timeLeft = 0.0

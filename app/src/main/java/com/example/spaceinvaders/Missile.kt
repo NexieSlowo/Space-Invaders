@@ -25,8 +25,10 @@ open abstract class Missile(
     fun missileDisparait(){
         missileOnScreen = false
     }
-
-    abstract fun reset()
+ //Reset et missileDisparait() la même chose!! Tenir qu'un des deux.
+    fun reset(){
+        missileOnScreen = false
+    }
     fun setRect(){
         missileVitesse = initialMissileVitesse
         missile.set(
@@ -47,7 +49,7 @@ open abstract class Missile(
 
     abstract fun update(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, bonus: Bonus,timeee: Timeee)
 
-    abstract fun deplacementMissile(
+    abstract fun updatePosition(
         interval       : Double)
 
 

@@ -17,10 +17,10 @@ open abstract class MissileEnemy(
         view) {
 
     init {
-        missilePaint.color = Color.RED
+        missilePaint.color = Color.GREEN
     }
 
-    override fun deplacementMissile(interval: Double){
+    override fun updatePosition(interval: Double){
         var up = (interval * missileVitesse).toFloat()
         missile.offset(0f, up)
     }
@@ -28,13 +28,14 @@ open abstract class MissileEnemy(
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship,bonus: Bonus,timeee: Timeee) {
         if(missileOnScreen){
-            deplacementMissile(interval)
+            updatePosition(interval)
             //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
             if(missile.intersect(allySpaceship.SpaceshipDistance,allySpaceship.SpaceshipDebut,allySpaceship.SpaceshipDistance+allySpaceship.width, allySpaceship.SpaceshipFin)){
                 //missileDisparait()
-                //joueurPerdVie(allySpaceship)
+                joueurPerdVie(allySpaceship)
                 missileOnScreen = false
-                faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
+                //faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
+
             }
             if(allySpaceship.vie ==0){
                 view.gameOver(R.string.lose)
@@ -42,7 +43,11 @@ open abstract class MissileEnemy(
         }
     }
 
-    abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
+    fun joueurPerdVie(allySpaceship: AllySpaceship){
+        allySpaceship.vie -= 1
+    }
+
+    //abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
 
 
 }

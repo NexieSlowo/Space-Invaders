@@ -19,24 +19,24 @@ abstract class SpaceShip(
 
     ) {
 
-    open val spaceship= RectF(
+    /*open val spaceship= RectF(
         SpaceshipDistance, SpaceshipDebut,
         SpaceshipDistance + width, SpaceshipFin
-    )
+    )*/
     //val spaceshipPaint = Paint()
     var spaceshipVitesse= initialSpaceshipVitesse
     val spaceshipPaint = Paint()
     init{spaceshipPaint.color = Color.WHITE}
 
 
-     fun setRect() {
+    /* fun setRect() {
         spaceshipVitesse = initialSpaceshipVitesse
         spaceship.set(
             SpaceshipDistance         ,
             SpaceshipDebut            ,
             (SpaceshipDistance + width),
             SpaceshipFin)
-    }
+    }*/
 
      abstract fun draw(canvas:Canvas)
 
@@ -74,7 +74,7 @@ abstract class SpaceShip(
      }*/
 
 
-     fun updateBitmap(interval:Double){
+     open fun updateBitmap(interval:Double,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
 
          var up = (interval * spaceshipVitesse).toFloat()
          SpaceshipDistance = SpaceshipDistance+up

@@ -17,7 +17,7 @@ class AllySpaceship(
     context                 : SpaceView):
 
     SpaceShip(
-        vie                     ,
+        //vie                     ,
         SpaceshipDistance       ,
         SpaceshipDebut          ,
         SpaceshipFin            ,
@@ -32,6 +32,7 @@ class AllySpaceship(
     private var image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
+     var vie = 0
 
 
     override fun reset(){
@@ -49,7 +50,20 @@ class AllySpaceship(
     }
 
 
+    override fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
 
+        var up = (interval * spaceshipVitesse).toFloat()
+        SpaceshipDistance = SpaceshipDistance+up
+        if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
+            spaceshipVitesse = -spaceshipVitesse
+            up = (interval*3*spaceshipVitesse).toFloat()
+            SpaceshipDistance = SpaceshipDistance+up
+        }
+        for (j in lesMissiles){
+            j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)
+        }
+
+    }
 
 
 

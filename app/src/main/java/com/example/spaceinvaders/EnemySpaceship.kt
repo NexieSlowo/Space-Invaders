@@ -21,7 +21,7 @@ class EnemySpaceship(
     context                 : SpaceView):
 
     SpaceShip(
-    vie,
+    //vie,
     SpaceshipDistance,
     SpaceshipDebut,
     SpaceshipFin,
@@ -29,6 +29,7 @@ class EnemySpaceship(
     width,view,context){
 
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
+    var vieEnnemi : Int = 0
     //var lesMissilesJaunes = arrayListOf<MissileJaune>()
     //var lesMissilesVerts = arrayListOf<MissileVert>()
     //var lesMissilesRouges = arrayListOf<MissileRouge>()
@@ -39,11 +40,12 @@ class EnemySpaceship(
     //lateinit var timeee : Timeee
 
     override fun reset(){
-        vie = 3
+        vieEnnemi = 3
         SpaceshipDistance = (view.width/3f)
         SpaceshipDebut    = (0.15f*view.height)
         SpaceshipFin      = SpaceshipDebut+300
         width             = 280f
+
         //setRect()
     }
 
@@ -55,6 +57,7 @@ class EnemySpaceship(
         for(i in lesMissiles){
             i.draw(canvas)
         }
+
 
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
     }
@@ -86,7 +89,7 @@ class EnemySpaceship(
 
 
 
-       override fun updateBitmap(interval:Double,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+       override fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
 
             var up = (interval * spaceshipVitesse).toFloat()
             SpaceshipDistance = SpaceshipDistance+up
@@ -100,6 +103,10 @@ class EnemySpaceship(
            }
 
         }
+
+    fun ennemiPerdVie(){
+        vieEnnemi -=1
+    }
 
     }
 

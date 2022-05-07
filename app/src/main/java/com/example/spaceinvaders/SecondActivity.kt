@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SecondActivity : AppCompatActivity(){
     private var mediaPlayer : MediaPlayer? = null
-    lateinit var spaceview: SpaceView
+    lateinit var spaceView: SpaceView
 
 
 
@@ -24,7 +24,7 @@ class SecondActivity : AppCompatActivity(){
         setContentView(R.layout.activity_second)
 
 
-        spaceview = findViewById(R.id.vMain)
+        spaceView = findViewById(R.id.vMain)
 
         val musicSWITCH = findViewById<Switch>(R.id.switch1)
         val changeActivityBTN = findViewById<FloatingActionButton>(R.id.floatingActionButton2)
@@ -73,12 +73,12 @@ class SecondActivity : AppCompatActivity(){
 
     override fun onPause() {
         super.onPause()
-        spaceview.pause()
+        spaceView.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        spaceview.resume()
+        spaceView.resume()
     }
     private fun playAudio() {
         if(mediaPlayer == null){

@@ -7,7 +7,7 @@ import android.content.res.Resources
 import android.graphics.*
 
 abstract class SpaceShip(
-    var vie: Int,
+    //var vie: Int,
     var SpaceshipDistance: Float,
     var SpaceshipDebut: Float,
     var SpaceshipFin: Float,
@@ -30,6 +30,7 @@ abstract class SpaceShip(
     var lesMissiles = arrayListOf<Missile>()
 
 
+
     /* fun setRect() {
         spaceshipVitesse = initialSpaceshipVitesse
         spaceship.set(
@@ -46,6 +47,13 @@ abstract class SpaceShip(
     fun changeVitesse(){
         spaceshipVitesse *= -1
     }
+
+    fun resetMissile(){
+        for(i in lesMissiles){
+            i.missileOnScreen = false
+        }
+    }
+
 
 
     /*open fun update(
@@ -75,18 +83,7 @@ abstract class SpaceShip(
      }*/
 
 
-     open fun updateBitmap(interval:Double,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-
-         var up = (interval * spaceshipVitesse).toFloat()
-         SpaceshipDistance = SpaceshipDistance+up
-         if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
-            spaceshipVitesse = -spaceshipVitesse
-            up = (interval*3*spaceshipVitesse).toFloat()
-            SpaceshipDistance = SpaceshipDistance+up
-         }
-
-
-    }
+    abstract fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
 
 
     /* abstract fun reset()*/

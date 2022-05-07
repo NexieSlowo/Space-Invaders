@@ -2,7 +2,7 @@ package com.example.spaceinvaders
 
 import android.graphics.*
 
-class etoile(
+class Etoile(
     var EtoileDistance: Float= 0f,
     var EtoileDebut: Float= 0f,
     var EtoileFin: Float= 0f ,
@@ -12,18 +12,22 @@ class etoile(
 
 
 
-    val etoile= RectF(
+    /*val etoile= RectF(
         EtoileDistance,
         EtoileDebut,
         EtoileDistance + width,
         EtoileFin)
 
+     */
+
     var image = BitmapFactory.decodeResource(context.resources,R.drawable.star2)
 
-    fun setRect() {
+    /*fun setRect() {
         etoile.set(
             EtoileDistance, EtoileDebut,
             (EtoileDistance + width), (EtoileFin))}
+
+     */
 
 
 

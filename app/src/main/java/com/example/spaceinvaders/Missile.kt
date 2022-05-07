@@ -2,7 +2,7 @@ package com.example.spaceinvaders
 import android.graphics.*
 import android.icu.util.DateInterval
 
-open abstract class Missile(
+ abstract class Missile(
     var missileDistance: Float,
     var missileDebut: Float,
     var missileFin: Float,
@@ -22,7 +22,7 @@ open abstract class Missile(
     var missileOnScreen = true
     init {missilePaint.color = Color.BLUE}
 
-    fun missileDisparait(){
+     fun missileDisparait(){
         missileOnScreen = false
     }
  //Reset et missileDisparait() la même chose!! Tenir qu'un des deux.
@@ -40,7 +40,7 @@ open abstract class Missile(
 }
 
 
-     fun draw(canvas: Canvas){
+    fun draw(canvas: Canvas){
          if(missileOnScreen){
                  canvas.drawRect(missile, missilePaint)
              }

@@ -32,7 +32,7 @@ class EnemySpaceship(
     //var lesMissilesJaunes = arrayListOf<MissileJaune>()
     //var lesMissilesVerts = arrayListOf<MissileVert>()
     //var lesMissilesRouges = arrayListOf<MissileRouge>()
-    var lesMissilesEnnemi = arrayListOf<MissileEnemy>()
+    //var lesMissilesEnnemi = arrayListOf<MissileEnemy>()
 
     //lateinit var allySpaceship: AllySpaceship
     //lateinit var bonus : Bonus
@@ -52,14 +52,14 @@ class EnemySpaceship(
 
     override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
-        for(i in lesMissilesEnnemi){
+        for(i in lesMissiles){
             i.draw(canvas)
         }
 
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
     }
     fun createMissileJaune(){
-        lesMissilesEnnemi.add(MissileRouge(SpaceshipDistance,
+        lesMissiles.add(MissileRouge(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
             view.screenHeight/2f,
@@ -67,7 +67,7 @@ class EnemySpaceship(
             view))
     }
     fun createMissileRouge(){
-        lesMissilesEnnemi.add(MissileRouge(SpaceshipDistance,
+        lesMissiles.add(MissileRouge(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
             view.screenHeight/2f,
@@ -76,7 +76,7 @@ class EnemySpaceship(
 
     }
     fun createMissileVerte() {
-        lesMissilesEnnemi.add(MissileVert(SpaceshipDistance,
+        lesMissiles.add(MissileVert(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
             view.screenHeight/2f,
@@ -95,7 +95,7 @@ class EnemySpaceship(
                 up = (interval*3*spaceshipVitesse).toFloat()
                 SpaceshipDistance = SpaceshipDistance+up
             }
-           for (j in lesMissilesEnnemi){
+           for (j in lesMissiles){
                j.update(interval,this,allySpaceship,bonus,timeee)
            }
 

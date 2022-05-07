@@ -27,6 +27,7 @@ abstract class SpaceShip(
     var spaceshipVitesse= initialSpaceshipVitesse
     val spaceshipPaint = Paint()
     init{spaceshipPaint.color = Color.WHITE}
+    var lesMissiles = arrayListOf<Missile>()
 
 
     /* fun setRect() {

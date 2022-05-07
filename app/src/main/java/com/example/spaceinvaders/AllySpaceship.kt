@@ -32,15 +32,42 @@ class AllySpaceship(
     private var image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
-     var vieAlly = 0
+     var vieAlly = 3
+    fun perdVie(){
+        vieAlly--
+    }
+    fun gagneVie() {
+        if (vieAlly < 3)
+            vieAlly++
+    }
 
+    val etoile4        = Etoile (view=view, context = context)
+    val etoile5        = Etoile (view=view, context = context)
+    val etoile6        = Etoile (view=view, context = context)
 
-    override fun reset(){
-        vie = 3
+    fun resetSpaceship(){
+        vieAlly = 3
         SpaceshipDistance  = (3*view.width/25f)
         SpaceshipDebut     = (7800*view.height/10000f-200)
         SpaceshipFin       = SpaceshipDebut+300
-        //setRect()
+    }
+    fun resetEtoile(){
+        etoile4.EtoileDistance           =  (5*view.width/10000f)
+        etoile4.EtoileDebut              = (10900*view.height/10000f)
+        etoile4.EtoileFin                = etoile4.EtoileDebut
+
+        etoile5.EtoileDistance           = (1200*view.width/10000f)
+        etoile5.EtoileDebut              = etoile4.EtoileDebut
+        etoile5.EtoileFin                = etoile4.EtoileDebut
+
+        etoile6.EtoileDistance           = (2400*view.width/10000f)
+        etoile6.EtoileDebut              = etoile4.EtoileDebut
+        etoile6.EtoileFin                = etoile4.EtoileDebut
+    }
+
+    override fun reset(){
+        resetSpaceship()
+        resetEtoile()
 
     }
     override fun draw(canvas: Canvas) {
@@ -50,6 +77,21 @@ class AllySpaceship(
             i.draw(canvas)
         }
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
+        when(vieAlly){
+
+            3 -> {
+                etoile4.draw(canvas)
+                etoile5.draw(canvas)
+                etoile6.draw(canvas)
+            }
+            2 -> {
+                etoile4.draw(canvas)
+                etoile5.draw(canvas)
+            }
+            1 -> {
+                etoile4.draw(canvas)
+            }
+        }
     }
     fun createMissileAlly() {
         lesMissiles.add(
@@ -76,7 +118,9 @@ class AllySpaceship(
         for (j in lesMissiles){
             j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)
         }
-
+        if(vieAlly ==0){
+            view.gameOver(R.string.lose)
+        }
     }
 
 

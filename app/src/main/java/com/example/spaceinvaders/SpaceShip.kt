@@ -53,13 +53,7 @@ abstract class SpaceShip(
             i.missileOnScreen = false
         }
     }
-    fun perdVie(){
-        vie--
-    }
-    fun gagneVie() {
-        if (vie < 3)
-        vie++
-    }
+
 
 
     /*open fun update(

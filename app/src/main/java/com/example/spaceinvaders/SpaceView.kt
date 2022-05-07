@@ -45,12 +45,7 @@ class SpaceView @JvmOverloads constructor(
     val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
-    val etoile1        = Etoile (view=this, context = this)
-    val etoile2        = Etoile (view=this, context = this)
-    val etoile3        = Etoile (view=this, context = this)
-    val etoile4        = Etoile (view=this, context = this)
-    val etoile5        = Etoile (view=this, context = this)
-    val etoile6        = Etoile (view=this, context = this)
+
     val bonus          = Bonus (view=this,context= this)
     var timeee         = Timeee ()
     var gameOver       = false
@@ -102,35 +97,7 @@ class SpaceView @JvmOverloads constructor(
         textPaint.setTextSize(50f)
         textPaint.isAntiAlias            = true
 
-        etoile1.EtoileDistance           = (5*w/10000f)
-        etoile1.EtoileDebut              = (2400*h/10000f)
-        etoile1.EtoileFin                = etoile1.EtoileDebut
-        //etoile1.setRect()
 
-        etoile2.EtoileDistance           = (1200*w/10000f)
-        etoile2.EtoileDebut              = etoile1.EtoileDebut
-        etoile2.EtoileFin                = etoile1.EtoileDebut
-        //etoile2.setRect()
-
-        etoile3.EtoileDistance           = (2400*w/10000f)
-        etoile3.EtoileDebut              = etoile1.EtoileDebut
-        etoile3.EtoileDebut              = etoile1.EtoileDebut
-        //etoile3.setRect()
-
-        etoile4.EtoileDistance           = etoile1.EtoileDistance
-        etoile4.EtoileDebut              = (10900*h/10000f)
-        etoile4.EtoileFin                = etoile4.EtoileDebut
-        //etoile4.setRect()
-
-        etoile5.EtoileDistance           = etoile2.EtoileDistance
-        etoile5.EtoileDebut              = etoile4.EtoileDebut
-        etoile5.EtoileFin                = etoile4.EtoileDebut
-        //etoile5.setRect()
-
-        etoile6.EtoileDistance           = etoile3.EtoileDistance
-        etoile6.EtoileDebut              = etoile4.EtoileDebut
-        etoile6.EtoileFin                = etoile4.EtoileDebut
-        //etoile6.setRect()
 
         bonus.Distance                   = (1*w/2f)
         bonus.Debut                      = (4*h/8f)
@@ -155,36 +122,7 @@ class SpaceView @JvmOverloads constructor(
             allySpaceship.draw(canvas)
             bonus.draw(canvas)
 
-            when (enemySpaceship.vie){
-
-                3 -> {
-                    etoile1.draw(canvas)
-                    etoile2.draw(canvas)
-                    etoile3.draw(canvas)
-                }
-                2 -> {
-                    etoile1.draw(canvas)
-                    etoile2.draw(canvas)
-                }
-                1 -> {
-                    etoile1.draw(canvas)
-                }
-            }
-            when(allySpaceship.vie){
-
-                3 -> {
-                    etoile4.draw(canvas)
-                    etoile5.draw(canvas)
-                    etoile6.draw(canvas)
-                }
-                2 -> {
-                    etoile4.draw(canvas)
-                    etoile5.draw(canvas)
-                }
-                1 -> {
-                    etoile4.draw(canvas)
-                }
-            }
+             
 
             canvas.drawText("Temps restant ${(timeee.timeLeft/60).toInt()}:${(timeee.timeLeft%60).toInt()}", 10f, 70f, textPaint)
 

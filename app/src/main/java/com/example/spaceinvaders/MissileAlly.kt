@@ -50,9 +50,7 @@ class MissileAlly(
                     missileDisparait()
                 }
             }
-            if(enemySpaceship.vie == 0){
-                view.gameOver(R.string.win)
-            }
+
 
         }
     }

@@ -32,4 +32,6 @@ class Etoile(
 
 
     fun draw(canvas: Canvas) {
-        canvas.drawBitmap(image,EtoileDistance,EtoileDebut-view.screenHeight/5,null)}}
+        canvas.drawBitmap(image,EtoileDistance,EtoileDebut-view.screenHeight/5,null)
+    }
+}

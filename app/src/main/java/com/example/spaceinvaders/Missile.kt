@@ -16,7 +16,6 @@ import android.icu.util.DateInterval
         missileDistance + width,
         missileFin)
 
-
     val missilePaint    = Paint()
     var missileVitesse  = initialMissileVitesse
     var missileOnScreen = true
@@ -39,7 +38,6 @@ import android.icu.util.DateInterval
         )
 }
 
-
     fun draw(canvas: Canvas){
          if(missileOnScreen){
                  canvas.drawRect(missile, missilePaint)
@@ -51,11 +49,6 @@ import android.icu.util.DateInterval
 
     abstract fun updatePosition(
         interval       : Double)
-
-
-
-
-
 
 }
 

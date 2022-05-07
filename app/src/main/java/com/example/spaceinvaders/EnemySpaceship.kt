@@ -33,18 +33,47 @@ class EnemySpaceship(
     //var lesMissilesVerts = arrayListOf<MissileVert>()
     //var lesMissilesRouges = arrayListOf<MissileRouge>()
     //var lesMissilesEnnemi = arrayListOf<MissileEnemy>()
+    var vieEnnemi = 3
+    fun perdVie(){
+        vieEnnemi--
+    }
+    fun gagneVie() {
+        if (vieEnnemi < 3)
+            vieEnnemi++
+    }
 
     //lateinit var allySpaceship: AllySpaceship
     //lateinit var bonus : Bonus
     //lateinit var timeee : Timeee
+    val etoile1        = Etoile (view=view, context = context)
+    val etoile2        = Etoile (view=view, context = context)
+    val etoile3        = Etoile (view=view, context = context)
 
-    override fun reset(){
-        vie = 3
+    fun resetSpaceship(){
+        vieEnnemi = 3
         SpaceshipDistance = (view.width/3f)
         SpaceshipDebut    = (0.15f*view.height)
         SpaceshipFin      = SpaceshipDebut+300
         width             = 280f
-        //setRect()
+    }
+    fun resetEtoile(){
+        etoile1.EtoileDistance           = (5*view.width/10000f)
+        etoile1.EtoileDebut              = (2400*view.height/10000f)
+        etoile1.EtoileFin                = etoile1.EtoileDebut
+
+        etoile2.EtoileDistance           = (1200*view.width/10000f)
+        etoile2.EtoileDebut              = etoile1.EtoileDebut
+        etoile2.EtoileFin                = etoile1.EtoileDebut
+
+        etoile3.EtoileDistance           = (2400*view.width/10000f)
+        etoile3.EtoileDebut              = etoile1.EtoileDebut
+        etoile3.EtoileDebut              = etoile1.EtoileDebut
+    }
+    override fun reset(){
+
+        resetEtoile()
+        resetSpaceship()
+
     }
     override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
@@ -52,6 +81,22 @@ class EnemySpaceship(
             i.draw(canvas)
         }
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
+        when (vieEnnemi){
+
+            3 -> {
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+                etoile3.draw(canvas)
+            }
+            2 -> {
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+            }
+            1 -> {
+                etoile1.draw(canvas)
+            }
+        }
+
     }
     fun createMissileJaune(){
         lesMissiles.add(MissileJaune(SpaceshipDistance,
@@ -90,6 +135,9 @@ class EnemySpaceship(
             }
         for (j in lesMissiles){
             j.update(interval,this,allySpaceship,bonus,timeee)
+        }
+        if(vieEnnemi == 0){
+            view.gameOver(R.string.win)
         }
     }
 

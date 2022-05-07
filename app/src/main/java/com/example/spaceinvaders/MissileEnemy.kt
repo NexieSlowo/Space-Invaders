@@ -42,12 +42,7 @@ open abstract class MissileEnemy(
                         bonus.Distance + bonus.width,
                         bonus.Fin
                     )
-                ) {
-                    missileDisparait()
-                }
-            }
-            if(allySpaceship.vie ==0){
-                view.gameOver(R.string.lose)
+                ) {missileDisparait()}
             }
         }
     }

@@ -57,6 +57,7 @@ class SpaceView @JvmOverloads constructor(
     var shotsFired = 0
     var totalElapsedTime = 0.0
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
+    var tourMissile = 0
 
     //val lesMissilesRouges  = arrayListOf<MissileRouge>()
     //val lesMissilesJaunes = arrayListOf<MissileJaune>()
@@ -229,32 +230,6 @@ class SpaceView @JvmOverloads constructor(
         randomTimer4 -= interval
         if (timeee.timeLeft/60 <= 0.0) drawing = false
 
-        if(randomTimer<=0.0) {
-            /*lesMissilesRouges.add(MissileRouge(
-                enemySpaceship.SpaceshipDistance,
-                enemySpaceship.SpaceshipFin,
-                enemySpaceship.SpaceshipDebut + width/7f,
-                height/2f,
-                10f,
-                this))*/
-
-            /*lesMissilesJaunes.add(MissileJaune(
-                enemySpaceship.SpaceshipDistance,
-                enemySpaceship.SpaceshipFin,
-                enemySpaceship.SpaceshipDebut + width/8f,
-                height/2f,
-                10f,
-                this))**/
-
-
-            enemySpaceship.createMissileJaune()
-
-
-
-            val random = Random.nextInt(1,3)
-            randomTimer = random.toDouble()
-        }
-
         if(randomTimer2<=0.0) {
 
 
@@ -270,15 +245,15 @@ class SpaceView @JvmOverloads constructor(
                 randomTimer2 = random.toDouble()
             }
         }
-        if(randomTimer3 <=0.0){
-            enemySpaceship.createMissileRouge()
-            val random = Random.nextInt(2,3)
-            randomTimer3 = random.toDouble()
-        }
-        if(randomTimer4 <=0.0){
-            enemySpaceship.createMissileVerte()
-            val random = Random.nextInt(7,9)
-            randomTimer4 = random.toDouble()
+        if(randomTimer<=0.0){
+            when(tourMissile){
+                0->{enemySpaceship.createMissileJaune()}
+                1->{enemySpaceship.createMissileRouge()}
+                2->{enemySpaceship.createMissileVerte()}
+            }
+            tourMissile = Random.nextInt(0,3)
+            val random = Random.nextInt(1,3)
+            randomTimer = random.toDouble()
         }
         if(timeee.timeLeft <= 0.0){
             timeee.timeLeft = 0.0

@@ -46,9 +46,23 @@ class AllySpaceship(
     override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
         //canvas.drawBitmap(image, SpaceshipDistance, SpaceshipDebut,null)
+        for(i in lesMissiles){
+            i.draw(canvas)
+        }
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
     }
-
+    fun createMissileAlly() {
+        lesMissiles.add(
+            MissileAlly(
+                SpaceshipDistance,
+                SpaceshipFin,
+                SpaceshipDebut + view.screenWidth / 7f,
+                view.screenHeight / 2f,
+                10f,
+                view
+            )
+        )
+    }
 
     override fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
 

@@ -56,7 +56,7 @@ class SpaceView @JvmOverloads constructor(
     var gameOver       = false
     var shotsFired = 0
     var totalElapsedTime = 0.0
-    val lesMissilesAlly   = arrayListOf<MissileAlly>()
+    //val lesMissilesAlly   = arrayListOf<MissileAlly>()
 
     //val lesMissilesRouges  = arrayListOf<MissileRouge>()
     //val lesMissilesJaunes = arrayListOf<MissileJaune>()
@@ -187,9 +187,9 @@ class SpaceView @JvmOverloads constructor(
 
             canvas.drawText("Temps restant ${(timeee.timeLeft/60).toInt()}:${(timeee.timeLeft%60).toInt()}", 10f, 70f, textPaint)
 
-            for (m in lesMissilesAlly){
-              m.draw(canvas)
-            }
+            //for (m in lesMissilesAlly){
+              //m.draw(canvas)
+            //}
             /*for(j in lesMissilesRouges){
                 j.draw(canvas)
             }
@@ -212,8 +212,8 @@ class SpaceView @JvmOverloads constructor(
         allySpaceship.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)
 
         //Mettre le if missileonScreen pour les missiles de la liste
-            for(m in lesMissilesAlly){
-                m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
+            //for(m in lesMissilesAlly){
+                //m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
             //for( j in lesMissilesRouges){
                 //j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
@@ -294,19 +294,16 @@ class SpaceView @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissilesAlly.add(MissileAlly(
-                    allySpaceship.SpaceshipDistance+allySpaceship.width/2,
-                    allySpaceship.SpaceshipDebut-100,
-                    allySpaceship.SpaceshipDebut*1,
-                    height/2f,
-                    10f,
-                    this))
+
+                allySpaceship.createMissileAlly()
+
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
                 allySpaceship.changeVitesse()
                 ++shotsFired
             }
         }
         return true}
+
 
 
 
@@ -338,9 +335,9 @@ class SpaceView @JvmOverloads constructor(
         enemySpaceship.reset()
         timeee.reset()
         shotsFired = 0
-        for (m in lesMissilesAlly){
-            m.reset()
-        }
+        //for (m in lesMissilesAlly){
+            allySpaceship.resetMissile()
+        //}
         /*for (m in lesMissilesRouges){
             m.reset()
         }
@@ -355,9 +352,9 @@ class SpaceView @JvmOverloads constructor(
 
     }
     fun gameOver(titreDialog: Int){
-        for (m in lesMissilesAlly){
-            m.reset()
-        }
+        //for (m in lesMissilesAlly){
+            allySpaceship.resetMissile()
+        //}
         /*for (m in lesMissilesRouges){
            m.reset()
        }

@@ -40,18 +40,17 @@ class MissileAlly(
 
             if(missile.intersect(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDistance+enemySpaceship.width,enemySpaceship.SpaceshipFin)){
                 missileDisparait()
-                //ennemiPerdVie(enemySpaceship)
-                enemySpaceship.ennemiPerdVie()
+                enemySpaceship.perdVie()
             }
 
             if(bonus.OnScreen){
                 if(missile.intersect(bonus.Distance,bonus.Debut,bonus.Distance+bonus.width,bonus.Fin)){
-                    rajouteTemps(timeee)
+                    timeee.rajouteTemps()
+                    allySpaceship.gagneVie()
                     missileDisparait()
                 }
-
             }
-            if(enemySpaceship.vieEnnemi == 0){
+            if(enemySpaceship.vie == 0){
                 view.gameOver(R.string.win)
             }
 
@@ -59,12 +58,7 @@ class MissileAlly(
     }
 
 
-    fun ennemiPerdVie(enemySpaceship: EnemySpaceship){
-        enemySpaceship.vieEnnemi--
-    }
-    fun rajouteTemps(timeee: Timeee){
-        timeee.timeLeft +=5.0
-    }
+
 
 }
 

@@ -32,10 +32,19 @@ open abstract class MissileEnemy(
             //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
             if(missile.intersect(allySpaceship.SpaceshipDistance,allySpaceship.SpaceshipDebut,allySpaceship.SpaceshipDistance+allySpaceship.width, allySpaceship.SpaceshipFin)){
                 //missileDisparait()
-                joueurPerdVie(allySpaceship)
                 missileOnScreen = false
-                //faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
-
+                faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
+            }
+            if(bonus.OnScreen) {
+                if (missile.intersect(
+                        bonus.Distance,
+                        bonus.Debut,
+                        bonus.Distance + bonus.width,
+                        bonus.Fin
+                    )
+                ) {
+                    missileDisparait()
+                }
             }
             if(allySpaceship.vie ==0){
                 view.gameOver(R.string.lose)
@@ -43,11 +52,9 @@ open abstract class MissileEnemy(
         }
     }
 
-    fun joueurPerdVie(allySpaceship: AllySpaceship){
-        allySpaceship.vie -= 1
-    }
 
-    //abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
+
+    abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
 
 
 }

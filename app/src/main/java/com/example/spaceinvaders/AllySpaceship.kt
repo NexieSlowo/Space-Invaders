@@ -17,7 +17,7 @@ class AllySpaceship(
     context                 : SpaceView):
 
     SpaceShip(
-        //vie                     ,
+        vie                     ,
         SpaceshipDistance       ,
         SpaceshipDebut          ,
         SpaceshipFin            ,
@@ -32,7 +32,7 @@ class AllySpaceship(
     private var image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
-     var vie = 0
+     var vieAlly = 0
 
 
     override fun reset(){

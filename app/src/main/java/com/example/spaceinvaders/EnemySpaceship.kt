@@ -21,7 +21,7 @@ class EnemySpaceship(
     context                 : SpaceView):
 
     SpaceShip(
-    //vie,
+    vie,
     SpaceshipDistance,
     SpaceshipDebut,
     SpaceshipFin,
@@ -29,7 +29,6 @@ class EnemySpaceship(
     width,view,context){
 
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
-    var vieEnnemi : Int = 0
     //var lesMissilesJaunes = arrayListOf<MissileJaune>()
     //var lesMissilesVerts = arrayListOf<MissileVert>()
     //var lesMissilesRouges = arrayListOf<MissileRouge>()
@@ -40,29 +39,22 @@ class EnemySpaceship(
     //lateinit var timeee : Timeee
 
     override fun reset(){
-        vieEnnemi = 3
+        vie = 3
         SpaceshipDistance = (view.width/3f)
         SpaceshipDebut    = (0.15f*view.height)
         SpaceshipFin      = SpaceshipDebut+300
         width             = 280f
-
         //setRect()
     }
-
-
-
-
     override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
         for(i in lesMissiles){
             i.draw(canvas)
         }
-
-
         canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
     }
     fun createMissileJaune(){
-        lesMissiles.add(MissileRouge(SpaceshipDistance,
+        lesMissiles.add(MissileJaune(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
             view.screenHeight/2f,
@@ -75,8 +67,8 @@ class EnemySpaceship(
             SpaceshipDebut + view.screenWidth/7f,
             view.screenHeight/2f,
             10f,
-            view))
-
+            view)
+        )
     }
     fun createMissileVerte() {
         lesMissiles.add(MissileVert(SpaceshipDistance,
@@ -84,29 +76,23 @@ class EnemySpaceship(
             SpaceshipDebut + view.screenWidth/7f,
             view.screenHeight/2f,
             10f,
-            view))}
+            view)
+        )
+    }
 
-
-
-
-       override fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-
-            var up = (interval * spaceshipVitesse).toFloat()
+    override fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+        var up = (interval * spaceshipVitesse).toFloat()
             SpaceshipDistance = SpaceshipDistance+up
             if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
                 spaceshipVitesse = -spaceshipVitesse
                 up = (interval*3*spaceshipVitesse).toFloat()
                 SpaceshipDistance = SpaceshipDistance+up
             }
-           for (j in lesMissiles){
-               j.update(interval,this,allySpaceship,bonus,timeee)
-           }
-
+        for (j in lesMissiles){
+            j.update(interval,this,allySpaceship,bonus,timeee)
         }
-
-    fun ennemiPerdVie(){
-        vieEnnemi -=1
     }
+
 
     }
 

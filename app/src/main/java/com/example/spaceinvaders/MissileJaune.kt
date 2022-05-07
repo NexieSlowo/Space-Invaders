@@ -17,9 +17,9 @@ class MissileJaune(missileDistance : Float,missileDebut : Float,missileFin : Flo
         TODO("Not yet implemented")
     }*/
 
-    //override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-        //view.timeLeft -=5.0
-   // }
+    override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+        timeee.enleveTemps()
+    }
 
 
     //override fun changetime() {

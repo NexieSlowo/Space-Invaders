@@ -57,6 +57,7 @@ class SpaceView @JvmOverloads constructor(
     var shotsFired = 0
     var totalElapsedTime = 0.0
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
+    var tourDuMissile = 0
 
     //val lesMissilesRouges  = arrayListOf<MissileRouge>()
     //val lesMissilesJaunes = arrayListOf<MissileJaune>()
@@ -84,6 +85,7 @@ class SpaceView @JvmOverloads constructor(
             draw()
             previousFrameTime = currentTime
         }
+
     }
     override fun onSizeChanged(
         w:Int,
@@ -154,7 +156,7 @@ class SpaceView @JvmOverloads constructor(
             allySpaceship.draw(canvas)
             bonus.draw(canvas)
 
-            when (enemySpaceship.vieEnnemi){
+            when (enemySpaceship.vie){
 
                 3 -> {
                     etoile1.draw(canvas)
@@ -227,33 +229,39 @@ class SpaceView @JvmOverloads constructor(
         randomTimer2 -= interval
         randomTimer3 -= interval
         randomTimer4 -= interval
+
+
         if (timeee.timeLeft/60 <= 0.0) drawing = false
 
-        if(randomTimer<=0.0) {
-            /*lesMissilesRouges.add(MissileRouge(
-                enemySpaceship.SpaceshipDistance,
-                enemySpaceship.SpaceshipFin,
-                enemySpaceship.SpaceshipDebut + width/7f,
-                height/2f,
-                10f,
-                this))*/
 
-            /*lesMissilesJaunes.add(MissileJaune(
-                enemySpaceship.SpaceshipDistance,
-                enemySpaceship.SpaceshipFin,
-                enemySpaceship.SpaceshipDebut + width/8f,
-                height/2f,
-                10f,
-                this))**/
+        if(randomTimer<=0.0){
+            when(tourDuMissile){
+                0->{
+                    enemySpaceship.createMissileJaune()
+                    val random = Random.nextInt(3,4)
+                    randomTimer = random.toDouble()
 
 
-            enemySpaceship.createMissileJaune()
+                }
+                1->{
+                    enemySpaceship.createMissileRouge()
+                    val random = Random.nextInt(3,4)
+                    randomTimer = random.toDouble()
 
 
+                }
+                2->{
+                    enemySpaceship.createMissileVerte()
+                    val random = Random.nextInt(3,4)
+                    randomTimer = random.toDouble()
 
-            val random = Random.nextInt(1,3)
-            randomTimer = random.toDouble()
+                }
+            }
+            tourDuMissile = Random.nextInt(0,2)
         }
+
+
+
 
         if(randomTimer2<=0.0) {
 
@@ -270,17 +278,15 @@ class SpaceView @JvmOverloads constructor(
                 randomTimer2 = random.toDouble()
             }
         }
-        if(randomTimer3 <=0.0){
-            enemySpaceship.createMissileRouge()
-            val random = Random.nextInt(2,3)
-            randomTimer3 = random.toDouble()
-        }
-        if(randomTimer4 <=0.0){
-            enemySpaceship.createMissileVerte()
-            val random = Random.nextInt(7,9)
-            randomTimer4 = random.toDouble()
-        }
-        if(timeee.timeLeft <= 0.0){
+
+
+
+
+
+
+
+
+        if(timeee.timeLeft < 0.0){
             timeee.timeLeft = 0.0
             gameOver(R.string.lose)
         }
@@ -358,12 +364,7 @@ class SpaceView @JvmOverloads constructor(
         for (m in lesMissilesAlly){
             m.reset()
         }
-        /*for (m in lesMissilesRouges){
-           m.reset()
-       }
-       for (m in lesMissilesJaunes){
-           m.reset()
-       }*/
+
         enemySpaceship.resetMissile()
 
 

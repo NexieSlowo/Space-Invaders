@@ -122,13 +122,12 @@ class SpaceView @JvmOverloads constructor(
             allySpaceship.draw(canvas)
             bonus.draw(canvas)
 
-             
+
+
 
             canvas.drawText("Temps restant ${(timeee.timeLeft/60).toInt()}:${(timeee.timeLeft%60).toInt()}", 10f, 70f, textPaint)
 
-            for (m in lesMissilesAlly){
-              m.draw(canvas)
-            }
+
             /*for(j in lesMissilesRouges){
                 j.draw(canvas)
             }
@@ -206,13 +205,7 @@ class SpaceView @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 //val x = e.rawX.toInt() - 100
                 //val y = e.rawY.toInt() - 300
-                lesMissilesAlly.add(MissileAlly(
-                    allySpaceship.SpaceshipDistance+allySpaceship.width/2,
-                    allySpaceship.SpaceshipDebut-100,
-                    allySpaceship.SpaceshipDebut*1,
-                    height/2f,
-                    10f,
-                    this))
+                allySpaceship.createMissileAlly()
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
                 allySpaceship.changeVitesse()
                 ++shotsFired

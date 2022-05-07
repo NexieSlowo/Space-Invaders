@@ -102,7 +102,7 @@ class EnemySpaceship(
         lesMissiles.add(MissileJaune(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
-            view.screenHeight/2f,
+            view.screenHeight*2f,
             10f,
             view))
     }
@@ -110,7 +110,7 @@ class EnemySpaceship(
         lesMissiles.add(MissileRouge(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
-            view.screenHeight/2f,
+            view.screenHeight*2f,
             10f,
             view)
         )
@@ -119,7 +119,7 @@ class EnemySpaceship(
         lesMissiles.add(MissileVert(SpaceshipDistance,
             SpaceshipFin,
             SpaceshipDebut + view.screenWidth/7f,
-            view.screenHeight/2f,
+            view.screenHeight*2f,
             10f,
             view)
         )

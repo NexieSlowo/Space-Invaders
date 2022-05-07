@@ -22,7 +22,7 @@ class MissileAlly(
         view){
 
     init {
-        missilePaint.color = Color.GREEN
+        missilePaint.color = Color.RED
     }
 
     override fun updatePosition(interval: Double){

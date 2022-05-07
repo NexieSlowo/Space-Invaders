@@ -96,10 +96,10 @@ class AllySpaceship(
     fun createMissileAlly() {
         lesMissiles.add(
             MissileAlly(
-                SpaceshipDistance,
-                SpaceshipFin,
-                SpaceshipDebut + view.screenWidth / 7f,
-                view.screenHeight / 2f,
+                SpaceshipDistance+width/2,
+                SpaceshipDebut*1,
+                SpaceshipDebut + view.screenWidth/7f,
+                view.screenHeight *2f,
                 10f,
                 view
             )

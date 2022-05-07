@@ -252,8 +252,7 @@ class SpaceView @JvmOverloads constructor(
                 2->{enemySpaceship.createMissileVerte()}
             }
             tourMissile = Random.nextInt(0,3)
-            val random = Random.nextInt(1,3)
-            randomTimer = random.toDouble()
+            randomTimer = Random.nextDouble(1.0,3.0)
         }
         if(timeee.timeLeft <= 0.0){
             timeee.timeLeft = 0.0

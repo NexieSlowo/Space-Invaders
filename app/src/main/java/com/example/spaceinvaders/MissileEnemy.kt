@@ -32,8 +32,8 @@ open abstract class MissileEnemy(
             //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
             if(missile.intersect(allySpaceship.SpaceshipDistance,allySpaceship.SpaceshipDebut,allySpaceship.SpaceshipDistance+allySpaceship.width, allySpaceship.SpaceshipFin)){
                 //missileDisparait()
-                missileOnScreen = false
                 faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
+                missileDisparait()
             }
             if(bonus.OnScreen) {
                 if (missile.intersect(

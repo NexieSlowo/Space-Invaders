@@ -42,12 +42,14 @@ class SpaceView @JvmOverloads constructor(
     var randomTimer2:Double = 0.0
     var restrictedShot = true
     var timer3 : Double = 0.0
+
     val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
 
     val bonus          = Bonus (view=this,context= this)
     var timeee         = Timeee ()
+    var timeOriginal = timeee.timeLeft
     var gameOver       = false
     var shotsFired = 0
     var totalElapsedTime = 0.0
@@ -301,7 +303,7 @@ class SpaceView @JvmOverloads constructor(
                 builder.setMessage(
                     resources.getString(
                         R.string.results_format
-                    )
+                    ) + shotsFired
                 )
                 builder.setPositiveButton(R.string.reset_game,
                     DialogInterface.OnClickListener { _, _->newGame()}

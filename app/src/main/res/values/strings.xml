@@ -2,6 +2,7 @@
     <string name="app_name">SpaceInvaders</string>
     <string name="win">Gagné</string>
     <string name="lose">Perdu</string>
-    <string name="results_format" >Résultat</string>
+    <string name="results_format" >Résultat: missiles tirés </string>
     <string name="reset_game">Recommencer</string>
+
 </resources>

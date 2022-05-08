@@ -40,7 +40,7 @@ class SpaceView @JvmOverloads constructor(
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
     var randomTimer2:Double = 0.0
-    var restrictedShot = false
+    var restrictedShot = true
     var timer3 : Double = 0.0
     val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
@@ -210,7 +210,7 @@ class SpaceView @JvmOverloads constructor(
                         ++shotsFired
                     }
                 }
-                timer3 = 3.0
+                timer3 = 1.0
             }
         }
         else{

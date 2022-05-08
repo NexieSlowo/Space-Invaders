@@ -15,7 +15,7 @@ class EnemySpaceship(
     SpaceshipLeft       : Float     = 0f,
     SpaceshipTop          : Float     = 0f,
     SpaceshipBottom            : Float     = 0f,
-    initialSpaceshipSpeed : Float     = 400f,
+    initialSpaceshipSpeed : Float     = 900f,
     width                   : Float     = 370f,
     view                    : SpaceView,
     context                 : SpaceView):

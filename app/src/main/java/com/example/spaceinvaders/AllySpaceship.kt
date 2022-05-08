@@ -11,7 +11,7 @@ class AllySpaceship(
     SpaceshipLeft       : Float     = 0f   ,
     SpaceshipTop          : Float     = 0f   ,
     SpaceshipBottom            : Float     = 0f   ,
-    initialspaceshipSpeed : Float     = 700f ,
+    initialspaceshipSpeed : Float     = 800f ,
     width                   : Float     = 300f ,
     view                    : SpaceView        ,
     context                 : SpaceView):

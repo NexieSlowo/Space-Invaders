@@ -26,7 +26,7 @@ abstract class SpaceShip(
     protected val etoile2        = Etoile (view=view, context = context)
     protected val etoile3        = Etoile (view=view, context = context)
     protected var life           =3
-    var invincible = true
+    var invincible = false
 
 
 

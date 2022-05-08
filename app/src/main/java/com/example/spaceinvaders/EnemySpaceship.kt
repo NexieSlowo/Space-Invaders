@@ -29,18 +29,20 @@ class EnemySpaceship(
     width,view,context){
 
     override var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
-    private var enemyLives = 3
-    private val etoile1        = Etoile (view=view, context = context)
+    //private var enemyLives = 3
+    /*private val etoile1        = Etoile (view=view, context = context)
     private val etoile2        = Etoile (view=view, context = context)
     private val etoile3        = Etoile (view=view, context = context)
 
+     */
 
-    override fun draw(canvas: Canvas) {
+
+    /*override fun draw(canvas: Canvas) {
         for(i in theMissiles){
             i.draw(canvas)
         }
         canvas.drawBitmap(image,SpaceshipLeft,SpaceshipTop,null)
-        when (enemyLives){
+        when (life){
 
             3 -> {
                 etoile1.draw(canvas)
@@ -58,11 +60,13 @@ class EnemySpaceship(
 
     }
 
+     */
+
     fun createMissileJaune(){
         theMissiles.add(MissileJaune(SpaceshipLeft,
             SpaceshipBottom,
             SpaceshipTop + view.screenWidth/7f,
-            view.screenHeight*4f,
+            view.screenHeight,
             10f,
             view))
     }
@@ -71,7 +75,7 @@ class EnemySpaceship(
         theMissiles.add(MissileRouge(SpaceshipLeft,
             SpaceshipBottom,
             SpaceshipTop + view.screenWidth/7f,
-            view.screenHeight*4f,
+            view.screenHeight,
             10f,
             view)
         )
@@ -80,7 +84,7 @@ class EnemySpaceship(
         theMissiles.add(MissileVert(SpaceshipLeft,
             SpaceshipBottom,
             SpaceshipTop + view.screenWidth/7f,
-            view.screenHeight*4f,
+            view.screenHeight,
             10f,
             view)
         )
@@ -97,27 +101,31 @@ class EnemySpaceship(
         for (j in theMissiles){
             j.update(interval,this,allySpaceship,bonus,timeee)
         }
-        if(enemyLives == 0){
+        if(life == 0){
             view.gameOver(R.string.win)
         }
     }
 
-    fun loseLife(){
-        enemyLives--
+   /* fun loseLife(){
+        life--
     }
     fun gainLife() {
-        if (enemyLives < 3)
-            enemyLives++
+        if (life < 3)
+            life++
     }
 
-    fun resetSpaceship(){
-        enemyLives = 3
+    */
+
+    override fun resetSpaceship(){
+        life = 3
         SpaceshipLeft = (view.width/3f)
         SpaceshipTop    = (0.15f*view.height)
         SpaceshipBottom     = SpaceshipTop+300
         width             = 280f
     }
-    fun resetEtoile(){
+
+
+    override fun resetEtoile(){
         etoile1.EtoileDistance           = (5*view.width/10000f)
         etoile1.EtoileDebut              = (2400*view.height/10000f)
         etoile1.EtoileFin                = etoile1.EtoileDebut
@@ -130,12 +138,14 @@ class EnemySpaceship(
         etoile3.EtoileDebut              = etoile1.EtoileDebut
         etoile3.EtoileDebut              = etoile1.EtoileDebut
     }
-    override fun reset(){
+    /*override fun reset(){
 
         resetEtoile()
         resetSpaceship()
 
     }
+
+     */
 
 
     }

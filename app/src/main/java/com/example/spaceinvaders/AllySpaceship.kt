@@ -30,60 +30,66 @@ class AllySpaceship(
     override val image = BitmapFactory.decodeResource(
         context.resources,
         R.drawable.player2)
-     var allyLives = 3
+     //var allyLives = 3
 
-    val etoile4        = Etoile (view=view, context = context)
-    val etoile5        = Etoile (view=view, context = context)
-    val etoile6        = Etoile (view=view, context = context)
+    /*val etoile1        = Etoile (view=view, context = context)
+    val etoile2        = Etoile (view=view, context = context)
+    val etoile3        = Etoile (view=view, context = context)*/
 
-    fun resetSpaceship(){
-        allyLives = 3
+    override fun resetSpaceship(){
+        life = 3
         SpaceshipLeft  = (3*view.width/25f)
         SpaceshipTop     = (7800*view.height/10000f-200)
         SpaceshipBottom       = SpaceshipTop+300
     }
-    fun resetEtoile(){
-        etoile4.EtoileDistance           =  (5*view.width/10000f)
-        etoile4.EtoileDebut              = (10900*view.height/10000f)
-        etoile4.EtoileFin                = etoile4.EtoileDebut
 
-        etoile5.EtoileDistance           = (1200*view.width/10000f)
-        etoile5.EtoileDebut              = etoile4.EtoileDebut
-        etoile5.EtoileFin                = etoile4.EtoileDebut
 
-        etoile6.EtoileDistance           = (2400*view.width/10000f)
-        etoile6.EtoileDebut              = etoile4.EtoileDebut
-        etoile6.EtoileFin                = etoile4.EtoileDebut
+    override fun resetEtoile(){
+        etoile1.EtoileDistance           =  (5*view.width/10000f)
+        etoile1.EtoileDebut              = (10900*view.height/10000f)
+        etoile1.EtoileFin                = etoile1.EtoileDebut
+
+        etoile2.EtoileDistance           = (1200*view.width/10000f)
+        etoile2.EtoileDebut              = etoile1.EtoileDebut
+        etoile2.EtoileFin                = etoile1.EtoileDebut
+
+        etoile3.EtoileDistance           = (2400*view.width/10000f)
+        etoile3.EtoileDebut              = etoile1.EtoileDebut
+        etoile3.EtoileFin                = etoile1.EtoileDebut
     }
 
-    override fun reset(){
+   /* override fun reset(){
         resetSpaceship()
         resetEtoile()
 
     }
-    override fun draw(canvas: Canvas) {
+
+    */
+  /*  override fun draw(canvas: Canvas) {
         //canvas.drawRect(spaceship,spaceshipPaint)
         //canvas.drawBitmap(image, SpaceshipLeft, SpaceshipTop,null)
         for(i in theMissiles){
             i.draw(canvas)
         }
         canvas.drawBitmap(image,SpaceshipLeft,SpaceshipTop,null)
-        when(allyLives){
+        when(life){
 
             3 -> {
-                etoile4.draw(canvas)
-                etoile5.draw(canvas)
-                etoile6.draw(canvas)
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+                etoile3.draw(canvas)
             }
             2 -> {
-                etoile4.draw(canvas)
-                etoile5.draw(canvas)
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
             }
             1 -> {
-                etoile4.draw(canvas)
+                etoile1.draw(canvas)
             }
         }
     }
+
+   */
     fun createMissileAlly() {
         theMissiles.add(
             MissileAlly(
@@ -109,36 +115,20 @@ class AllySpaceship(
         for (j in theMissiles){
             j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)
         }
-        if(allyLives ==0){
+        if(life ==0){
             view.gameOver(R.string.lose)
         }
     }
 
-    fun loseLife(){
-        allyLives--
+    /*fun loseLife(){
+        life--
     }
-    fun gainlife() {
-        if (allyLives < 3)
-            allyLives++
+    fun gainLife() {
+        if (life < 3)
+            life++
     }
 
-
-    /*override fun update(
-        interval: Double){
-        var up = (interval * spaceshipSpeed).toFloat()
-        spaceship.offset(up,0f)
-        if(spaceship.left < 0 ||  spaceship.right  > view.screenWidth){
-            spaceshipSpeed *= -1
-            up = (interval *4 * spaceshipSpeed).toFloat()
-            spaceship.offset(up,0f)
-        }
-        SpaceshipLeft =SpaceshipLeft+up
-    }
-*/
-
-
-
-
+     */
 
 
 

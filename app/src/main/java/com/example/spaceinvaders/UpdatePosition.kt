@@ -1,7 +1,7 @@
 package com.example.spaceinvaders
 
-interface InterfaceAddTime {
-    val hit_reward: Double
+interface UpdatePosition {
+   /* val hit_reward: Double
         get() = 10.0
     var timeleft: Double
         get() = 0.0
@@ -12,6 +12,9 @@ interface InterfaceAddTime {
     }
     fun removetime(){
         timeleft -=  hit_reward
-    }
+    }*/
    // abstract fun changetime(enemySpaceship: EnemySpaceship)
+
+    abstract fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
+
 }

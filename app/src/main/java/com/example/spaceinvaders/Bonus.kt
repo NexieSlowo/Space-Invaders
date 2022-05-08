@@ -11,11 +11,11 @@ class Bonus(
     var view: SpaceView,
     context: SpaceView)
 
-    :InterfaceAddTime{
+    {
 
-    override fun addtime() {
+    /*override fun addtime() {
         TODO("Not yet implemented")
-    }
+    }*/
 
     var OnScreen = true
     val bonusPaint    = Paint()

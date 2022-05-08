@@ -22,22 +22,37 @@ abstract class SpaceShip(
     var spaceshipSpeed= initialSpaceshipSpeed
     var theMissiles = arrayListOf<Missile>()
     abstract val image : Bitmap
+    protected val etoile1        = Etoile (view=view, context = context)
+    protected val etoile2        = Etoile (view=view, context = context)
+    protected val etoile3        = Etoile (view=view, context = context)
+    protected var life           =3
 
 
 
 
-    /* fun setRect() {
-        spaceshipVitesse = initialSpaceshipVitesse
-        spaceship.set(
-            SpaceshipDistance         ,
-            SpaceshipDebut            ,
-            (SpaceshipDistance + width),
-            SpaceshipFin)
-    }*/
+     fun draw(canvas: Canvas) {
 
-     abstract fun draw(canvas:Canvas)
+        for(i in theMissiles){
+            i.draw(canvas)
+        }
+        canvas.drawBitmap(image,SpaceshipLeft,SpaceshipTop,null)
+        when(life){
 
-     abstract fun reset()
+            3 -> {
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+                etoile3.draw(canvas)
+            }
+            2 -> {
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+            }
+            1 -> {
+                etoile1.draw(canvas)
+            }
+        }
+    }
+
 
     fun resetMissile(){
         for(i in theMissiles){
@@ -50,54 +65,32 @@ abstract class SpaceShip(
     }
 
 
+    fun loseLife(){
+        life--
+    }
 
 
-    /*open fun update(
-       interval: Double){
-       //Cette methode fait le mouvement
-       val up = (interval * spaceshipVitesse).toFloat()
-       val vaisseauToucheBord = (spaceship.left < 0 || spaceship.right > view.screenWidth)
-       val decallementt: Int = 4
+    fun gainLife() {
+        if (life < 3)
+            life++
+    }
 
-       deplacement_du_vaisseau(up)
-        if (vaisseauToucheBord) {
-           changeVitesse()
-           changeDistanceParcourue(interval,decallementt)
-        }
 
-       MAJPositionVaisseau(up)
-   }*/
-     /*fun update(interval: Double){
-         var up = (interval * spaceshipVitesse).toFloat()
-         spaceship.offset(up,0f)
-         if(spaceship.left < 0 ||  spaceship.right  > view.screenWidth){
-             spaceshipVitesse *= -1
-             up = (interval *4 * spaceshipVitesse).toFloat()
-             spaceship.offset(up,0f)
-         }
-         SpaceshipDistance =SpaceshipDistance+up
-     }*/
+    fun reset(){
+
+        resetEtoile()
+        resetSpaceship()
+
+    }
+
+
+    abstract fun resetSpaceship()
+    abstract fun resetEtoile()
 
 
     abstract fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
 
 
-    /* abstract fun reset()*/
-
-     /*fun deplacement_du_vaisseau(up: Float){
-        spaceship.offset(up,0f)
-    }
-
-
-    fun changeDistanceParcourue(interval: Double, decallement: Int){
-        val up = (interval * decallement * spaceshipVitesse).toFloat()
-        deplacement_du_vaisseau(up)
-    }
-
-
-    fun MAJPositionVaisseau(up: Float){
-        SpaceshipDistance += up
-    }*/
 
 
 

@@ -46,7 +46,7 @@ class MissileAlly(
             if(bonus.OnScreen){
                 if(missile.intersect(bonus.Distance,bonus.Top,bonus.Distance+bonus.width,bonus.Bottom)){
                     timeee.rajouteTemps()
-                    allySpaceship.gainlife()
+                    allySpaceship.gainLife()
                     reset()
                 }
             }

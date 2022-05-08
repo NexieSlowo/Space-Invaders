@@ -199,20 +199,24 @@ class SpaceView @JvmOverloads constructor(
 
 
 
+
+
+
+
     override fun onTouchEvent(e: MotionEvent): Boolean {
         if(restrictedShot){
-            if(timer3<=0.0) {
-                when (e.action) {
-                    MotionEvent.ACTION_DOWN -> {
+            when (e.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    if(timer3<=0.0) {
                         //val x = e.rawX.toInt() - 100
                         //val y = e.rawY.toInt() - 300
                         allySpaceship.createMissileAlly()
                         //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
                         allySpaceship.changeDirection()
                         ++shotsFired
+                        timer3 = 1.0
                     }
                 }
-                timer3 = 1.0
             }
         }
         else{

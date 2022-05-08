@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpaceInvaders</string>
+    <string name="app_name">Space Invaders</string>
     <string name="win">Gagné</string>
     <string name="lose">Perdu</string>
     <string name="results_format" >Résultat: missiles tirés </string>

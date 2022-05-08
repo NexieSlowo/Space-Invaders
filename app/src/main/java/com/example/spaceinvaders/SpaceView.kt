@@ -40,8 +40,7 @@ class SpaceView @JvmOverloads constructor(
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
     var randomTimer2:Double = 0.0
-    var randomTimer3 : Double = 0.0
-    var randomTimer4 : Double = 0.0
+    var timer3 : Double = 0.0
     val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
@@ -117,9 +116,11 @@ class SpaceView @JvmOverloads constructor(
 
             canvas = holder.lockCanvas()
             canvas.drawBitmap(imageBackground,0f,0f, null)
-            enemySpaceship.draw(canvas)
             allySpaceship.draw(canvas)
             bonus.draw(canvas)
+            enemySpaceship.draw(canvas)
+
+
 
 
 
@@ -162,8 +163,8 @@ class SpaceView @JvmOverloads constructor(
         timeee.timeLeft -= interval
         randomTimer -= interval
         randomTimer2 -= interval
-        randomTimer3 -= interval
-        randomTimer4 -= interval
+        timer3 -= interval
+
         if (timeee.timeLeft/60 <= 0.0) drawing = false
 
         if(randomTimer2<=0.0) {
@@ -181,6 +182,7 @@ class SpaceView @JvmOverloads constructor(
                 randomTimer2 = random.toDouble()
             }
         }
+
         if(randomTimer<=0.0){
             when(tourMissile){
                 0->{enemySpaceship.createMissileJaune()}
@@ -199,18 +201,22 @@ class SpaceView @JvmOverloads constructor(
 
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
-
-        when (e.action) {
-            MotionEvent.ACTION_DOWN -> {
-                //val x = e.rawX.toInt() - 100
-                //val y = e.rawY.toInt() - 300
-                allySpaceship.createMissileAlly()
-                //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
-                allySpaceship.changeDirection()
-                ++shotsFired
+        if(timer3<=0.0) {
+            when (e.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    //val x = e.rawX.toInt() - 100
+                    //val y = e.rawY.toInt() - 300
+                    allySpaceship.createMissileAlly()
+                    //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
+                    allySpaceship.changeDirection()
+                    ++shotsFired
+                }
             }
+            timer3 = 3.0
         }
-        return true}
+
+        return true
+    }
 
 
 

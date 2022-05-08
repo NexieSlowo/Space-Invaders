@@ -21,9 +21,9 @@ class Bonus(
     val bonusPaint    = Paint()
 
     val bonus= RectF(Distance, Top, Distance + width, Bottom)
-    init {bonusPaint.color = Color.WHITE}
+    init {bonusPaint.color = Color.BLUE}
 
-    private var image = BitmapFactory.decodeResource(context.resources,R.drawable.bonus2)
+    private var image = BitmapFactory.decodeResource(context.resources,R.drawable.astero)
 
     fun setRect() {
         bonus.set(Distance, Top, (Distance + width), (Bottom))
@@ -33,7 +33,8 @@ class Bonus(
 
     fun draw(canvas: Canvas) {
         if(OnScreen){
-            //canvas.drawRect(bonus, bonusPaint)
+            setRect()
+            canvas.drawRect(bonus, bonusPaint)
             canvas.drawBitmap(image,Distance,Top,null)
 
         }

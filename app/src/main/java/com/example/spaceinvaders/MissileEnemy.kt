@@ -45,7 +45,9 @@ open abstract class MissileEnemy(
                         bonus.Distance + bonus.width,
                         bonus.Bottom
                     )
-                ) {reset()}
+                ) {
+
+                }
             }
         }
     }

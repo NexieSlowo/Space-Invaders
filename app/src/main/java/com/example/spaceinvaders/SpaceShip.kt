@@ -17,7 +17,7 @@ abstract class SpaceShip(
     context: SpaceView,
 
 
-    ) {
+    ) : UpdatePosition {
 
     var spaceshipSpeed= initialSpaceshipSpeed
     var theMissiles = arrayListOf<Missile>()
@@ -26,7 +26,7 @@ abstract class SpaceShip(
     protected val etoile2        = Etoile (view=view, context = context)
     protected val etoile3        = Etoile (view=view, context = context)
     protected var life           =3
-
+    var invincible = true
 
 
 
@@ -66,13 +66,16 @@ abstract class SpaceShip(
 
 
     fun loseLife(){
-        life--
+        if(!invincible){life--}
+
     }
 
 
     fun gainLife() {
-        if (life < 3)
-            life++
+        if(!invincible){
+            if (life < 3)
+                life++
+        }
     }
 
 
@@ -87,9 +90,11 @@ abstract class SpaceShip(
     abstract fun resetSpaceship()
     abstract fun resetEtoile()
 
-
+/*
     abstract fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
 
+
+ */
 
 
 

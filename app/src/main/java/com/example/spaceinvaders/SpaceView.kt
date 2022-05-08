@@ -54,8 +54,7 @@ class SpaceView @JvmOverloads constructor(
     val lesMissilesAlly   = arrayListOf<MissileAlly>()
     var tourMissile = 0
 
-    //val lesMissilesRouges  = arrayListOf<MissileRouge>()
-    //val lesMissilesJaunes = arrayListOf<MissileJaune>()
+
     private val imageBackground   = BitmapFactory.decodeResource(context.resources, R.drawable.gradient)
 
 
@@ -100,8 +99,8 @@ class SpaceView @JvmOverloads constructor(
 
 
         bonus.Distance                   = (1*w/2f)
-        bonus.Debut                      = (4*h/8f)
-        bonus.Fin                        = bonus.Debut+250
+        bonus.Top                      = (4*h/8f)
+        bonus.Bottom                        = bonus.Top+250
         bonus.width                      = 250f
         bonus.setRect()
 
@@ -207,7 +206,7 @@ class SpaceView @JvmOverloads constructor(
                 //val y = e.rawY.toInt() - 300
                 allySpaceship.createMissileAlly()
                 //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
-                allySpaceship.changeVitesse()
+                allySpaceship.changeDirection()
                 ++shotsFired
             }
         }

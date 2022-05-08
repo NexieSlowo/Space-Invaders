@@ -12,48 +12,109 @@ import java.util.*
 class EnemySpaceship(
 
     vie                     : Int       = 3,
-    SpaceshipDistance       : Float     = 0f,
-    SpaceshipDebut          : Float     = 0f,
-    SpaceshipFin            : Float     = 0f,
-    initialSpaceshipVitesse : Float     = 400f,
+    SpaceshipLeft       : Float     = 0f,
+    SpaceshipTop          : Float     = 0f,
+    SpaceshipBottom            : Float     = 0f,
+    initialSpaceshipSpeed : Float     = 400f,
     width                   : Float     = 370f,
     view                    : SpaceView,
     context                 : SpaceView):
 
     SpaceShip(
     vie,
-    SpaceshipDistance,
-    SpaceshipDebut,
-    SpaceshipFin,
-    initialSpaceshipVitesse,
+    SpaceshipLeft,
+    SpaceshipTop,
+    SpaceshipBottom,
+    initialSpaceshipSpeed,
     width,view,context){
 
-    private var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
-    //var lesMissilesJaunes = arrayListOf<MissileJaune>()
-    //var lesMissilesVerts = arrayListOf<MissileVert>()
-    //var lesMissilesRouges = arrayListOf<MissileRouge>()
-    //var lesMissilesEnnemi = arrayListOf<MissileEnemy>()
-    var vieEnnemi = 3
-    fun perdVie(){
-        vieEnnemi--
-    }
-    fun gagneVie() {
-        if (vieEnnemi < 3)
-            vieEnnemi++
+    override var image = BitmapFactory.decodeResource(context.resources,R.drawable.deathstar2)
+    private var enemyLives = 3
+    private val etoile1        = Etoile (view=view, context = context)
+    private val etoile2        = Etoile (view=view, context = context)
+    private val etoile3        = Etoile (view=view, context = context)
+
+
+    override fun draw(canvas: Canvas) {
+        for(i in theMissiles){
+            i.draw(canvas)
+        }
+        canvas.drawBitmap(image,SpaceshipLeft,SpaceshipTop,null)
+        when (enemyLives){
+
+            3 -> {
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+                etoile3.draw(canvas)
+            }
+            2 -> {
+                etoile1.draw(canvas)
+                etoile2.draw(canvas)
+            }
+            1 -> {
+                etoile1.draw(canvas)
+            }
+        }
+
     }
 
-    //lateinit var allySpaceship: AllySpaceship
-    //lateinit var bonus : Bonus
-    //lateinit var timeee : Timeee
-    val etoile1        = Etoile (view=view, context = context)
-    val etoile2        = Etoile (view=view, context = context)
-    val etoile3        = Etoile (view=view, context = context)
+    fun createMissileJaune(){
+        theMissiles.add(MissileJaune(SpaceshipLeft,
+            SpaceshipBottom,
+            SpaceshipTop + view.screenWidth/7f,
+            view.screenHeight*4f,
+            10f,
+            view))
+    }
+
+    fun createMissileRouge(){
+        theMissiles.add(MissileRouge(SpaceshipLeft,
+            SpaceshipBottom,
+            SpaceshipTop + view.screenWidth/7f,
+            view.screenHeight*4f,
+            10f,
+            view)
+        )
+    }
+    fun createMissileVerte() {
+        theMissiles.add(MissileVert(SpaceshipLeft,
+            SpaceshipBottom,
+            SpaceshipTop + view.screenWidth/7f,
+            view.screenHeight*4f,
+            10f,
+            view)
+        )
+    }
+
+    override fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+        var up = (interval * spaceshipSpeed).toFloat()
+            SpaceshipLeft = SpaceshipLeft+up
+            if(SpaceshipLeft+view.screenWidth/4 > view.screenWidth || SpaceshipLeft < 0 ){
+                changeDirection()
+                up = (interval*3*spaceshipSpeed).toFloat()
+                SpaceshipLeft = SpaceshipLeft+up
+            }
+        for (j in theMissiles){
+            j.update(interval,this,allySpaceship,bonus,timeee)
+        }
+        if(enemyLives == 0){
+            view.gameOver(R.string.win)
+        }
+    }
+
+    fun loseLife(){
+        enemyLives--
+    }
+    fun gainLife() {
+        if (enemyLives < 3)
+            enemyLives++
+    }
 
     fun resetSpaceship(){
-        vieEnnemi = 3
-        SpaceshipDistance = (view.width/3f)
-        SpaceshipDebut    = (0.15f*view.height)
-        SpaceshipFin      = SpaceshipDebut+300
+        enemyLives = 3
+        SpaceshipLeft = (view.width/3f)
+        SpaceshipTop    = (0.15f*view.height)
+        SpaceshipBottom     = SpaceshipTop+300
         width             = 280f
     }
     fun resetEtoile(){
@@ -74,71 +135,6 @@ class EnemySpaceship(
         resetEtoile()
         resetSpaceship()
 
-    }
-    override fun draw(canvas: Canvas) {
-        //canvas.drawRect(spaceship,spaceshipPaint)
-        for(i in lesMissiles){
-            i.draw(canvas)
-        }
-        canvas.drawBitmap(image,SpaceshipDistance,SpaceshipDebut,null)
-        when (vieEnnemi){
-
-            3 -> {
-                etoile1.draw(canvas)
-                etoile2.draw(canvas)
-                etoile3.draw(canvas)
-            }
-            2 -> {
-                etoile1.draw(canvas)
-                etoile2.draw(canvas)
-            }
-            1 -> {
-                etoile1.draw(canvas)
-            }
-        }
-
-    }
-    fun createMissileJaune(){
-        lesMissiles.add(MissileJaune(SpaceshipDistance,
-            SpaceshipFin,
-            SpaceshipDebut + view.screenWidth/7f,
-            view.screenHeight*2f,
-            10f,
-            view))
-    }
-    fun createMissileRouge(){
-        lesMissiles.add(MissileRouge(SpaceshipDistance,
-            SpaceshipFin,
-            SpaceshipDebut + view.screenWidth/7f,
-            view.screenHeight*2f,
-            10f,
-            view)
-        )
-    }
-    fun createMissileVerte() {
-        lesMissiles.add(MissileVert(SpaceshipDistance,
-            SpaceshipFin,
-            SpaceshipDebut + view.screenWidth/7f,
-            view.screenHeight*2f,
-            10f,
-            view)
-        )
-    }
-
-    override fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-        var up = (interval * spaceshipVitesse).toFloat()
-            SpaceshipDistance = SpaceshipDistance+up
-            if(SpaceshipDistance+view.screenWidth/4 > view.screenWidth || SpaceshipDistance < 0 ){
-                spaceshipVitesse = -spaceshipVitesse
-                up = (interval*3*spaceshipVitesse).toFloat()
-                SpaceshipDistance = SpaceshipDistance+up
-            }
-        for (j in lesMissiles){
-            j.update(interval,this,allySpaceship,bonus,timeee)
-        }
-        if(vieEnnemi == 0){
-            view.gameOver(R.string.win)
-        }
     }
 
 

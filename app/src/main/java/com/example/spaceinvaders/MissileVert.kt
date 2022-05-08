@@ -7,7 +7,7 @@ class MissileVert(missileDistance : Float,missileDebut : Float,missileFin:Float,
         missilePaint.color = Color.GREEN
     }
     override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
-        enemySpaceship.gagneVie()
+        enemySpaceship.gainLife()
     }
 
 }

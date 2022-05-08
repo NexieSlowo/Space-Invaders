@@ -3,38 +3,31 @@ import android.graphics.*
 import android.icu.util.DateInterval
 
  abstract class Missile(
-    var missileDistance: Float,
-    var missileDebut: Float,
-    var missileFin: Float,
-    var initialMissileVitesse: Float,
+    var missileLeft: Float,
+    var missileTop: Float,
+    var missileBottom: Float,
+    var initialmissileSpeed: Float,
     var width: Float,
     var view: SpaceView){
 
     val missile= RectF(
-        missileDistance,
-        missileDebut,
-        missileDistance + width,
-        missileFin)
-
-    val missilePaint    = Paint()
-    var missileVitesse  = initialMissileVitesse
+        missileLeft,
+        missileTop,
+        missileLeft + width,
+        missileBottom)
+     val missilePaint    = Paint()
+    var missileSpeed  = initialmissileSpeed
     var missileOnScreen = true
     init {missilePaint.color = Color.BLUE}
 
-     fun missileDisparait(){
-        missileOnScreen = false
-    }
- //Reset et missileDisparait() la même chose!! Tenir qu'un des deux.
-    fun reset(){
-        missileOnScreen = false
-    }
+
     fun setRect(){
-        missileVitesse = initialMissileVitesse
+        missileSpeed = initialmissileSpeed
         missile.set(
-            missileDistance             ,
-            missileDebut                ,
-            missileDistance + width,
-            missileFin
+            missileLeft             ,
+            missileTop                ,
+            missileLeft + width,
+            missileBottom
         )
 }
 
@@ -44,11 +37,20 @@ import android.icu.util.DateInterval
              }
      }
 
-
+//pas changer le update
     abstract fun update(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, bonus: Bonus,timeee: Timeee)
-
+//updatePosition() va être pris de l'interface
     abstract fun updatePosition(
         interval       : Double)
 
+   /*  fun missileDisparait(){
+         missileOnScreen = false
+     }*/
+     //Reset et missileDisparait() la même chose!! Tenir qu'un des deux.
+     fun reset(){
+         missileOnScreen = false
+     }
+
 }
+
 

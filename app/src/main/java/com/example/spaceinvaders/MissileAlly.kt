@@ -6,18 +6,18 @@ import android.widget.ImageView
 import android.widget.Toast
 
 class MissileAlly(
-    missileDistance       : Float ,
-    missileDebut          : Float ,
-    missileFin            : Float ,
-    initialMissileVitesse : Float ,
+    MissileLeft       : Float ,
+    missileTop          : Float ,
+    missileBottom            : Float ,
+    initialMissileSpeed : Float ,
     width                 : Float ,
     view                  : SpaceView):
 
     Missile(
-        missileDistance,
-        missileDebut,
-        missileFin,
-        initialMissileVitesse,
+        MissileLeft,
+        missileTop,
+        missileBottom,
+        initialMissileSpeed,
         width,
         view){
 
@@ -26,28 +26,28 @@ class MissileAlly(
     }
 
     override fun updatePosition(interval: Double){
-        val up = (interval * missileVitesse).toFloat()
+        val up = (interval * missileSpeed).toFloat()
         missile.offset(0f, -up)
     }
 
 
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee) {
         if(missileOnScreen){
-            //var missile_touche_vaisseau: Boolean = (missile.top< enemySpaceship.SpaceshipDebut && missile.left > enemySpaceship.SpaceshipDistance && missile.right < enemySpaceship.SpaceshipDistance + enemySpaceship.width)
+            //var missile_touche_vaisseau: Boolean = (missile.top< enemySpaceship.SpaceshipTop && missile.left > enemySpaceship.SpaceshipLeft && missile.right < enemySpaceship.SpaceshipLeft + enemySpaceship.width)
             //var missile_touche_bonus: Boolean = (missile.top< bonus.Debut && missile.left > bonus.Distance && missile.right < bonus.Distance + bonus.width)
 
             updatePosition(interval)
 
-            if(missile.intersect(enemySpaceship.SpaceshipDistance,enemySpaceship.SpaceshipDebut,enemySpaceship.SpaceshipDistance+enemySpaceship.width,enemySpaceship.SpaceshipFin)){
-                missileDisparait()
-                enemySpaceship.perdVie()
+            if(missile.intersect(enemySpaceship.SpaceshipLeft,enemySpaceship.SpaceshipTop,enemySpaceship.SpaceshipLeft+enemySpaceship.width,enemySpaceship.SpaceshipBottom)){
+                reset()
+                enemySpaceship.loseLife()
             }
 
             if(bonus.OnScreen){
-                if(missile.intersect(bonus.Distance,bonus.Debut,bonus.Distance+bonus.width,bonus.Fin)){
+                if(missile.intersect(bonus.Distance,bonus.Top,bonus.Distance+bonus.width,bonus.Bottom)){
                     timeee.rajouteTemps()
-                    allySpaceship.gagneVie()
-                    missileDisparait()
+                    allySpaceship.gainlife()
+                    reset()
                 }
             }
 

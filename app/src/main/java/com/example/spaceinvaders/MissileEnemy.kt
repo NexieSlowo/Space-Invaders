@@ -2,17 +2,17 @@ package com.example.spaceinvaders
 import android.graphics.Canvas
 import android.graphics.Color
 open abstract class MissileEnemy(
-    missileDistance : Float,
-    missileDebut : Float,
-    missileFin : Float,
-    initialMissileVitesse : Float,
+    MissileLeft : Float,
+    MissileTop : Float,
+    MissileBottom : Float,
+    InitialMissileSpeed : Float,
     width:Float, view: SpaceView
 ):
     Missile(
-        missileDistance,
-        missileDebut,
-        missileFin,
-        initialMissileVitesse,
+        MissileLeft,
+        MissileTop,
+        MissileBottom,
+        InitialMissileSpeed,
         width,
         view) {
 
@@ -21,7 +21,7 @@ open abstract class MissileEnemy(
     }
 
     override fun updatePosition(interval: Double){
-        var up = (interval * missileVitesse).toFloat()
+        var up = (interval * missileSpeed).toFloat()
         missile.offset(0f, up)
     }
 
@@ -29,20 +29,20 @@ open abstract class MissileEnemy(
     override fun update(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship,bonus: Bonus,timeee: Timeee) {
         if(missileOnScreen){
             updatePosition(interval)
-            //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipDebut && missile.left > allySpaceship.SpaceshipDistance && missile.right < allySpaceship.SpaceshipDistance + allySpaceship.width)
-            if(missile.intersect(allySpaceship.SpaceshipDistance,allySpaceship.SpaceshipDebut,allySpaceship.SpaceshipDistance+allySpaceship.width, allySpaceship.SpaceshipFin)){
+            //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipTop && missile.left > allySpaceship.SpaceshipLeft && missile.right < allySpaceship.SpaceshipLeft + allySpaceship.width)
+            if(missile.intersect(allySpaceship.SpaceshipLeft,allySpaceship.SpaceshipTop,allySpaceship.SpaceshipLeft+allySpaceship.width, allySpaceship.SpaceshipBottom)){
                 //missileDisparait()
                 faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
-                missileDisparait()
+                reset()
             }
             if(bonus.OnScreen) {
                 if (missile.intersect(
                         bonus.Distance,
-                        bonus.Debut,
+                        bonus.Top,
                         bonus.Distance + bonus.width,
-                        bonus.Fin
+                        bonus.Bottom
                     )
-                ) {missileDisparait()}
+                ) {reset()}
             }
         }
     }

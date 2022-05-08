@@ -8,10 +8,10 @@ import android.graphics.*
 
 abstract class SpaceShip(
     var vie: Int,
-    var SpaceshipDistance: Float,
-    var SpaceshipDebut: Float,
-    var SpaceshipFin: Float,
-    var initialSpaceshipVitesse: Float,
+    var SpaceshipLeft: Float,
+    var SpaceshipTop: Float,
+    var SpaceshipBottom: Float,
+    var initialSpaceshipSpeed: Float,
     var width: Float,
     var view: SpaceView,
     context: SpaceView,
@@ -19,15 +19,10 @@ abstract class SpaceShip(
 
     ) {
 
-    /*open val spaceship= RectF(
-        SpaceshipDistance, SpaceshipDebut,
-        SpaceshipDistance + width, SpaceshipFin
-    )*/
-    //val spaceshipPaint = Paint()
-    var spaceshipVitesse= initialSpaceshipVitesse
-    val spaceshipPaint = Paint()
-    init{spaceshipPaint.color = Color.WHITE}
-    var lesMissiles = arrayListOf<Missile>()
+    var spaceshipSpeed= initialSpaceshipSpeed
+    var theMissiles = arrayListOf<Missile>()
+    abstract val image : Bitmap
+
 
 
 
@@ -44,15 +39,16 @@ abstract class SpaceShip(
 
      abstract fun reset()
 
-    fun changeVitesse(){
-        spaceshipVitesse *= -1
-    }
-
     fun resetMissile(){
-        for(i in lesMissiles){
+        for(i in theMissiles){
             i.missileOnScreen = false
         }
     }
+
+    fun changeDirection(){
+        spaceshipSpeed *= -1
+    }
+
 
 
 

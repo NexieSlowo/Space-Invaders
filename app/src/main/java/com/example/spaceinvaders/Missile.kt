@@ -8,7 +8,8 @@ import android.icu.util.DateInterval
     var missileBottom: Float,
     var initialmissileSpeed: Float,
     var width: Float,
-    var view: SpaceView){
+    var view: SpaceView
+    ) : UpdatePosition {
 
     protected val missile= RectF(
         missileLeft,
@@ -38,10 +39,15 @@ import android.icu.util.DateInterval
      }
 
 //pas changer le update
-    abstract fun update(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, bonus: Bonus,timeee: Timeee)
+     /*
+    abstract fun updatePosition(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, bonus: Bonus,timeee: Timeee)
+
+      */
 //updatePosition() va être pris de l'interface
+    /*
     protected abstract fun updatePosition(
         interval       : Double)
+     */
 
      fun reset(){
          missileOnScreen = false

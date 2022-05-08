@@ -63,28 +63,31 @@ class EnemySpaceship(
      */
 
     fun createMissileJaune(){
-        theMissiles.add(MissileJaune(SpaceshipLeft,
+        theMissiles.add(MissileJaune(
+            SpaceshipLeft+width/2,
             SpaceshipBottom,
             SpaceshipTop + view.screenWidth/7f,
-            view.screenHeight,
+            view.screenHeight*2,
             10f,
             view))
     }
 
     fun createMissileRouge(){
-        theMissiles.add(MissileRouge(SpaceshipLeft,
+        theMissiles.add(MissileRouge(
+            SpaceshipLeft+width/2,
             SpaceshipBottom,
             SpaceshipTop + view.screenWidth/7f,
-            view.screenHeight,
+            view.screenHeight*2,
             10f,
             view)
         )
     }
     fun createMissileVerte() {
-        theMissiles.add(MissileVert(SpaceshipLeft,
+        theMissiles.add(MissileVert(
+            SpaceshipLeft+width/2,
             SpaceshipBottom,
             SpaceshipTop + view.screenWidth/7f,
-            view.screenHeight,
+            view.screenHeight*2,
             10f,
             view)
         )
@@ -99,7 +102,7 @@ class EnemySpaceship(
                 SpaceshipLeft = SpaceshipLeft+up
             }
         for (j in theMissiles){
-            j.update(interval,this,allySpaceship,bonus,timeee)
+            j.updatePosition(interval,this,allySpaceship,bonus,timeee)
         }
         if(life == 0){
             view.gameOver(R.string.win)

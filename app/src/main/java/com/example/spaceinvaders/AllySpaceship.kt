@@ -93,10 +93,10 @@ class AllySpaceship(
     fun createMissileAlly() {
         theMissiles.add(
             MissileAlly(
-                SpaceshipLeft,
-                SpaceshipBottom,
+                SpaceshipLeft+width/2,
+                SpaceshipBottom*1,
                 SpaceshipTop + view.screenWidth / 7f,
-                view.screenHeight / 2f,
+                view.screenHeight *2f,
                 10f,
                 view
             )
@@ -113,7 +113,7 @@ class AllySpaceship(
             SpaceshipLeft = SpaceshipLeft+up
         }
         for (j in theMissiles){
-            j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)
+            j.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)
         }
         if(life ==0){
             view.gameOver(R.string.lose)

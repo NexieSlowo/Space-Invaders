@@ -40,6 +40,7 @@ class SpaceView @JvmOverloads constructor(
     lateinit var thread    : Thread
     var randomTimer:Double = 0.0
     var randomTimer2:Double = 0.0
+    var restrictedShot = false
     var timer3 : Double = 0.0
     val activity = context as FragmentActivity
     val enemySpaceship = EnemySpaceship(view=this, context = this)
@@ -97,11 +98,7 @@ class SpaceView @JvmOverloads constructor(
 
 
 
-        bonus.Distance                   = (1*w/2f)
-        bonus.Top                      = (4*h/8f)
-        bonus.Bottom                        = bonus.Top+250
-        bonus.width                      = 250f
-        bonus.setRect()
+        bonus.reset()
 
         /*missile.missileDistance = (w/6f)
         missile.initialMissileVitesse = (1000f)
@@ -151,7 +148,7 @@ class SpaceView @JvmOverloads constructor(
 
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
-                m.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
+                m.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)}
 
             //for( j in lesMissilesRouges){
                 //j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
@@ -201,7 +198,22 @@ class SpaceView @JvmOverloads constructor(
 
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
-        if(timer3<=0.0) {
+        if(restrictedShot){
+            if(timer3<=0.0) {
+                when (e.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        //val x = e.rawX.toInt() - 100
+                        //val y = e.rawY.toInt() - 300
+                        allySpaceship.createMissileAlly()
+                        //lesMissilesEnemy.add(Missile(enemySpaceship.enemySpaceshipDistance,enemySpaceship.enemySpaceshipDebut,enemySpaceship.enemySpaceshipDebut + width/7f,height/0.45f,10f,this))
+                        allySpaceship.changeDirection()
+                        ++shotsFired
+                    }
+                }
+                timer3 = 3.0
+            }
+        }
+        else{
             when (e.action) {
                 MotionEvent.ACTION_DOWN -> {
                     //val x = e.rawX.toInt() - 100
@@ -212,9 +224,7 @@ class SpaceView @JvmOverloads constructor(
                     ++shotsFired
                 }
             }
-            timer3 = 3.0
         }
-
         return true
     }
 

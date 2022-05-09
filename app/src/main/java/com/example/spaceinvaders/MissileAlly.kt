@@ -43,7 +43,6 @@ class MissileAlly(
 
             if(obstacle.OnScreen){
                 if(missile.intersect(obstacle.Left,obstacle.Top,obstacle.Left+obstacle.width,obstacle.Bottom)){
-
                     reset()
                 }
             }

@@ -17,7 +17,7 @@ class MissileYellow(missileDistance : Float,missileDebut : Float,missileFin : Fl
         TODO("Not yet implemented")
     }*/
 
-    override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee){
+    override fun interact(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee){
         timeee.removeTime()
     }
 

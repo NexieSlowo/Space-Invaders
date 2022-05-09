@@ -6,7 +6,7 @@ class MissileRed(missileDistance : Float,missileDebut:Float,missileFin:Float,ini
     init{
         missilePaint.color = Color.RED
     }
-    override fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee){
+    override fun interact(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee){
         allySpaceship.loseLife()
 
     }

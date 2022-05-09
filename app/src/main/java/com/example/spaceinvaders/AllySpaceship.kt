@@ -103,18 +103,30 @@ class AllySpaceship(
         )
     }
 
-    override fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee){
+    override fun updatePosition(
+        interval:Double,
+        enemySpaceship: EnemySpaceship,
+        allySpaceship: AllySpaceship,
+        obstacle: Obstacle,
+        timeee: Timeee){
 
+        // met à jour la position du vaisseau
         var up = (interval * spaceshipSpeed).toFloat()
         SpaceshipLeft = SpaceshipLeft+up
+
+        // cette condition sert à faire rebondir le vaisseau sur le bord
         if(SpaceshipLeft+view.screenWidth/4 > view.screenWidth || SpaceshipLeft < 0 ){
             spaceshipSpeed *=-1
             up = (interval*3*spaceshipSpeed).toFloat()
             SpaceshipLeft = SpaceshipLeft+up
         }
+
+        //met  à jour la position des missiles
         for (j in theMissiles){
             j.updatePosition(interval,enemySpaceship,allySpaceship,obstacle,timeee)
         }
+
+        //si le vaisseau à zero vie, jeu perdu
         if(life ==0){
             view.gameOver(R.string.lose)
         }

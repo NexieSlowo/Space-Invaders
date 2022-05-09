@@ -30,26 +30,15 @@ open abstract class MissileEnemy(
             //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipTop && missile.left > allySpaceship.SpaceshipLeft && missile.right < allySpaceship.SpaceshipLeft + allySpaceship.width)
             if(missile.intersect(allySpaceship.SpaceshipLeft,allySpaceship.SpaceshipTop,allySpaceship.SpaceshipLeft+allySpaceship.width, allySpaceship.SpaceshipBottom)){
                 //missileDisparait()
-                faitQlqCh(enemySpaceship,allySpaceship,obstacle,timeee)
+                interact(enemySpaceship,allySpaceship,obstacle,timeee)
                 reset()
-            }
-            if(obstacle.OnScreen) {
-                if (missile.intersect(
-                        obstacle.Left,
-                        obstacle.Top,
-                        obstacle.Left + obstacle.width,
-                        obstacle.Bottom
-                    )
-                ) {
-
-                }
             }
         }
     }
 
 
 
-    abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee)
+    abstract fun interact(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee)
 
 
 }

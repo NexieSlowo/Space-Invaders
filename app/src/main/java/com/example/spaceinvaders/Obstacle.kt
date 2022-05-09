@@ -3,8 +3,8 @@ package com.example.spaceinvaders
 import android.graphics.*
 import kotlin.random.Random
 
-class Bonus(
-    var Distance: Float= 0f,
+class Obstacle(
+    var Left: Float= 0f,
     var Top: Float= 0f,
     var Bottom: Float= 0f ,
     var width: Float = 270f,
@@ -18,20 +18,20 @@ class Bonus(
     }*/
 
     var OnScreen = false
-    val bonusPaint    = Paint()
+    val obstaclePaint    = Paint()
 
-    val bonus= RectF(Distance, Top, Distance + width, Bottom)
-    init {bonusPaint.color = Color.BLUE}
+    val obstacle= RectF(Left, Top, Left + width, Bottom)
+    init {obstaclePaint.color = Color.BLUE}
 
     private var image = BitmapFactory.decodeResource(context.resources,R.drawable.astero)
 
     fun setRect() {
-        bonus.set(Distance, Top, (Distance + width), (Bottom))
+        obstacle.set(Left, Top, (Left + width), (Bottom))
     }
 
     fun reset(){
         OnScreen= false
-        Distance                   = (1*view.width/2f)
+        Left                   = (1*view.width/2f)
         Top                      = (4*view.height/8f)
         Bottom                        = Top+300
         width                      = 230f
@@ -41,18 +41,18 @@ class Bonus(
     fun draw(canvas: Canvas) {
         if(OnScreen){
             //setRect()
-            //canvas.drawRect(bonus, bonusPaint)
-            canvas.drawBitmap(image,Distance,Top,null)
+            //canvas.drawRect(obstacle, obstaclePaint)
+            canvas.drawBitmap(image,Left,Top,null)
 
         }
     }
 
 
-    fun apparitionAleatoire(){
+    fun randomAppearance(){
         val randomDist = Random.nextDouble(0.0,0.8).toFloat()
         val randomTop = Random.nextDouble(0.2,0.5).toFloat()
 
-        Distance                   = randomDist*view.screenWidth
+        Left                   = randomDist*view.screenWidth
         Top                      = randomTop*view.screenHeight
         Bottom                        = Top+220
         setRect()

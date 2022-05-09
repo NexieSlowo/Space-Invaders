@@ -15,6 +15,6 @@ interface UpdatePosition {
     }*/
    // abstract fun changetime(enemySpaceship: EnemySpaceship)
 
-    fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
+    fun updatePosition(interval:Double,enemySpaceship:EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee)
 
 }

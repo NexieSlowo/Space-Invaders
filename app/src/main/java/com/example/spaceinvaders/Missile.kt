@@ -40,7 +40,7 @@ import android.icu.util.DateInterval
 
 //pas changer le update
      /*
-    abstract fun updatePosition(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, bonus: Bonus,timeee: Timeee)
+    abstract fun updatePosition(interval : Double, enemySpaceship : EnemySpaceship, allySpaceship  : AllySpaceship, obstacle: Obstacle,timeee: Timeee)
 
       */
 //updatePosition() va être pris de l'interface

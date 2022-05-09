@@ -47,7 +47,7 @@ class SpaceView @JvmOverloads constructor(
     val enemySpaceship = EnemySpaceship(view=this, context = this)
     val allySpaceship  = AllySpaceship (view=this, context = this)
 
-    val bonus          = Bonus (view=this,context= this)
+    val obstacle          = Obstacle (view=this,context= this)
     var timeee         = Timeee ()
     var timeOriginal = timeee.timeLeft
     var gameOver       = false
@@ -100,7 +100,7 @@ class SpaceView @JvmOverloads constructor(
 
 
 
-        bonus.reset()
+        obstacle.reset()
 
         /*missile.missileDistance = (w/6f)
         missile.initialMissileVitesse = (1000f)
@@ -116,7 +116,7 @@ class SpaceView @JvmOverloads constructor(
             canvas = holder.lockCanvas()
             canvas.drawBitmap(imageBackground,0f,0f, null)
             allySpaceship.draw(canvas)
-            bonus.draw(canvas)
+            obstacle.draw(canvas)
             enemySpaceship.draw(canvas)
 
 
@@ -145,12 +145,12 @@ class SpaceView @JvmOverloads constructor(
         val interval = elapsedTimeMS / 1000.0
         //enemySpaceship.update(interval)
         //allySpaceship.update(interval)
-        enemySpaceship.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)
-        allySpaceship.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)
+        enemySpaceship.updatePosition(interval,enemySpaceship,allySpaceship,obstacle,timeee)
+        allySpaceship.updatePosition(interval,enemySpaceship,allySpaceship,obstacle,timeee)
 
         //Mettre le if missileonScreen pour les missiles de la liste
             for(m in lesMissilesAlly){
-                m.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)}
+                m.updatePosition(interval,enemySpaceship,allySpaceship,obstacle,timeee)}
 
             //for( j in lesMissilesRouges){
                 //j.update(interval,enemySpaceship,allySpaceship,bonus,timeee)}
@@ -169,10 +169,10 @@ class SpaceView @JvmOverloads constructor(
         if(randomTimer2<=0.0) {
 
 
-            bonus.apparitionAleatoire()
-            bonus.shining()                                     //bonus apparait ou disparait
+            obstacle.randomAppearance()
+            obstacle.shining()                                     //bonus apparait ou disparait
 
-            if(bonus.OnScreen){
+            if(obstacle.OnScreen){
                 val random = Random.nextInt(3,5)     //reste "apparu" entre 3 et 5 s
                 randomTimer2 = random.toDouble()
             }
@@ -184,9 +184,9 @@ class SpaceView @JvmOverloads constructor(
 
         if(randomTimer<=0.0){
             when(tourMissile){
-                0->{enemySpaceship.createMissileJaune()}
-                1->{enemySpaceship.createMissileRouge()}
-                2->{enemySpaceship.createMissileVerte()}
+                0->{enemySpaceship.createMissileYellow()}
+                1->{enemySpaceship.createMissileRed()}
+                2->{enemySpaceship.createMissileGreen()}
             }
             tourMissile = Random.nextInt(0,3)
             randomTimer = Random.nextDouble(1.0,3.0)

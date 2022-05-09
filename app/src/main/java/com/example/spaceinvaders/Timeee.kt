@@ -9,7 +9,7 @@ class Timeee (
         timeLeft = 120.0
     }
 
-    fun enleveTemps(){
+    fun removeTime(){
         timeLeft -=10.0
     }
 }

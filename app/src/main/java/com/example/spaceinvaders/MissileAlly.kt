@@ -28,7 +28,7 @@ class MissileAlly(
 
 
 
-    override fun updatePosition(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee) {
+    override fun updatePosition(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee) {
         if(missileOnScreen){
             //var missile_touche_vaisseau: Boolean = (missile.top< enemySpaceship.SpaceshipTop && missile.left > enemySpaceship.SpaceshipLeft && missile.right < enemySpaceship.SpaceshipLeft + enemySpaceship.width)
             //var missile_touche_bonus: Boolean = (missile.top< bonus.Debut && missile.left > bonus.Distance && missile.right < bonus.Distance + bonus.width)
@@ -41,8 +41,8 @@ class MissileAlly(
                 enemySpaceship.loseLife()
             }
 
-            if(bonus.OnScreen){
-                if(missile.intersect(bonus.Distance,bonus.Top,bonus.Distance+bonus.width,bonus.Bottom)){
+            if(obstacle.OnScreen){
+                if(missile.intersect(obstacle.Left,obstacle.Top,obstacle.Left+obstacle.width,obstacle.Bottom)){
 
                     reset()
                 }

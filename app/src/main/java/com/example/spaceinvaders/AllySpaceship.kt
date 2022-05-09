@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.icu.util.DateInterval
 
 class AllySpaceship(
-    vie                     : Int       = 3    ,
+    //life                     : Int       = 3    ,
     SpaceshipLeft       : Float     = 0f   ,
     SpaceshipTop          : Float     = 0f   ,
     SpaceshipBottom            : Float     = 0f   ,
@@ -17,7 +17,7 @@ class AllySpaceship(
     context                 : SpaceView):
 
     SpaceShip(
-        vie                     ,
+        //life                     ,
         SpaceshipLeft       ,
         SpaceshipTop          ,
         SpaceshipBottom            ,
@@ -44,18 +44,18 @@ class AllySpaceship(
     }
 
 
-    override fun resetEtoile(){
-        etoile1.EtoileDistance           =  (5*view.width/10000f)
-        etoile1.EtoileDebut              = (10900*view.height/10000f)
-        etoile1.EtoileFin                = etoile1.EtoileDebut
+    override fun resetStar(){
+        star1.StarLeft           =  (5*view.width/10000f)
+        star1.StarTop              = (10900*view.height/10000f)
+        star1.StarBottom                = star1.StarTop
 
-        etoile2.EtoileDistance           = (1200*view.width/10000f)
-        etoile2.EtoileDebut              = etoile1.EtoileDebut
-        etoile2.EtoileFin                = etoile1.EtoileDebut
+        star2.StarLeft           = (1200*view.width/10000f)
+        star2.StarTop              = star1.StarTop
+        star2.StarBottom                = star1.StarTop
 
-        etoile3.EtoileDistance           = (2400*view.width/10000f)
-        etoile3.EtoileDebut              = etoile1.EtoileDebut
-        etoile3.EtoileFin                = etoile1.EtoileDebut
+        star3.StarLeft           = (2400*view.width/10000f)
+        star3.StarTop              = star1.StarTop
+        star3.StarBottom                = star1.StarTop
     }
 
    /* override fun reset(){
@@ -103,7 +103,7 @@ class AllySpaceship(
         )
     }
 
-    override fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee){
+    override fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee){
 
         var up = (interval * spaceshipSpeed).toFloat()
         SpaceshipLeft = SpaceshipLeft+up
@@ -113,7 +113,7 @@ class AllySpaceship(
             SpaceshipLeft = SpaceshipLeft+up
         }
         for (j in theMissiles){
-            j.updatePosition(interval,enemySpaceship,allySpaceship,bonus,timeee)
+            j.updatePosition(interval,enemySpaceship,allySpaceship,obstacle,timeee)
         }
         if(life ==0){
             view.gameOver(R.string.lose)

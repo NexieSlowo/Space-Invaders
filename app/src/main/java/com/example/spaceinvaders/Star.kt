@@ -2,10 +2,10 @@ package com.example.spaceinvaders
 
 import android.graphics.*
 
-class Etoile(
-    var EtoileDistance: Float= 0f,
-    var EtoileDebut: Float= 0f,
-    var EtoileFin: Float= 0f ,
+class Star(
+    var StarLeft: Float= 0f,
+    var StarTop: Float= 0f,
+    var StarBottom: Float= 0f ,
     var width: Float = 300f,
     var view: SpaceView,
     context: SpaceView){
@@ -32,6 +32,6 @@ class Etoile(
 
 
     fun draw(canvas: Canvas) {
-        canvas.drawBitmap(image,EtoileDistance,EtoileDebut-view.screenHeight/5,null)
+        canvas.drawBitmap(image,StarLeft,StarTop-view.screenHeight/5,null)
     }
 }

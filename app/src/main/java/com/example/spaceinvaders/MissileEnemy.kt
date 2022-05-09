@@ -23,22 +23,22 @@ open abstract class MissileEnemy(
 
 
 
-    override fun updatePosition(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship,bonus: Bonus,timeee: Timeee) {
+    override fun updatePosition(interval :Double,enemySpaceship: EnemySpaceship,allySpaceship:AllySpaceship,obstacle: Obstacle,timeee: Timeee) {
         if(missileOnScreen){
             var up = (interval * missileSpeed).toFloat()
             missile.offset(0f, up)
             //var missile_touche_vaisseau = (missile.bottom> allySpaceship.SpaceshipTop && missile.left > allySpaceship.SpaceshipLeft && missile.right < allySpaceship.SpaceshipLeft + allySpaceship.width)
             if(missile.intersect(allySpaceship.SpaceshipLeft,allySpaceship.SpaceshipTop,allySpaceship.SpaceshipLeft+allySpaceship.width, allySpaceship.SpaceshipBottom)){
                 //missileDisparait()
-                faitQlqCh(enemySpaceship,allySpaceship,bonus,timeee)
+                faitQlqCh(enemySpaceship,allySpaceship,obstacle,timeee)
                 reset()
             }
-            if(bonus.OnScreen) {
+            if(obstacle.OnScreen) {
                 if (missile.intersect(
-                        bonus.Distance,
-                        bonus.Top,
-                        bonus.Distance + bonus.width,
-                        bonus.Bottom
+                        obstacle.Left,
+                        obstacle.Top,
+                        obstacle.Left + obstacle.width,
+                        obstacle.Bottom
                     )
                 ) {
 
@@ -49,7 +49,7 @@ open abstract class MissileEnemy(
 
 
 
-    abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
+    abstract fun faitQlqCh(enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,obstacle: Obstacle,timeee: Timeee)
 
 
 }

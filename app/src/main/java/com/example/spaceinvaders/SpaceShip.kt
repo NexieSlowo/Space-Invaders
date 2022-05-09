@@ -7,7 +7,7 @@ import android.content.res.Resources
 import android.graphics.*
 
 abstract class SpaceShip(
-    var vie: Int,
+    //var life: Int,
     var SpaceshipLeft: Float,
     var SpaceshipTop: Float,
     var SpaceshipBottom: Float,
@@ -22,9 +22,9 @@ abstract class SpaceShip(
     var spaceshipSpeed= initialSpaceshipSpeed
     var theMissiles = arrayListOf<Missile>()
     abstract val image : Bitmap
-    protected val etoile1        = Etoile (view=view, context = context)
-    protected val etoile2        = Etoile (view=view, context = context)
-    protected val etoile3        = Etoile (view=view, context = context)
+    protected val star1        = Star (view=view, context = context)
+    protected val star2        = Star (view=view, context = context)
+    protected val star3        = Star (view=view, context = context)
     protected var life           =3
     var invincible = false
 
@@ -39,16 +39,16 @@ abstract class SpaceShip(
         when(life){
 
             3 -> {
-                etoile1.draw(canvas)
-                etoile2.draw(canvas)
-                etoile3.draw(canvas)
+                star1.draw(canvas)
+                star2.draw(canvas)
+                star3.draw(canvas)
             }
             2 -> {
-                etoile1.draw(canvas)
-                etoile2.draw(canvas)
+                star1.draw(canvas)
+                star2.draw(canvas)
             }
             1 -> {
-                etoile1.draw(canvas)
+                star1.draw(canvas)
             }
         }
     }
@@ -81,14 +81,14 @@ abstract class SpaceShip(
 
     fun reset(){
 
-        resetEtoile()
+        resetStar()
         resetSpaceship()
 
     }
 
 
     abstract fun resetSpaceship()
-    abstract fun resetEtoile()
+    abstract fun resetStar()
 
 /*
     abstract fun updatePosition(interval:Double,enemySpaceship: EnemySpaceship,allySpaceship: AllySpaceship,bonus: Bonus,timeee: Timeee)
